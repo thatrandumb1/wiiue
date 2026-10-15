@@ -587,11 +587,11 @@ body {
 <script type="application/json" id="snapshot">
 {
   "status": {
-    "headline": "Graphics: the first image on screen",
-    "detail": "Opening the TV and GamePad windows, then translating the Wii U's GX2 graphics commands to Vulkan. Goal: a homebrew program draws a triangle.",
-    "testCases": 45, "assertions": 440, "commits": 19, "lastCommit": "0a2ab66",
-    "instructions": 104950, "instructionsNote": "files.rpx: 26 file checks, all passing",
-    "updatedAt": "2026-10-14T17:59:00-07:00"
+    "headline": "Graphics: first image on screen, GPU next",
+    "detail": "TV and GamePad windows work, and programs can draw with OSScreen at 60 fps. Next: the GX2 graphics library and translating Wii U shaders to Vulkan, so a program can draw a triangle with the GPU.",
+    "testCases": 46, "assertions": 464, "commits": 23, "lastCommit": "ec18455",
+    "instructions": 351818178, "instructionsNote": "screen test: 600 frames at 60 fps",
+    "updatedAt": "2026-10-14T18:16:00-07:00"
   },
   "phases": [
     {"n": 0, "group": "Foundation", "title": "Tools", "detail": "Visual Studio, CMake, Vulkan SDK, vcpkg, devkitPro", "status": "done"},
@@ -619,6 +619,7 @@ body {
     {"n": 22, "group": "Hardware extras", "title": "Extras", "detail": "Camera, microphone, amiibo, save states", "status": "later"}
   ],
   "log": [
+    {"at": "2026-10-14T18:15:00-07:00", "phase": 8, "text": "Milestone: first image on screen. TV and GamePad windows open, and a test program draws text, colors and a moving square at 60 fps", "commit": "ec18455"},
     {"at": "2026-10-14T17:59:00-07:00", "phase": 8, "text": "Started graphics"},
     {"at": "2026-10-14T17:58:00-07:00", "phase": 7, "text": "File system done: a test program reads game content, writes the SD card and passes all 26 file checks", "commit": "0a2ab66"},
     {"at": "2026-10-14T17:47:00-07:00", "phase": 7, "text": "Started the file system"},
