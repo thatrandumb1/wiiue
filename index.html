@@ -477,11 +477,11 @@ body {
 <script type="application/json" id="snapshot">
 {
   "status": {
-    "headline": "File system: games reading their own files",
-    "detail": "Mapping the Wii U's /vol/content and /vol/save paths to folders on your PC, so programs can open, read and write files. Next after that: graphics.",
-    "testCases": 39, "assertions": 369, "commits": 16, "lastCommit": "1af05ca",
-    "instructions": 10522, "instructionsNote": "hello.rpx, start to finish",
-    "updatedAt": "2026-10-14T17:47:00-07:00"
+    "headline": "Graphics: the first image on screen",
+    "detail": "Opening the TV and GamePad windows, then translating the Wii U's GX2 graphics commands to Vulkan. Goal: a homebrew program draws a triangle.",
+    "testCases": 45, "assertions": 440, "commits": 19, "lastCommit": "0a2ab66",
+    "instructions": 104950, "instructionsNote": "files.rpx: 26 file checks, all passing",
+    "updatedAt": "2026-10-14T17:59:00-07:00"
   },
   "phases": [
     {"n": 0, "group": "Foundation", "title": "Tools", "detail": "Visual Studio, CMake, Vulkan SDK, vcpkg, devkitPro", "status": "done"},
@@ -491,8 +491,8 @@ body {
     {"n": 4, "group": "Core emulator", "title": "RPX loader", "detail": "Sections, relocations, imports to HLE stubs", "status": "done"},
     {"n": 5, "group": "Core emulator", "title": "PowerPC CPU", "detail": "Interpreter: integer, float, paired singles", "status": "done"},
     {"n": 6, "group": "Core emulator", "title": "Coreinit", "detail": "Heaps, threads, locks, OSReport", "status": "done", "milestone": true},
-    {"n": 7, "group": "Core emulator", "title": "File system", "detail": "/vol/content and /vol/save on your PC", "status": "active"},
-    {"n": 8, "group": "Core emulator", "title": "Graphics", "detail": "GX2 to Vulkan, TV and GamePad windows", "status": "next", "milestone": true},
+    {"n": 7, "group": "Core emulator", "title": "File system", "detail": "/vol/content and /vol/save on your PC", "status": "done"},
+    {"n": 8, "group": "Core emulator", "title": "Graphics", "detail": "GX2 to Vulkan, TV and GamePad windows", "status": "active", "milestone": true},
     {"n": 9, "group": "Core emulator", "title": "Input", "detail": "GamePad buttons, sticks, touch, gyro", "status": "next"},
     {"n": 10, "group": "Core emulator", "title": "Audio", "detail": "AX voices, ADPCM, mixing", "status": "next"},
     {"n": 11, "group": "Core emulator", "title": "Multi-core", "detail": "Three CPU cores, scheduler, alarms", "status": "next"},
@@ -509,6 +509,8 @@ body {
     {"n": 22, "group": "Hardware extras", "title": "Extras", "detail": "Camera, microphone, amiibo, save states", "status": "later"}
   ],
   "log": [
+    {"at": "2026-10-14T17:59:00-07:00", "phase": 8, "text": "Started graphics"},
+    {"at": "2026-10-14T17:58:00-07:00", "phase": 7, "text": "File system done: a test program reads game content, writes the SD card and passes all 26 file checks", "commit": "0a2ab66"},
     {"at": "2026-10-14T17:47:00-07:00", "phase": 7, "text": "Started the file system"},
     {"at": "2026-10-14T17:46:00-07:00", "phase": 6, "text": "Milestone: hello.rpx prints \"Hello from my emulator!\" and exits cleanly after 10,522 instructions", "commit": "1af05ca"},
     {"at": "2026-10-14T17:25:00-07:00", "phase": 6, "text": "Progress page opened to the public"},

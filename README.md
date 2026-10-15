@@ -9,9 +9,9 @@
 
 <p align="center">
   <a href="https://thatrandumb1.github.io/wiiue/"><img src="https://img.shields.io/badge/live%20progress-open%20site-00a6e0?style=for-the-badge" alt="live progress: open site"></a>
-  <img src="https://img.shields.io/badge/phase-7%3A%20File%20system-0084b8?style=for-the-badge" alt="phase: 7: File system">
-  <img src="https://img.shields.io/badge/tests-39%20passing-3cb371?style=for-the-badge" alt="tests: 39 passing">
-  <img src="https://img.shields.io/badge/phases%20done-7%20of%2023-6b7782?style=for-the-badge" alt="phases done: 7 of 23">
+  <img src="https://img.shields.io/badge/phase-8%3A%20Graphics-0084b8?style=for-the-badge" alt="phase: 8: Graphics">
+  <img src="https://img.shields.io/badge/tests-45%20passing-3cb371?style=for-the-badge" alt="tests: 45 passing">
+  <img src="https://img.shields.io/badge/phases%20done-8%20of%2023-6b7782?style=for-the-badge" alt="phases done: 8 of 23">
 </p>
 
 <p align="center">
@@ -32,16 +32,16 @@
 
 ## Recent activity
 
+- `Oct 14, 5:59 PM` · **P8** · Started graphics
+- `Oct 14, 5:58 PM` · **P7** · File system done: a test program reads game content, writes the SD card and passes all 26 file checks · `0a2ab66`
 - `Oct 14, 5:47 PM` · **P7** · Started the file system
 - `Oct 14, 5:46 PM` · **P6** · Milestone: hello.rpx prints "Hello from my emulator!" and exits cleanly after 10,522 instructions · `1af05ca`
 - `Oct 14, 5:25 PM` · **P6** · Progress page opened to the public
 - `Oct 14, 5:15 PM` · **P6** · Live progress page published · `278bc00`
 - `Oct 14, 5:10 PM` · **P6** · Started coreinit, the Wii U's core system library
 - `Oct 14, 5:07 PM` · **P5** · CPU interpreter runs: 677 instructions of real startup code before the first missing system call · `1b9757a`
-- `Oct 14, 4:55 PM` · **P4** · RPX loader: hello.rpx loads, matches the compiler's output byte for byte · `cf9af50`
-- `Oct 14, 4:47 PM` · **P2** · Guest memory working: 4 GB address space, big-endian reads and writes · `47ff654`
 
 ---
 
-<sub>Last updated Oct 14, 2026, 5:47 PM PDT. Full live view: <a href="https://thatrandumb1.github.io/wiiue/">https://thatrandumb1.github.io/wiiue/</a><br>
+<sub>Last updated Oct 14, 2026, 5:59 PM PDT. Full live view: <a href="https://thatrandumb1.github.io/wiiue/">https://thatrandumb1.github.io/wiiue/</a><br>
 Fan project page. Not affiliated with or endorsed by Nintendo.</sub>
