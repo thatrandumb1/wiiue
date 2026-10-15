@@ -10,7 +10,7 @@
 <title>WiiUE</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=M+PLUS+Rounded+1c:wght@500;700;800&family=Nunito:wght@400;600;700&family=DM+Mono:wght@400;500&display=swap">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Nunito:wght@400..800&display=swap">
 <style>
 /* Layout: console home-menu feel. A pill status bar, one big "now playing" tile beside
    stat tiles, the roadmap as a grid of rounded channel tiles grouped by stage, and an
@@ -32,9 +32,10 @@
   --logo-grey: #858585;
   --logo-blue: #0594cf;
   --shadow: 0 1px 0 rgba(47, 58, 68, 0.06), 0 6px 18px rgba(47, 58, 68, 0.08);
-  --font-display: "M PLUS Rounded 1c", "Nunito", "Segoe UI", system-ui, sans-serif;
+  /* One smooth rounded family everywhere; numbers line up via tabular figures */
+  --font-display: "Nunito", "Segoe UI", system-ui, sans-serif;
   --font-body: "Nunito", "Segoe UI", system-ui, sans-serif;
-  --font-mono: "DM Mono", ui-monospace, "Cascadia Mono", Consolas, monospace;
+  --font-mono: "Nunito", "Segoe UI", system-ui, sans-serif;
   --radius-tile: 22px;
   --radius-pill: 999px;
   /* Light theme only, whatever the viewer's system or app theme */
@@ -50,6 +51,10 @@ body {
   font-family: var(--font-body);
   font-size: 15px;
   line-height: 1.5;
+  font-variant-numeric: tabular-nums;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  text-rendering: optimizeLegibility;
 }
 .wrap {
   max-width: 1120px;
@@ -303,6 +308,83 @@ body {
 }
 .commit { font-family: var(--font-mono); font-size: 12px; color: var(--ink-soft); margin-left: 6px; }
 
+/* ---- history ---- */
+.history {
+  background: var(--surface);
+  border: 1px solid var(--line);
+  border-radius: 28px;
+  padding: 18px 20px 20px;
+  box-shadow: var(--shadow);
+}
+.history-grid {
+  display: grid;
+  grid-template-columns: minmax(0, 1.7fr) minmax(0, 1fr);
+  gap: 22px;
+  align-items: start;
+}
+.timeline {
+  list-style: none;
+  margin: 0;
+  padding: 0 0 0 4px;
+  display: grid;
+  gap: 0;
+}
+.timeline li {
+  position: relative;
+  display: grid;
+  grid-template-columns: 82px minmax(0, 1fr);
+  gap: 14px;
+  padding: 0 0 16px 0;
+}
+/* rail and dot connecting the entries */
+.timeline li::before {
+  content: "";
+  position: absolute;
+  left: 92px;
+  top: 6px;
+  bottom: -6px;
+  width: 2px;
+  background: var(--line);
+}
+.timeline li:last-child::before { display: none; }
+.timeline li::after {
+  content: "";
+  position: absolute;
+  left: 87px;
+  top: 3px;
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  background: var(--surface);
+  border: 3px solid var(--accent);
+}
+.timeline time {
+  font-size: 13px;
+  font-weight: 800;
+  color: var(--accent-deep);
+  text-align: right;
+  padding-right: 18px;
+  white-space: nowrap;
+}
+.timeline li > div { padding-left: 14px; font-size: 14px; color: var(--ink); max-width: 62ch; }
+.hw {
+  background: var(--surface-2);
+  border: 1px solid var(--line);
+  border-radius: var(--radius-tile);
+  padding: 16px 18px;
+}
+.hw h3 { margin: 0 0 10px; font-family: var(--font-display); font-weight: 800; font-size: 16px; }
+.hw dl { margin: 0; display: grid; gap: 10px; }
+.hw dt { font-size: 12px; font-weight: 800; letter-spacing: 0.08em; text-transform: uppercase; color: var(--accent-deep); }
+.hw dd { margin: 2px 0 0; font-size: 14px; }
+@media (max-width: 760px) {
+  .history-grid { grid-template-columns: minmax(0, 1fr); }
+  .timeline li { grid-template-columns: 66px minmax(0, 1fr); gap: 10px; }
+  .timeline li::before { left: 72px; }
+  .timeline li::after { left: 67px; }
+  .timeline time { padding-right: 12px; font-size: 12px; }
+}
+
 .empty {
   border: 2px dashed var(--line);
   border-radius: var(--radius-tile);
@@ -319,7 +401,7 @@ body {
 
 /* Empty space between cards lets clicks through to the screensaver logo behind */
 .wrap, .side, .main, .top, .stats, .roadmap, .groups, .groups > div, .tiles { pointer-events: none; }
-.bar, .now, .stat, .tile, .feed, .section-head, .empty, .foot { pointer-events: auto; }
+.bar, .now, .stat, .tile, .feed, .history, .section-head, .empty, .foot { pointer-events: auto; }
 
 /* ---- screensaver control ---- */
 .toggle {
@@ -466,6 +548,34 @@ body {
   <section class="feed">
     <div class="section-head"><h2>Activity</h2><span>newest first</span></div>
     <ol id="log"><li><span class="when">–</span><span class="what">Updates are posted here after each step is built, tested and committed.</span></li></ol>
+  </section>
+
+  <section class="history" aria-labelledby="history-title">
+    <div class="section-head"><h2 id="history-title">History of the Wii U</h2><span>the console this project brings back</span></div>
+    <div class="history-grid">
+      <ol class="timeline">
+        <li><time datetime="2011-06">Jun 2011</time><div><b>Revealed at E3</b> as Nintendo's successor to the Wii, built around a tablet-style controller with its own screen: the Wii U GamePad.</div></li>
+        <li><time datetime="2012-11-18">Nov 2012</time><div><b>Launches</b> in North America on November 18, then Europe and Australia (Nov 30) and Japan (Dec 8), in an 8 GB Basic and a 32 GB Deluxe model. Launch games include New Super Mario Bros. U, Nintendo Land and ZombiU, and Miiverse, a built-in social network, goes live.</div></li>
+        <li><time datetime="2013">2013</time><div><b>Big first-party year:</b> Super Mario 3D World, Pikmin 3 and The Legend of Zelda: The Wind Waker HD.</div></li>
+        <li><time datetime="2014">2014</time><div><b>Mario Kart 8</b> and <b>Super Smash Bros. for Wii U</b> arrive and become the console's best sellers.</div></li>
+        <li><time datetime="2015">2015</time><div><b>Splatoon</b> and <b>Super Mario Maker</b> launch. Cemu, the first Wii U emulator, appears that October.</div></li>
+        <li><time datetime="2017-03-03">Mar 2017</time><div><b>The Legend of Zelda: Breath of the Wild</b> launches on Wii U and on its replacement, the Nintendo Switch. Production has already ended; lifetime sales finish at 13.56 million. Many Wii U games later return on Switch.</div></li>
+        <li><time datetime="2017-11">Nov 2017</time><div><b>Miiverse shuts down.</b></div></li>
+        <li><time datetime="2023-03-27">Mar 2023</time><div><b>The Wii U eShop closes</b> to new purchases.</div></li>
+        <li><time datetime="2024-04-08">Apr 2024</time><div><b>Nintendo Network goes offline,</b> ending official online play. The fan-run Pretendo Network keeps some of it alive, and emulators keep the library playable.</div></li>
+      </ol>
+      <aside class="hw">
+        <h3>Inside the console</h3>
+        <dl>
+          <dt>CPU</dt><dd>IBM "Espresso": 3 PowerPC cores at 1.24 GHz, with paired-single floating point</dd>
+          <dt>GPU</dt><dd>AMD "Latte", about 550 MHz, with 32 MB of fast on-chip memory (MEM1)</dd>
+          <dt>Memory</dt><dd>2 GB: 1 GB for games, 1 GB for the system</dd>
+          <dt>GamePad</dt><dd>6.2-inch 854×480 touchscreen streamed over 5 GHz Wi-Fi, plus gyro, camera, microphone and NFC</dd>
+          <dt>Storage</dt><dd>8 or 32 GB built in, plus USB drives</dd>
+          <dt>Wii mode</dt><dd>Plays Wii discs and uses Wii Remotes through a built-in Wii system (vWii)</dd>
+        </dl>
+      </aside>
+    </div>
   </section>
 
   <p class="foot"><a href="https://github.com/thatrandumb1/wiiue" target="_blank" rel="noopener">View this project on GitHub</a> · Fan project page. Not affiliated with or endorsed by Nintendo.</p>

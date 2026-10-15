@@ -41,6 +41,33 @@
 - `Oct 14, 5:10 PM` · **P6** · Started coreinit, the Wii U's core system library
 - `Oct 14, 5:07 PM` · **P5** · CPU interpreter runs: 677 instructions of real startup code before the first missing system call · `1b9757a`
 
+## History of the Wii U
+
+The console this project brings back.
+
+| When | What happened |
+|---|---|
+| **Jun 2011** | Revealed at E3 as Nintendo's successor to the Wii, built around a tablet-style controller with its own screen: the Wii U GamePad. |
+| **Nov 2012** | Launches in North America on November 18, then Europe and Australia (Nov 30) and Japan (Dec 8), in an 8 GB Basic and a 32 GB Deluxe model. Launch games include New Super Mario Bros. U, Nintendo Land and ZombiU, and Miiverse, a built-in social network, goes live. |
+| **2013** | Big first-party year: Super Mario 3D World, Pikmin 3 and The Legend of Zelda: The Wind Waker HD. |
+| **2014** | Mario Kart 8 and Super Smash Bros. for Wii U arrive and become the console's best sellers. |
+| **2015** | Splatoon and Super Mario Maker launch. Cemu, the first Wii U emulator, appears that October. |
+| **Mar 2017** | The Legend of Zelda: Breath of the Wild launches on Wii U and on its replacement, the Nintendo Switch. Production has already ended; lifetime sales finish at 13.56 million. Many Wii U games later return on Switch. |
+| **Nov 2017** | Miiverse shuts down. |
+| **Mar 2023** | The Wii U eShop closes to new purchases. |
+| **Apr 2024** | Nintendo Network goes offline, ending official online play. The fan-run Pretendo Network keeps some of it alive, and emulators keep the library playable. |
+
+### Inside the console
+
+| Part | Details |
+|---|---|
+| **CPU** | IBM "Espresso": 3 PowerPC cores at 1.24 GHz, with paired-single floating point |
+| **GPU** | AMD "Latte", about 550 MHz, with 32 MB of fast on-chip memory (MEM1) |
+| **Memory** | 2 GB: 1 GB for games, 1 GB for the system |
+| **GamePad** | 6.2-inch 854×480 touchscreen streamed over 5 GHz Wi-Fi, plus gyro, camera, microphone and NFC |
+| **Storage** | 8 or 32 GB built in, plus USB drives |
+| **Wii mode** | Plays Wii discs and uses Wii Remotes through a built-in Wii system (vWii) |
+
 ---
 
 <sub>Last updated Oct 14, 2026, 5:59 PM PDT. Full live view: <a href="https://thatrandumb1.github.io/wiiue/">https://thatrandumb1.github.io/wiiue/</a><br>
