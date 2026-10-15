@@ -9,6 +9,7 @@
 
 <p align="center">
   <a href="https://thatrandumb1.github.io/wiiue/"><img src="https://img.shields.io/badge/live%20progress-open%20site-00a6e0?style=for-the-badge" alt="live progress: open site"></a>
+  <a href="https://github.com/thatrandumb1/wiiue/releases/latest"><img src="https://img.shields.io/badge/download-demos%20for%20Windows-e60012?style=for-the-badge" alt="download: demos for Windows"></a>
   <img src="https://img.shields.io/badge/phase-between%20phases-0084b8?style=for-the-badge" alt="phase: between phases">
   <img src="https://img.shields.io/badge/tests-76%20passing-3cb371?style=for-the-badge" alt="tests: 76 passing">
   <img src="https://img.shields.io/badge/phases%20done-12%20of%2023-6b7782?style=for-the-badge" alt="phases done: 12 of 23">
@@ -22,6 +23,13 @@
   <a href="https://thatrandumb1.github.io/wiiue/#gh-light-mode-only"><img src="assets/stats-light.svg" alt="Project stats" width="860"></a>
   <a href="https://thatrandumb1.github.io/wiiue/#gh-dark-mode-only"><img src="assets/stats-dark.svg" alt="Project stats" width="860"></a>
 </p>
+
+## Try it
+
+Download **[the latest WiiUE demos](https://github.com/thatrandumb1/wiiue/releases/latest)** (Windows 10/11, 64-bit, a GPU with Vulkan 1.3), unzip the
+folder and double-click `Play Demos.bat`. It runs small test programs written for this project: 3D cubes, GPU
+shaders, controller and touch input, audio, and multi-core threads. No Nintendo files are included and it doesn't
+run commercial games yet.
 
 ## Roadmap
 
