@@ -358,16 +358,8 @@ body {
 .wrap, .side, .main, .top, .stats, .roadmap, .groups, .groups > div, .tiles { pointer-events: none; }
 .bar, .now, .stat, .tile, .feed, .section-head, .empty, .foot { pointer-events: auto; }
 
-/* ---- layout + screensaver controls ---- */
-.seg {
-  display: inline-flex;
-  padding: 3px;
-  gap: 2px;
-  border-radius: var(--radius-pill);
-  background: var(--surface-2);
-  border: 1px solid var(--line);
-}
-.seg button, .toggle {
+/* ---- screensaver control ---- */
+.toggle {
   font: inherit;
   font-size: 13px;
   font-weight: 700;
@@ -378,10 +370,9 @@ body {
   color: var(--ink-soft);
   cursor: pointer;
 }
-.seg button[aria-pressed="true"] { background: var(--surface); color: var(--accent-deep); box-shadow: var(--shadow); }
 .toggle { border: 1px solid var(--line); background: var(--surface-2); }
 .toggle[aria-pressed="true"] { background: var(--accent-wash); color: var(--accent-deep); border-color: transparent; }
-.seg button:focus-visible, .toggle:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+.toggle:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
 
 /* ---- screensaver ---- */
 .dvd-layer {
@@ -415,32 +406,6 @@ body {
   100% { filter: drop-shadow(0 0 0 transparent); }
 }
 .dvd-layer.off { display: none; }
-
-/* ---- side layout: controls and status stay in a panel on the left ---- */
-@media (min-width: 960px) {
-  .wrap[data-layout="side"] {
-    max-width: 1440px;
-    grid-template-columns: 380px minmax(0, 1fr);
-    align-items: start;
-    column-gap: 26px;
-  }
-  .wrap[data-layout="side"] .side {
-    position: sticky;
-    top: calc(18px + env(safe-area-inset-top, 0px));
-    max-height: calc(100vh - 36px);
-    overflow-y: auto;
-    gap: 16px;
-    padding-bottom: 4px;
-  }
-  .wrap[data-layout="side"] .top { grid-template-columns: minmax(0, 1fr); }
-  .wrap[data-layout="side"] .bar { border-radius: 26px; padding: 14px 16px; gap: 10px; }
-  .wrap[data-layout="side"] .bar .spacer { flex-basis: 100%; height: 0; }
-  .wrap[data-layout="side"] .now h1 { font-size: 26px; }
-  .wrap[data-layout="side"] .stat .value { font-size: 24px; }
-}
-@media (max-width: 959px) {
-  .seg { display: none; }
-}
 
 @media (max-width: 760px) {
   .top { grid-template-columns: minmax(0, 1fr); }
@@ -484,7 +449,7 @@ body {
   <svg class="dvd" id="dvd" viewBox="0 0 1960 460"><use href="#logo-art" width="1960" height="460"/></svg>
 </div>
 
-<div class="wrap" id="wrap" data-layout="top">
+<div class="wrap" id="wrap">
  <aside class="side">
   <header class="bar">
     <div class="brand">
@@ -492,10 +457,6 @@ body {
       <small>Wii U emulator, built from scratch</small>
     </div>
     <div class="spacer"></div>
-    <div class="seg" role="group" aria-label="Layout">
-      <button type="button" id="layout-top" aria-pressed="true">Top</button>
-      <button type="button" id="layout-side" aria-pressed="false">Side</button>
-    </div>
     <button type="button" class="toggle" id="saver-toggle" aria-pressed="true" title="Bouncing logo in the background">Screensaver</button>
     <span class="pill" id="conn"><span class="dot"></span><span id="conn-text">Connecting</span></span>
     <span class="time" id="updated">No updates yet</span>
@@ -779,18 +740,6 @@ body {
       /* ignore */
     }
   }
-
-  // ---- layout: status bar on top, or a side panel ----
-  function setLayout(layout) {
-    $("wrap").dataset.layout = layout;
-    $("layout-top").setAttribute("aria-pressed", String(layout === "top"));
-    $("layout-side").setAttribute("aria-pressed", String(layout === "side"));
-    savePref("layout", layout);
-    window.dispatchEvent(new Event("resize")); // keep the screensaver logo inside the new bounds
-  }
-  $("layout-top").addEventListener("click", () => setLayout("top"));
-  $("layout-side").addEventListener("click", () => setLayout("side"));
-  setLayout(loadPref("layout", "top") === "side" ? "side" : "top");
 
   // ---- screensaver: bouncing logo, changes color on every wall, drag and fling ----
   function startScreensaver() {
