@@ -37,46 +37,8 @@
   --font-mono: "DM Mono", ui-monospace, "Cascadia Mono", Consolas, monospace;
   --radius-tile: 22px;
   --radius-pill: 999px;
-}
-@media (prefers-color-scheme: dark) {
-  :root:not([data-theme="light"]) {
-    --bg: #1b2229;
-    --stripe: #1f272f;
-    --surface: #26303a;
-    --surface-2: #2c3743;
-    --line: #3a4652;
-    --ink: #e8eef3;
-    --ink-soft: #9fadb9;
-    --accent: #2cc0f2;
-    --accent-deep: #6fd6f8;
-    --accent-wash: #173c4d;
-    --done: #57cf8c;
-    --done-wash: #1d3a2b;
-    --later: #6c7a86;
-    --logo-grey: #b4bcc4;
-    --logo-blue: #2cb4ea;
-    --shadow: 0 1px 0 rgba(0, 0, 0, 0.3), 0 8px 22px rgba(0, 0, 0, 0.35);
-    color-scheme: dark;
-  }
-}
-:root[data-theme="dark"] {
-  --bg: #1b2229;
-  --stripe: #1f272f;
-  --surface: #26303a;
-  --surface-2: #2c3743;
-  --line: #3a4652;
-  --ink: #e8eef3;
-  --ink-soft: #9fadb9;
-  --accent: #2cc0f2;
-  --accent-deep: #6fd6f8;
-  --accent-wash: #173c4d;
-  --done: #57cf8c;
-  --done-wash: #1d3a2b;
-  --later: #6c7a86;
-  --logo-grey: #b4bcc4;
-  --logo-blue: #2cb4ea;
-  --shadow: 0 1px 0 rgba(0, 0, 0, 0.3), 0 8px 22px rgba(0, 0, 0, 0.35);
-  color-scheme: dark;
+  /* Light theme only, whatever the viewer's system or app theme */
+  color-scheme: light;
 }
 
 * { box-sizing: border-box; }
