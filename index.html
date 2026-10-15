@@ -1,0 +1,659 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="description" content="Live build progress of WiiUE, a Wii U emulator built from scratch.">
+</head>
+<body>
+<title>WiiUE Progress</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=M+PLUS+Rounded+1c:wght@500;700;800&family=Nunito:wght@400;600;700&family=DM+Mono:wght@400;500&display=swap">
+<style>
+/* Layout: console home-menu feel. A pill status bar, one big "now playing" tile beside
+   stat tiles, the roadmap as a grid of rounded channel tiles grouped by stage, and an
+   activity feed docked at the bottom like a second screen. */
+:root {
+  --bg: #eef1f4;
+  --stripe: #e6eaee;
+  --surface: #ffffff;
+  --surface-2: #f6f8fa;
+  --line: #d5dbe1;
+  --ink: #2f3a44;
+  --ink-soft: #6b7782;
+  --accent: #00a6e0;
+  --accent-deep: #0084b8;
+  --accent-wash: #dff4fc;
+  --done: #3cb371;
+  --done-wash: #e3f5ea;
+  --later: #a9b3bc;
+  --logo-grey: #858585;
+  --logo-blue: #0594cf;
+  --shadow: 0 1px 0 rgba(47, 58, 68, 0.06), 0 6px 18px rgba(47, 58, 68, 0.08);
+  --font-display: "M PLUS Rounded 1c", "Nunito", "Segoe UI", system-ui, sans-serif;
+  --font-body: "Nunito", "Segoe UI", system-ui, sans-serif;
+  --font-mono: "DM Mono", ui-monospace, "Cascadia Mono", Consolas, monospace;
+  --radius-tile: 22px;
+  --radius-pill: 999px;
+}
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --bg: #1b2229;
+    --stripe: #1f272f;
+    --surface: #26303a;
+    --surface-2: #2c3743;
+    --line: #3a4652;
+    --ink: #e8eef3;
+    --ink-soft: #9fadb9;
+    --accent: #2cc0f2;
+    --accent-deep: #6fd6f8;
+    --accent-wash: #173c4d;
+    --done: #57cf8c;
+    --done-wash: #1d3a2b;
+    --later: #6c7a86;
+    --logo-grey: #b4bcc4;
+    --logo-blue: #2cb4ea;
+    --shadow: 0 1px 0 rgba(0, 0, 0, 0.3), 0 8px 22px rgba(0, 0, 0, 0.35);
+    color-scheme: dark;
+  }
+}
+:root[data-theme="dark"] {
+  --bg: #1b2229;
+  --stripe: #1f272f;
+  --surface: #26303a;
+  --surface-2: #2c3743;
+  --line: #3a4652;
+  --ink: #e8eef3;
+  --ink-soft: #9fadb9;
+  --accent: #2cc0f2;
+  --accent-deep: #6fd6f8;
+  --accent-wash: #173c4d;
+  --done: #57cf8c;
+  --done-wash: #1d3a2b;
+  --later: #6c7a86;
+  --logo-grey: #b4bcc4;
+  --logo-blue: #2cb4ea;
+  --shadow: 0 1px 0 rgba(0, 0, 0, 0.3), 0 8px 22px rgba(0, 0, 0, 0.35);
+  color-scheme: dark;
+}
+
+* { box-sizing: border-box; }
+body {
+  margin: 0;
+  background-color: var(--bg);
+  background-image: repeating-linear-gradient(0deg, var(--stripe) 0 2px, transparent 2px 6px);
+  color: var(--ink);
+  font-family: var(--font-body);
+  font-size: 15px;
+  line-height: 1.5;
+}
+.wrap {
+  max-width: 1120px;
+  margin: 0 auto;
+  padding-inline: 20px;
+  padding-block: 18px 40px;
+  display: grid;
+  gap: 22px;
+}
+
+/* ---- status bar ---- */
+.bar {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  flex-wrap: wrap;
+  background: var(--surface);
+  border: 1px solid var(--line);
+  border-radius: var(--radius-pill);
+  padding: 8px 10px 8px 18px;
+  box-shadow: var(--shadow);
+}
+.brand {
+  font-family: var(--font-display);
+  font-weight: 800;
+  font-size: 20px;
+  letter-spacing: -0.01em;
+  display: flex;
+  align-items: baseline;
+  gap: 8px;
+}
+.logo { height: 30px; width: auto; display: block; }
+.brand { align-items: center; }
+.brand small {
+  font-family: var(--font-body);
+  font-weight: 600;
+  font-size: 13px;
+  color: var(--ink-soft);
+}
+.bar .spacer { flex: 1; }
+.pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+  border-radius: var(--radius-pill);
+  padding: 5px 12px;
+  font-size: 13px;
+  font-weight: 700;
+  background: var(--surface-2);
+  border: 1px solid var(--line);
+  color: var(--ink-soft);
+  white-space: nowrap;
+}
+.pill.live { color: var(--accent-deep); background: var(--accent-wash); border-color: transparent; }
+.dot { width: 8px; height: 8px; border-radius: 50%; background: currentColor; }
+.live .dot { animation: pulse 1.8s ease-in-out infinite; }
+@keyframes pulse { 50% { opacity: 0.25; } }
+.time { font-family: var(--font-mono); font-size: 13px; color: var(--ink-soft); }
+
+/* ---- now tile + stats ---- */
+.top {
+  display: grid;
+  grid-template-columns: minmax(0, 1.6fr) minmax(0, 1fr);
+  gap: 16px;
+}
+.now {
+  position: relative;
+  overflow: hidden;
+  border-radius: var(--radius-tile);
+  padding: 22px 24px;
+  color: #fff;
+  background: linear-gradient(160deg, #19bdf2 0%, #0093cf 70%, #0080b8 100%);
+  box-shadow: var(--shadow);
+  display: grid;
+  gap: 10px;
+  min-width: 0;
+}
+.now::after {
+  content: "";
+  position: absolute;
+  inset: auto -60px -120px auto;
+  width: 280px;
+  height: 280px;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.12);
+}
+.eyebrow {
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  opacity: 0.85;
+}
+.now h1 {
+  margin: 0;
+  font-family: var(--font-display);
+  font-weight: 800;
+  font-size: clamp(26px, 4vw, 36px);
+  line-height: 1.15;
+  text-wrap: balance;
+}
+.now p { margin: 0; max-width: 60ch; font-size: 15px; opacity: 0.95; }
+.meter {
+  margin-top: 6px;
+  height: 12px;
+  border-radius: var(--radius-pill);
+  background: rgba(255, 255, 255, 0.25);
+  overflow: hidden;
+}
+.meter > span {
+  display: block;
+  height: 100%;
+  width: 0;
+  border-radius: inherit;
+  background: #fff;
+  transition: width 0.6s ease;
+}
+.meter-label { font-size: 13px; font-weight: 700; opacity: 0.9; font-variant-numeric: tabular-nums; }
+
+.stats {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 12px;
+}
+.stat {
+  background: var(--surface);
+  border: 1px solid var(--line);
+  border-radius: 18px;
+  padding: 14px 16px;
+  display: grid;
+  align-content: space-between;
+  gap: 4px;
+  box-shadow: var(--shadow);
+  min-width: 0;
+}
+.stat .label { font-size: 12px; font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase; color: var(--ink-soft); }
+.stat .value {
+  font-family: var(--font-display);
+  font-weight: 800;
+  font-size: 28px;
+  font-variant-numeric: tabular-nums;
+  line-height: 1.1;
+}
+.stat .sub { font-size: 13px; color: var(--ink-soft); overflow-wrap: anywhere; }
+
+/* ---- roadmap tiles ---- */
+.section-head {
+  display: flex;
+  align-items: baseline;
+  gap: 10px;
+  margin: 4px 4px 10px;
+}
+.section-head h2 {
+  margin: 0;
+  font-family: var(--font-display);
+  font-weight: 800;
+  font-size: 18px;
+}
+.section-head span { font-size: 13px; color: var(--ink-soft); font-weight: 600; }
+.groups { display: grid; gap: 20px; }
+.tiles {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(190px, 1fr));
+  gap: 12px;
+}
+.tile {
+  position: relative;
+  background: var(--surface);
+  border: 2px solid var(--line);
+  border-radius: var(--radius-tile);
+  padding: 14px 14px 12px;
+  display: grid;
+  grid-template-rows: auto 1fr auto;
+  gap: 6px;
+  min-height: 132px;
+  box-shadow: var(--shadow);
+  transition: transform 0.15s ease;
+}
+.tile:hover { transform: translateY(-2px); }
+.tile .num {
+  font-family: var(--font-mono);
+  font-size: 12px;
+  color: var(--ink-soft);
+}
+.tile h3 {
+  margin: 0;
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: 16px;
+  line-height: 1.25;
+}
+.tile p { margin: 0; font-size: 13px; color: var(--ink-soft); }
+.chip {
+  justify-self: start;
+  border-radius: var(--radius-pill);
+  padding: 2px 10px;
+  font-size: 12px;
+  font-weight: 700;
+  background: var(--surface-2);
+  color: var(--ink-soft);
+}
+.tile.done { border-color: var(--done); }
+.tile.done .chip { background: var(--done-wash); color: var(--done); }
+.tile.active {
+  border-color: var(--accent);
+  box-shadow: 0 0 0 4px var(--accent-wash), var(--shadow);
+}
+.tile.active .chip { background: var(--accent); color: #fff; }
+.tile.later h3 { color: var(--ink-soft); }
+.tile.milestone::before {
+  content: "Milestone";
+  position: absolute;
+  top: 12px;
+  right: 12px;
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--accent-deep);
+}
+
+/* ---- activity feed (second-screen panel) ---- */
+.feed {
+  background: var(--surface);
+  border: 1px solid var(--line);
+  border-radius: 28px;
+  padding: 18px 20px;
+  box-shadow: var(--shadow);
+}
+.feed ol { list-style: none; margin: 0; padding: 0; display: grid; gap: 2px; }
+.feed li {
+  display: grid;
+  grid-template-columns: 96px minmax(0, 1fr);
+  gap: 12px;
+  padding: 10px 6px;
+  border-bottom: 1px solid var(--line);
+}
+.feed li:last-child { border-bottom: 0; }
+.feed .when { font-family: var(--font-mono); font-size: 12px; color: var(--ink-soft); padding-top: 2px; }
+.feed .what { min-width: 0; overflow-wrap: anywhere; }
+.feed .what b { font-weight: 700; }
+.tag {
+  display: inline-block;
+  margin-right: 6px;
+  border-radius: 6px;
+  padding: 0 6px;
+  font-size: 12px;
+  font-weight: 700;
+  background: var(--accent-wash);
+  color: var(--accent-deep);
+}
+.commit { font-family: var(--font-mono); font-size: 12px; color: var(--ink-soft); margin-left: 6px; }
+
+.empty {
+  border: 2px dashed var(--line);
+  border-radius: var(--radius-tile);
+  padding: 22px;
+  color: var(--ink-soft);
+  text-align: center;
+  background: var(--surface);
+}
+.foot { font-size: 12px; color: var(--ink-soft); text-align: center; }
+
+@media (max-width: 760px) {
+  .top { grid-template-columns: minmax(0, 1fr); }
+  .feed li { grid-template-columns: minmax(0, 1fr); gap: 2px; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .live .dot { animation: none; }
+  .tile, .meter > span { transition: none; }
+}
+</style>
+
+<div class="wrap">
+  <header class="bar">
+    <div class="brand">
+      <svg class="logo" viewBox="20 150 1960 460" role="img" aria-label="WiiUE">
+        <defs>
+          <clipPath id="w-clip"><rect x="0" y="188" width="700" height="420"/></clipPath>
+          <mask id="u-cut">
+            <rect x="1040" y="160" width="520" height="380" fill="#fff"/>
+            <path d="M1180,150 V330 A116,116 0 0 0 1412,330 V150 Z" fill="#000"/>
+            <path d="M1229,150 V333 A66.5,66.5 0 0 0 1362,333 V150 Z" fill="#fff"/>
+          </mask>
+        </defs>
+        <g fill="var(--logo-grey)">
+          <polyline clip-path="url(#w-clip)" points="63,120 205,548 338,232 470,548 619,120" fill="none"
+                    stroke="var(--logo-grey)" stroke-width="96" stroke-linejoin="round"/>
+          <circle cx="734" cy="213" r="54"/>
+          <circle cx="911" cy="213" r="54"/>
+          <rect x="688" y="311" width="92" height="279"/>
+          <rect x="865" y="311" width="93" height="279"/>
+        </g>
+        <g fill="var(--logo-blue)">
+          <rect x="1062" y="177" width="474" height="349" rx="72" mask="url(#u-cut)"/>
+          <path d="M1688,177 H1915 A42.5,42.5 0 0 1 1915,262 H1730 V330 H1888 A41.5,41.5 0 0 1 1888,413 H1730 V497 H1916 A46.5,46.5 0 0 1 1916,590 H1688 A70,70 0 0 1 1618,520 V247 A70,70 0 0 1 1688,177 Z"/>
+        </g>
+      </svg>
+      <small>Wii U emulator, built from scratch</small>
+    </div>
+    <div class="spacer"></div>
+    <span class="pill" id="conn"><span class="dot"></span><span id="conn-text">Connecting</span></span>
+    <span class="time" id="updated">No updates yet</span>
+  </header>
+
+  <section class="top">
+    <article class="now" aria-live="polite">
+      <div class="eyebrow" id="now-eyebrow">Now working on</div>
+      <h1 id="now-title">Waiting for the first update</h1>
+      <p id="now-text">Progress appears here as each phase is built and tested.</p>
+      <div class="meter" aria-hidden="true"><span id="meter-fill"></span></div>
+      <div class="meter-label" id="meter-label">0 of 0 phases done</div>
+    </article>
+    <div class="stats">
+      <div class="stat"><span class="label">Tests passing</span><span class="value" id="stat-tests">â€“</span><span class="sub" id="stat-tests-sub">unit tests</span></div>
+      <div class="stat"><span class="label">Phases done</span><span class="value" id="stat-phases">â€“</span><span class="sub" id="stat-phases-sub">of the roadmap</span></div>
+      <div class="stat"><span class="label">Commits</span><span class="value" id="stat-commits">â€“</span><span class="sub" id="stat-commits-sub">latest â€“</span></div>
+      <div class="stat"><span class="label">Instructions run</span><span class="value" id="stat-instr">â€“</span><span class="sub" id="stat-instr-sub">by hello.rpx</span></div>
+    </div>
+  </section>
+
+  <section>
+    <div class="section-head"><h2>Roadmap</h2><span id="roadmap-note">22 phases from tools to real hardware</span></div>
+    <div class="groups" id="groups">
+      <div class="empty">The roadmap loads from the project's live record. If nothing shows up, open this page while signed in.</div>
+    </div>
+  </section>
+
+  <section class="feed">
+    <div class="section-head"><h2>Activity</h2><span>newest first</span></div>
+    <ol id="log"><li><span class="when">â€“</span><span class="what">Updates are posted here after each step is built, tested and committed.</span></li></ol>
+  </section>
+
+  <p class="foot">Fan project page. Not affiliated with or endorsed by Nintendo.</p>
+</div>
+
+<!-- Snapshot of the live record, built into the page so visitors who can't reach the
+     live database (signed out) still see current progress. Refreshed on every republish. -->
+<script type="application/json" id="snapshot">
+{
+  "status": {
+    "headline": "Coreinit: the Wii U's core system library",
+    "detail": "Writing our own versions of the system functions hello.rpx calls: memory heaps, threads, locks, OSReport. Goal: \"Hello from my emulator!\" printed by the emulated program.",
+    "testCases": 33, "assertions": 286, "commits": 6, "lastCommit": "278bc00",
+    "instructions": 677, "instructionsNote": "before the first missing system function",
+    "updatedAt": "2026-10-14T17:25:00-07:00"
+  },
+  "phases": [
+    {"n": 0, "group": "Foundation", "title": "Tools", "detail": "Visual Studio, CMake, Vulkan SDK, vcpkg, devkitPro", "status": "done"},
+    {"n": 1, "group": "Foundation", "title": "Project skeleton", "detail": "Folders, build system, docs, git", "status": "done"},
+    {"n": 2, "group": "Core emulator", "title": "Guest memory", "detail": "4 GB address space, big-endian access, fault reports", "status": "done"},
+    {"n": 3, "group": "Core emulator", "title": "Homebrew test programs", "detail": "hello.rpx built with devkitPro", "status": "done"},
+    {"n": 4, "group": "Core emulator", "title": "RPX loader", "detail": "Sections, relocations, imports to HLE stubs", "status": "done"},
+    {"n": 5, "group": "Core emulator", "title": "PowerPC CPU", "detail": "Interpreter: integer, float, paired singles", "status": "done"},
+    {"n": 6, "group": "Core emulator", "title": "Coreinit", "detail": "Heaps, threads, locks, OSReport", "status": "active", "milestone": true},
+    {"n": 7, "group": "Core emulator", "title": "File system", "detail": "/vol/content and /vol/save on your PC", "status": "next"},
+    {"n": 8, "group": "Core emulator", "title": "Graphics", "detail": "GX2 to Vulkan, TV and GamePad windows", "status": "next", "milestone": true},
+    {"n": 9, "group": "Core emulator", "title": "Input", "detail": "GamePad buttons, sticks, touch, gyro", "status": "next"},
+    {"n": 10, "group": "Core emulator", "title": "Audio", "detail": "AX voices, ADPCM, mixing", "status": "next"},
+    {"n": 11, "group": "Core emulator", "title": "Multi-core", "detail": "Three CPU cores, scheduler, alarms", "status": "next"},
+    {"n": 12, "group": "Your console", "title": "Console dump", "detail": "System files, fonts, Miis, saves", "status": "later"},
+    {"n": 13, "group": "Your console", "title": "Real games", "detail": "First commercial game reaches gameplay", "status": "later", "milestone": true},
+    {"n": 14, "group": "Your console", "title": "Speed", "detail": "JIT recompiler, shader caches", "status": "later"},
+    {"n": 15, "group": "Full system feel", "title": "App UI", "detail": "Game list, icons, settings", "status": "later"},
+    {"n": 16, "group": "Full system feel", "title": "Wii U Menu", "detail": "Boot the dumped home menu", "status": "later", "milestone": true},
+    {"n": 17, "group": "Full system feel", "title": "Wii games via Dolphin", "detail": "Launch vWii titles in Dolphin", "status": "later"},
+    {"n": 18, "group": "Online", "title": "Networking", "detail": "Sockets, SSL, server redirects", "status": "later"},
+    {"n": 19, "group": "Online", "title": "Self-hosted servers", "detail": "Your own Pretendo account and friends", "status": "later"},
+    {"n": 20, "group": "Online", "title": "Public Pretendo", "detail": "Only with Pretendo's permission", "status": "later"},
+    {"n": 21, "group": "Hardware extras", "title": "Real GamePad", "detail": "Linux bridge streams to the real controller", "status": "later"},
+    {"n": 22, "group": "Hardware extras", "title": "Extras", "detail": "Camera, microphone, amiibo, save states", "status": "later"}
+  ],
+  "log": [
+    {"at": "2026-10-14T17:25:00-07:00", "phase": 6, "text": "Progress page opened to the public"},
+    {"at": "2026-10-14T17:15:00-07:00", "phase": 6, "text": "Live progress page published", "commit": "278bc00"},
+    {"at": "2026-10-14T17:10:00-07:00", "phase": 6, "text": "Started coreinit, the Wii U's core system library"},
+    {"at": "2026-10-14T17:07:18-07:00", "phase": 5, "text": "CPU interpreter runs: 677 instructions of real startup code before the first missing system call", "commit": "1b9757a"},
+    {"at": "2026-10-14T16:55:35-07:00", "phase": 4, "text": "RPX loader: hello.rpx loads, matches the compiler's output byte for byte", "commit": "cf9af50"},
+    {"at": "2026-10-14T16:47:32-07:00", "phase": 2, "text": "Guest memory working: 4 GB address space, big-endian reads and writes", "commit": "47ff654"},
+    {"at": "2026-10-14T16:44:09-07:00", "phase": 0, "text": "All tools installed after fixing a stuck devkitPro install; hello.rpx builds", "commit": "bb71fe2"},
+    {"at": "2026-10-14T16:08:18-07:00", "phase": 1, "text": "Project created: build system, docs, folder for your console dump", "commit": "7417865"}
+  ]
+}
+</script>
+
+<script>
+(function () {
+  const GROUPS = ["Foundation", "Core emulator", "Your console", "Full system feel", "Online", "Hardware extras"];
+  const STATUS_LABEL = { done: "Done", active: "In progress", next: "Up next", later: "Later" };
+  const $ = (id) => document.getElementById(id);
+
+  let status = null;
+  let phases = [];
+  let log = [];
+
+  function relTime(iso) {
+    if (!iso) return "";
+    const t = Date.parse(iso);
+    if (Number.isNaN(t)) return "";
+    const s = Math.max(0, Math.round((Date.now() - t) / 1000));
+    if (s < 60) return "just now";
+    const m = Math.round(s / 60);
+    if (m < 60) return m + " min ago";
+    const h = Math.round(m / 60);
+    if (h < 24) return h + " h ago";
+    return new Date(t).toLocaleDateString(undefined, { month: "short", day: "numeric" });
+  }
+
+  function clockTime(iso) {
+    const t = Date.parse(iso);
+    if (Number.isNaN(t)) return "";
+    const d = new Date(t);
+    const today = new Date();
+    const sameDay = d.toDateString() === today.toDateString();
+    const time = d.toLocaleTimeString(undefined, { hour: "numeric", minute: "2-digit" });
+    return sameDay ? time : d.toLocaleDateString(undefined, { month: "short", day: "numeric" }) + " " + time;
+  }
+
+  function el(tag, cls, text) {
+    const e = document.createElement(tag);
+    if (cls) e.className = cls;
+    if (text != null) e.textContent = text;
+    return e;
+  }
+
+  function renderStatus() {
+    const done = phases.filter((p) => p.status === "done").length;
+    const total = phases.length;
+    $("meter-fill").style.width = total ? Math.round((done / total) * 100) + "%" : "0";
+    $("meter-label").textContent = done + " of " + total + " phases done";
+    $("stat-phases").textContent = total ? done + "/" + total : "â€“";
+
+    if (!status) return;
+    const active = phases.find((p) => p.status === "active");
+    $("now-eyebrow").textContent = active ? "Now working on Â· Phase " + active.n : "Now working on";
+    $("now-title").textContent = status.headline || (active ? active.title : "Between phases");
+    $("now-text").textContent = status.detail || (active ? active.detail : "");
+    $("stat-tests").textContent = status.testCases != null ? String(status.testCases) : "â€“";
+    $("stat-tests-sub").textContent = status.assertions != null ? status.assertions + " checks, all passing" : "unit tests";
+    $("stat-commits").textContent = status.commits != null ? String(status.commits) : "â€“";
+    $("stat-commits-sub").textContent = status.lastCommit ? "latest " + status.lastCommit : "latest â€“";
+    $("stat-instr").textContent = status.instructions != null ? Number(status.instructions).toLocaleString() : "â€“";
+    $("stat-instr-sub").textContent = status.instructionsNote || "by hello.rpx";
+    $("updated").textContent = status.updatedAt ? "Updated " + relTime(status.updatedAt) : "No updates yet";
+  }
+
+  function renderPhases() {
+    const root = $("groups");
+    root.textContent = "";
+    if (!phases.length) {
+      root.appendChild(el("div", "empty", "No roadmap entries yet. They appear here once the project posts its first update."));
+      return;
+    }
+    const groups = GROUPS.concat([...new Set(phases.map((p) => p.group))].filter((g) => !GROUPS.includes(g)));
+    for (const g of groups) {
+      const items = phases.filter((p) => p.group === g).sort((a, b) => a.n - b.n);
+      if (!items.length) continue;
+      const section = el("div");
+      const head = el("div", "section-head");
+      head.appendChild(el("h2", null, g));
+      const doneHere = items.filter((p) => p.status === "done").length;
+      head.appendChild(el("span", null, doneHere + "/" + items.length + " done"));
+      section.appendChild(head);
+      const grid = el("div", "tiles");
+      for (const p of items) {
+        const tile = el("article", "tile " + (p.status || "later") + (p.milestone ? " milestone" : ""));
+        tile.appendChild(el("span", "num", "Phase " + String(p.n).padStart(2, "0")));
+        const body = el("div");
+        body.appendChild(el("h3", null, p.title));
+        if (p.detail) body.appendChild(el("p", null, p.detail));
+        tile.appendChild(body);
+        tile.appendChild(el("span", "chip", STATUS_LABEL[p.status] || "Later"));
+        grid.appendChild(tile);
+      }
+      section.appendChild(grid);
+      root.appendChild(section);
+    }
+  }
+
+  function renderLog() {
+    const list = $("log");
+    list.textContent = "";
+    if (!log.length) {
+      const li = el("li");
+      li.appendChild(el("span", "when", "â€“"));
+      li.appendChild(el("span", "what", "Updates are posted here after each step is built, tested and committed."));
+      list.appendChild(li);
+      return;
+    }
+    for (const entry of log) {
+      const li = el("li");
+      li.appendChild(el("span", "when", clockTime(entry.at)));
+      const what = el("span", "what");
+      if (entry.phase != null) what.appendChild(el("span", "tag", "P" + entry.phase));
+      what.appendChild(document.createTextNode(entry.text || ""));
+      if (entry.commit) what.appendChild(el("span", "commit", entry.commit));
+      li.appendChild(what);
+      list.appendChild(li);
+    }
+  }
+
+  function setConn(state) {
+    const pill = $("conn");
+    pill.classList.toggle("live", state === "live");
+    $("conn-text").textContent = state === "live" ? "Live" : state === "snapshot" ? "Snapshot" : "Connecting";
+    pill.title = state === "snapshot" ? "Showing the latest published progress." : "";
+  }
+
+  function loadSnapshot() {
+    try {
+      const snap = JSON.parse($("snapshot").textContent);
+      status = snap.status || null;
+      phases = Array.isArray(snap.phases) ? snap.phases : [];
+      log = Array.isArray(snap.log) ? snap.log : [];
+    } catch (e) {
+      status = null;
+      phases = [];
+      log = [];
+    }
+  }
+
+  async function start() {
+    // Render the built-in snapshot first so every visitor sees progress immediately
+    loadSnapshot();
+    setConn("snapshot");
+    renderPhases();
+    renderStatus();
+    renderLog();
+
+    const db = window.claude && window.claude.use ? await window.claude.use("db") : null;
+    if (!db) {
+      return;
+    }
+
+    const onError = () => setConn("snapshot");
+
+    db.doc("tracker/status").onSnapshot((snap) => {
+      if (!snap.exists) return; // keep the built-in snapshot
+      status = snap.data();
+      setConn("live");
+      renderStatus();
+    }, onError);
+
+    db.collection("phases").orderBy("n").onSnapshot((snap) => {
+      if (snap.empty) return;
+      phases = snap.docs.map((d) => d.data());
+      setConn("live");
+      renderPhases();
+      renderStatus();
+    }, onError);
+
+    db.collection("log").orderBy("at", "desc").limit(60).onSnapshot((snap) => {
+      if (snap.empty) return;
+      log = snap.docs.map((d) => d.data());
+      setConn("live");
+      renderLog();
+    }, onError);
+
+    // Keep relative times fresh (display only, no writes)
+    setInterval(() => {
+      if (status && status.updatedAt) $("updated").textContent = "Updated " + relTime(status.updatedAt);
+    }, 30000);
+  }
+
+  start();
+})();
+</script>
+
+</body>
+</html>
