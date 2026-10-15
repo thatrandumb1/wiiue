@@ -10,8 +10,8 @@
 <p align="center">
   <a href="https://thatrandumb1.github.io/wiiue/"><img src="https://img.shields.io/badge/live%20progress-open%20site-00a6e0?style=for-the-badge" alt="live progress: open site"></a>
   <img src="https://img.shields.io/badge/phase-between%20phases-0084b8?style=for-the-badge" alt="phase: between phases">
-  <img src="https://img.shields.io/badge/tests-61%20passing-3cb371?style=for-the-badge" alt="tests: 61 passing">
-  <img src="https://img.shields.io/badge/phases%20done-10%20of%2023-6b7782?style=for-the-badge" alt="phases done: 10 of 23">
+  <img src="https://img.shields.io/badge/tests-70%20passing-3cb371?style=for-the-badge" alt="tests: 70 passing">
+  <img src="https://img.shields.io/badge/phases%20done-11%20of%2023-6b7782?style=for-the-badge" alt="phases done: 11 of 23">
 </p>
 
 <p align="center">
@@ -32,6 +32,7 @@
 
 ## Recent activity
 
+- `Oct 14, 7:35 PM` · **P10** · Audio done: the AX mixer plays PCM and ADPCM voices with pitch and volume on your speakers; a test program plays a C-E-G-C tune · `e8c71ee`
 - `Oct 14, 7:03 PM` · **P9** · Input done: GamePad buttons, sticks, touch screen and motion work from the keyboard, mouse or a game controller · `4b79a22`
 - `Oct 14, 6:47 PM` · **P8** · Graphics done: Wii U shaders are translated to Vulkan and a spinning 3D triangle draws on both screens on the graphics card · `774489c`
 - `Oct 14, 6:25 PM` · **P8** · GX2 graphics library running: a program set up the standard way clears both screens to cycling colors and quits cleanly when the window closes · `07c839b`
@@ -39,7 +40,6 @@
 - `Oct 14, 5:59 PM` · **P8** · Started graphics
 - `Oct 14, 5:58 PM` · **P7** · File system done: a test program reads game content, writes the SD card and passes all 26 file checks · `0a2ab66`
 - `Oct 14, 5:47 PM` · **P7** · Started the file system
-- `Oct 14, 5:46 PM` · **P6** · Milestone: hello.rpx prints "Hello from my emulator!" and exits cleanly after 10,522 instructions · `1af05ca`
 
 ## History of the Wii U
 
@@ -70,5 +70,5 @@ The console this project brings back.
 
 ---
 
-<sub>Last updated Oct 14, 2026, 7:04 PM PDT. Full live view: <a href="https://thatrandumb1.github.io/wiiue/">https://thatrandumb1.github.io/wiiue/</a><br>
+<sub>Last updated Oct 14, 2026, 7:36 PM PDT. Full live view: <a href="https://thatrandumb1.github.io/wiiue/">https://thatrandumb1.github.io/wiiue/</a><br>
 Fan project page. Not affiliated with or endorsed by Nintendo.</sub>

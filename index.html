@@ -587,11 +587,11 @@ body {
 <script type="application/json" id="snapshot">
 {
   "status": {
-    "headline": "Input done: the GamePad works",
-    "detail": "Programs can now read the GamePad: buttons, both sticks, the touch screen and motion. Play with the keyboard and mouse or any game controller (with rumble and gyro when it has them). Next: audio.",
-    "testCases": 61, "assertions": 636, "commits": 30, "lastCommit": "4b79a22",
-    "instructions": 488587, "instructionsNote": "Triangle test: 600 frames on both screens",
-    "updatedAt": "2026-10-14T19:04:00-07:00"
+    "headline": "Audio done: first sounds",
+    "detail": "Programs now play sound through the Wii U's AX mixer: voices, pitch, volume and the console's compressed ADPCM format, mixed for the TV and GamePad and played on your speakers. A test program plays a little tune. Next: multi-core.",
+    "testCases": 70, "assertions": 1092, "commits": 32, "lastCommit": "e8c71ee",
+    "instructions": 10961877, "instructionsNote": "Audio test: a 3-second tune",
+    "updatedAt": "2026-10-14T19:36:00-07:00"
   },
   "phases": [
     {"n": 0, "group": "Foundation", "title": "Tools", "detail": "Visual Studio, CMake, Vulkan SDK, vcpkg, devkitPro", "status": "done"},
@@ -604,7 +604,7 @@ body {
     {"n": 7, "group": "Core emulator", "title": "File system", "detail": "/vol/content and /vol/save on your PC", "status": "done"},
     {"n": 8, "group": "Core emulator", "title": "Graphics", "detail": "GX2 to Vulkan, TV and GamePad windows", "status": "done", "milestone": true},
     {"n": 9, "group": "Core emulator", "title": "Input", "detail": "GamePad buttons, sticks, touch, gyro", "status": "done"},
-    {"n": 10, "group": "Core emulator", "title": "Audio", "detail": "AX voices, ADPCM, mixing", "status": "next"},
+    {"n": 10, "group": "Core emulator", "title": "Audio", "detail": "AX voices, ADPCM, mixing", "status": "done"},
     {"n": 11, "group": "Core emulator", "title": "Multi-core", "detail": "Three CPU cores, scheduler, alarms", "status": "next"},
     {"n": 12, "group": "Your console", "title": "Console dump", "detail": "System files, fonts, Miis, saves", "status": "later"},
     {"n": 13, "group": "Your console", "title": "Real games", "detail": "First commercial game reaches gameplay", "status": "later", "milestone": true},
@@ -619,6 +619,7 @@ body {
     {"n": 22, "group": "Hardware extras", "title": "Extras", "detail": "Camera, microphone, amiibo, save states", "status": "later"}
   ],
   "log": [
+    {"at": "2026-10-14T19:35:00-07:00", "phase": 10, "text": "Audio done: the AX mixer plays PCM and ADPCM voices with pitch and volume on your speakers; a test program plays a C-E-G-C tune", "commit": "e8c71ee"},
     {"at": "2026-10-14T19:03:00-07:00", "phase": 9, "text": "Input done: GamePad buttons, sticks, touch screen and motion work from the keyboard, mouse or a game controller", "commit": "4b79a22"},
     {"at": "2026-10-14T18:47:00-07:00", "phase": 8, "text": "Graphics done: Wii U shaders are translated to Vulkan and a spinning 3D triangle draws on both screens on the graphics card", "commit": "774489c"},
     {"at": "2026-10-14T18:25:00-07:00", "phase": 8, "text": "GX2 graphics library running: a program set up the standard way clears both screens to cycling colors and quits cleanly when the window closes", "commit": "07c839b"},

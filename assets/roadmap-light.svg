@@ -23,7 +23,7 @@
     <rect x="14" y="96" width="48" height="20" rx="10" fill="#e3f5ea"/>
     <text x="38" y="110" text-anchor="middle" font-family="'WiiUE Nunito', Nunito, 'Segoe UI', 'Helvetica Neue', Arial, sans-serif" font-size="11" font-weight="700" fill="#3cb371">Done</text>
   </g>
-  <text x="4" y="200" font-family="'WiiUE Nunito', Nunito, 'Segoe UI', 'Helvetica Neue', Arial, sans-serif" font-size="18" font-weight="800" fill="#2f3a44">Core emulator<tspan font-family="'WiiUE Nunito', Nunito, 'Segoe UI', 'Helvetica Neue', Arial, sans-serif" font-size="13" font-weight="600" fill="#6b7782" dx="10">8/10 done</tspan></text>
+  <text x="4" y="200" font-family="'WiiUE Nunito', Nunito, 'Segoe UI', 'Helvetica Neue', Arial, sans-serif" font-size="18" font-weight="800" fill="#2f3a44">Core emulator<tspan font-family="'WiiUE Nunito', Nunito, 'Segoe UI', 'Helvetica Neue', Arial, sans-serif" font-size="13" font-weight="600" fill="#6b7782" dx="10">9/10 done</tspan></text>
   <g transform="translate(0,214)">
     
     <rect x="1" y="1" width="204" height="126" rx="22" fill="#ffffff" stroke="#3cb371" stroke-width="2"/>
@@ -113,13 +113,13 @@
   </g>
   <g transform="translate(0,494)">
     
-    <rect x="1" y="1" width="204" height="126" rx="22" fill="#ffffff" stroke="#d5dbe1" stroke-width="2"/>
+    <rect x="1" y="1" width="204" height="126" rx="22" fill="#ffffff" stroke="#3cb371" stroke-width="2"/>
     <text x="14" y="26" font-family="'WiiUE Nunito', Nunito, 'Segoe UI', 'Helvetica Neue', Arial, sans-serif" font-size="11" fill="#6b7782">Phase 10</text>
     
     <text x="14" y="48" font-family="'WiiUE Nunito', Nunito, 'Segoe UI', 'Helvetica Neue', Arial, sans-serif" font-size="15" font-weight="700" fill="#2f3a44">Audio</text>
     <text x="14" y="67" font-family="'WiiUE Nunito', Nunito, 'Segoe UI', 'Helvetica Neue', Arial, sans-serif" font-size="12" fill="#6b7782">AX voices, ADPCM, mixing</text>
-    <rect x="14" y="96" width="69" height="20" rx="10" fill="#f6f8fa"/>
-    <text x="48.5" y="110" text-anchor="middle" font-family="'WiiUE Nunito', Nunito, 'Segoe UI', 'Helvetica Neue', Arial, sans-serif" font-size="11" font-weight="700" fill="#6b7782">Up next</text>
+    <rect x="14" y="96" width="48" height="20" rx="10" fill="#e3f5ea"/>
+    <text x="38" y="110" text-anchor="middle" font-family="'WiiUE Nunito', Nunito, 'Segoe UI', 'Helvetica Neue', Arial, sans-serif" font-size="11" font-weight="700" fill="#3cb371">Done</text>
   </g>
   <g transform="translate(218,494)">
     
