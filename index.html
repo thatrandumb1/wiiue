@@ -401,10 +401,10 @@ body {
       <div class="meter-label" id="meter-label">0 of 0 phases done</div>
     </article>
     <div class="stats">
-      <div class="stat"><span class="label">Tests passing</span><span class="value" id="stat-tests">â€“</span><span class="sub" id="stat-tests-sub">unit tests</span></div>
-      <div class="stat"><span class="label">Phases done</span><span class="value" id="stat-phases">â€“</span><span class="sub" id="stat-phases-sub">of the roadmap</span></div>
-      <div class="stat"><span class="label">Commits</span><span class="value" id="stat-commits">â€“</span><span class="sub" id="stat-commits-sub">latest â€“</span></div>
-      <div class="stat"><span class="label">Instructions run</span><span class="value" id="stat-instr">â€“</span><span class="sub" id="stat-instr-sub">by hello.rpx</span></div>
+      <div class="stat"><span class="label">Tests passing</span><span class="value" id="stat-tests">–</span><span class="sub" id="stat-tests-sub">unit tests</span></div>
+      <div class="stat"><span class="label">Phases done</span><span class="value" id="stat-phases">–</span><span class="sub" id="stat-phases-sub">of the roadmap</span></div>
+      <div class="stat"><span class="label">Commits</span><span class="value" id="stat-commits">–</span><span class="sub" id="stat-commits-sub">latest –</span></div>
+      <div class="stat"><span class="label">Instructions run</span><span class="value" id="stat-instr">–</span><span class="sub" id="stat-instr-sub">by hello.rpx</span></div>
     </div>
   </section>
 
@@ -417,7 +417,7 @@ body {
 
   <section class="feed">
     <div class="section-head"><h2>Activity</h2><span>newest first</span></div>
-    <ol id="log"><li><span class="when">â€“</span><span class="what">Updates are posted here after each step is built, tested and committed.</span></li></ol>
+    <ol id="log"><li><span class="when">–</span><span class="what">Updates are posted here after each step is built, tested and committed.</span></li></ol>
   </section>
 
   <p class="foot">Fan project page. Not affiliated with or endorsed by Nintendo.</p>
@@ -517,18 +517,18 @@ body {
     const total = phases.length;
     $("meter-fill").style.width = total ? Math.round((done / total) * 100) + "%" : "0";
     $("meter-label").textContent = done + " of " + total + " phases done";
-    $("stat-phases").textContent = total ? done + "/" + total : "â€“";
+    $("stat-phases").textContent = total ? done + "/" + total : "–";
 
     if (!status) return;
     const active = phases.find((p) => p.status === "active");
-    $("now-eyebrow").textContent = active ? "Now working on Â· Phase " + active.n : "Now working on";
+    $("now-eyebrow").textContent = active ? "Now working on · Phase " + active.n : "Now working on";
     $("now-title").textContent = status.headline || (active ? active.title : "Between phases");
     $("now-text").textContent = status.detail || (active ? active.detail : "");
-    $("stat-tests").textContent = status.testCases != null ? String(status.testCases) : "â€“";
+    $("stat-tests").textContent = status.testCases != null ? String(status.testCases) : "–";
     $("stat-tests-sub").textContent = status.assertions != null ? status.assertions + " checks, all passing" : "unit tests";
-    $("stat-commits").textContent = status.commits != null ? String(status.commits) : "â€“";
-    $("stat-commits-sub").textContent = status.lastCommit ? "latest " + status.lastCommit : "latest â€“";
-    $("stat-instr").textContent = status.instructions != null ? Number(status.instructions).toLocaleString() : "â€“";
+    $("stat-commits").textContent = status.commits != null ? String(status.commits) : "–";
+    $("stat-commits-sub").textContent = status.lastCommit ? "latest " + status.lastCommit : "latest –";
+    $("stat-instr").textContent = status.instructions != null ? Number(status.instructions).toLocaleString() : "–";
     $("stat-instr-sub").textContent = status.instructionsNote || "by hello.rpx";
     $("updated").textContent = status.updatedAt ? "Updated " + relTime(status.updatedAt) : "No updates yet";
   }
@@ -571,7 +571,7 @@ body {
     list.textContent = "";
     if (!log.length) {
       const li = el("li");
-      li.appendChild(el("span", "when", "â€“"));
+      li.appendChild(el("span", "when", "–"));
       li.appendChild(el("span", "what", "Updates are posted here after each step is built, tested and committed."));
       list.appendChild(li);
       return;
