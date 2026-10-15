@@ -15,7 +15,7 @@
   <text x="28" y="50" font-family="'WiiUE Nunito', Nunito, 'Segoe UI', 'Helvetica Neue', Arial, sans-serif" font-size="12" font-weight="700" letter-spacing="1.6" fill="#ffffff" fill-opacity="0.85">NOW WORKING ON</text>
   <text x="28" y="90" font-family="'WiiUE Nunito', Nunito, 'Segoe UI', 'Helvetica Neue', Arial, sans-serif" font-size="32" font-weight="800" fill="#ffffff">Core emulator done: three cores</text>
   <text x="28" y="130" font-family="'WiiUE Nunito', Nunito, 'Segoe UI', 'Helvetica Neue', Arial, sans-serif" font-size="14" fill="#ffffff" fill-opacity="0.95">Programs now run many threads across the Wii U's three CPU cores, with priorities, locks, events,</text>
-  <text x="28" y="150" font-family="'WiiUE Nunito', Nunito, 'Segoe UI', 'Helvetica Neue', Arial, sans-serif" font-size="14" fill="#ffffff" fill-opacity="0.95">message queues, sleeps and timers. That completes the core emulator (phases 5-11). Next:…</text>
+  <text x="28" y="150" font-family="'WiiUE Nunito', Nunito, 'Segoe UI', 'Helvetica Neue', Arial, sans-serif" font-size="14" fill="#ffffff" fill-opacity="0.95">message queues, sleeps and timers. That completes the core emulator (phases 5-11). Next: dumping…</text>
   <rect x="28" y="198" width="804" height="12" rx="6" fill="#ffffff" fill-opacity="0.25"/>
   <rect x="28" y="198" width="419" height="12" rx="6" fill="#ffffff"/>
   <text x="28" y="230" font-family="'WiiUE Nunito', Nunito, 'Segoe UI', 'Helvetica Neue', Arial, sans-serif" font-size="13" font-weight="700" fill="#ffffff" fill-opacity="0.9">12 of 23 phases done</text>

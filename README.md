@@ -42,7 +42,7 @@ run commercial games yet.
 
 - `Oct 14, 8:44 PM` · **P8** · First real 3D: depth buffers and back-face culling work, and a test program spins two cubes in perspective · `901aadc`
 - `Oct 14, 8:13 PM` · **P11** · Multi-core done: threads run on all three cores with priorities, locks, events, queues, sleeps and alarms; the threads test passes 9/9 · `14bae43`
-- `Oct 14, 7:35 PM` · **P10** · Audio done: the AX mixer plays PCM and ADPCM voices with pitch and volume on your speakers; a test program plays a C-E-G-C tune · `e8c71ee`
+- `Oct 14, 7:35 PM` · **P10** · Audio done: the AX mixer plays PCM and ADPCM voices with pitch and volume on the PC's speakers; a test program plays a C-E-G-C tune · `e8c71ee`
 - `Oct 14, 7:03 PM` · **P9** · Input done: GamePad buttons, sticks, touch screen and motion work from the keyboard, mouse or a game controller · `4b79a22`
 - `Oct 14, 6:47 PM` · **P8** · Graphics done: Wii U shaders are translated to Vulkan and a spinning 3D triangle draws on both screens on the graphics card · `774489c`
 - `Oct 14, 6:25 PM` · **P8** · GX2 graphics library running: a program set up the standard way clears both screens to cycling colors and quits cleanly when the window closes · `07c839b`

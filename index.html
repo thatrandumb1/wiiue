@@ -592,7 +592,7 @@ body {
 {
   "status": {
     "headline": "Core emulator done: three cores",
-    "detail": "Programs now run many threads across the Wii U's three CPU cores, with priorities, locks, events, message queues, sleeps and timers. That completes the core emulator (phases 5-11). Next: your console dump, then real games.",
+    "detail": "Programs now run many threads across the Wii U's three CPU cores, with priorities, locks, events, message queues, sleeps and timers. That completes the core emulator (phases 5-11). Next: dumping a real Wii U console, then real games.",
     "testCases": 76, "assertions": 1177, "commits": 36, "lastCommit": "901aadc",
     "instructions": 14002270, "instructionsNote": "Threads test: 9 checks on 3 cores",
     "updatedAt": "2026-10-14T20:45:00-07:00"
@@ -605,19 +605,19 @@ body {
     {"n": 4, "group": "Core emulator", "title": "RPX loader", "detail": "Sections, relocations, imports to HLE stubs", "status": "done"},
     {"n": 5, "group": "Core emulator", "title": "PowerPC CPU", "detail": "Interpreter: integer, float, paired singles", "status": "done"},
     {"n": 6, "group": "Core emulator", "title": "Coreinit", "detail": "Heaps, threads, locks, OSReport", "status": "done", "milestone": true},
-    {"n": 7, "group": "Core emulator", "title": "File system", "detail": "/vol/content and /vol/save on your PC", "status": "done"},
+    {"n": 7, "group": "Core emulator", "title": "File system", "detail": "/vol/content and /vol/save on the PC", "status": "done"},
     {"n": 8, "group": "Core emulator", "title": "Graphics", "detail": "GX2 to Vulkan, TV and GamePad windows", "status": "done", "milestone": true},
     {"n": 9, "group": "Core emulator", "title": "Input", "detail": "GamePad buttons, sticks, touch, gyro", "status": "done"},
     {"n": 10, "group": "Core emulator", "title": "Audio", "detail": "AX voices, ADPCM, mixing", "status": "done"},
     {"n": 11, "group": "Core emulator", "title": "Multi-core", "detail": "Three CPU cores, scheduler, alarms", "status": "done"},
-    {"n": 12, "group": "Your console", "title": "Console dump", "detail": "System files, fonts, Miis, saves", "status": "later"},
-    {"n": 13, "group": "Your console", "title": "Real games", "detail": "First commercial game reaches gameplay", "status": "later", "milestone": true},
-    {"n": 14, "group": "Your console", "title": "Speed", "detail": "JIT recompiler, shader caches", "status": "later"},
+    {"n": 12, "group": "Real console", "title": "Console dump", "detail": "System files, fonts, Miis, saves", "status": "later"},
+    {"n": 13, "group": "Real console", "title": "Real games", "detail": "First commercial game reaches gameplay", "status": "later", "milestone": true},
+    {"n": 14, "group": "Real console", "title": "Speed", "detail": "JIT recompiler, shader caches", "status": "later"},
     {"n": 15, "group": "Full system feel", "title": "App UI", "detail": "Game list, icons, settings", "status": "later"},
     {"n": 16, "group": "Full system feel", "title": "Wii U Menu", "detail": "Boot the dumped home menu", "status": "later", "milestone": true},
     {"n": 17, "group": "Full system feel", "title": "Wii games via Dolphin", "detail": "Launch vWii titles in Dolphin", "status": "later"},
     {"n": 18, "group": "Online", "title": "Networking", "detail": "Sockets, SSL, server redirects", "status": "later"},
-    {"n": 19, "group": "Online", "title": "Self-hosted servers", "detail": "Your own Pretendo account and friends", "status": "later"},
+    {"n": 19, "group": "Online", "title": "Self-hosted servers", "detail": "Our own Pretendo server, accounts and friends", "status": "later"},
     {"n": 20, "group": "Online", "title": "Public Pretendo", "detail": "Only with Pretendo's permission", "status": "later"},
     {"n": 21, "group": "Hardware extras", "title": "Real GamePad", "detail": "Linux bridge streams to the real controller", "status": "later"},
     {"n": 22, "group": "Hardware extras", "title": "Extras", "detail": "Camera, microphone, amiibo, save states", "status": "later"}
@@ -625,7 +625,7 @@ body {
   "log": [
     {"at": "2026-10-14T20:44:00-07:00", "phase": 8, "text": "First real 3D: depth buffers and back-face culling work, and a test program spins two cubes in perspective", "commit": "901aadc"},
     {"at": "2026-10-14T20:13:00-07:00", "phase": 11, "text": "Multi-core done: threads run on all three cores with priorities, locks, events, queues, sleeps and alarms; the threads test passes 9/9", "commit": "14bae43"},
-    {"at": "2026-10-14T19:35:00-07:00", "phase": 10, "text": "Audio done: the AX mixer plays PCM and ADPCM voices with pitch and volume on your speakers; a test program plays a C-E-G-C tune", "commit": "e8c71ee"},
+    {"at": "2026-10-14T19:35:00-07:00", "phase": 10, "text": "Audio done: the AX mixer plays PCM and ADPCM voices with pitch and volume on the PC's speakers; a test program plays a C-E-G-C tune", "commit": "e8c71ee"},
     {"at": "2026-10-14T19:03:00-07:00", "phase": 9, "text": "Input done: GamePad buttons, sticks, touch screen and motion work from the keyboard, mouse or a game controller", "commit": "4b79a22"},
     {"at": "2026-10-14T18:47:00-07:00", "phase": 8, "text": "Graphics done: Wii U shaders are translated to Vulkan and a spinning 3D triangle draws on both screens on the graphics card", "commit": "774489c"},
     {"at": "2026-10-14T18:25:00-07:00", "phase": 8, "text": "GX2 graphics library running: a program set up the standard way clears both screens to cycling colors and quits cleanly when the window closes", "commit": "07c839b"},
@@ -641,14 +641,14 @@ body {
     {"at": "2026-10-14T16:55:35-07:00", "phase": 4, "text": "RPX loader: hello.rpx loads, matches the compiler's output byte for byte", "commit": "cf9af50"},
     {"at": "2026-10-14T16:47:32-07:00", "phase": 2, "text": "Guest memory working: 4 GB address space, big-endian reads and writes", "commit": "47ff654"},
     {"at": "2026-10-14T16:44:09-07:00", "phase": 0, "text": "All tools installed after fixing a stuck devkitPro install; hello.rpx builds", "commit": "bb71fe2"},
-    {"at": "2026-10-14T16:08:18-07:00", "phase": 1, "text": "Project created: build system, docs, folder for your console dump", "commit": "7417865"}
+    {"at": "2026-10-14T16:08:18-07:00", "phase": 1, "text": "Project created: build system, docs, folder for the console dump", "commit": "7417865"}
   ]
 }
 </script>
 
 <script>
 (function () {
-  const GROUPS = ["Foundation", "Core emulator", "Your console", "Full system feel", "Online", "Hardware extras"];
+  const GROUPS = ["Foundation", "Core emulator", "Real console", "Full system feel", "Online", "Hardware extras"];
   const STATUS_LABEL = { done: "Done", active: "In progress", next: "Up next", later: "Later" };
   const $ = (id) => document.getElementById(id);
 

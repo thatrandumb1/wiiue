@@ -85,7 +85,7 @@
     
     <text x="14" y="48" font-family="'WiiUE Nunito', Nunito, 'Segoe UI', 'Helvetica Neue', Arial, sans-serif" font-size="15" font-weight="700" fill="#e6edf3">File system</text>
     <text x="14" y="67" font-family="'WiiUE Nunito', Nunito, 'Segoe UI', 'Helvetica Neue', Arial, sans-serif" font-size="12" fill="#8d96a0">/vol/content and /vol/save on</text>
-    <text x="14" y="83" font-family="'WiiUE Nunito', Nunito, 'Segoe UI', 'Helvetica Neue', Arial, sans-serif" font-size="12" fill="#8d96a0">your PC</text>
+    <text x="14" y="83" font-family="'WiiUE Nunito', Nunito, 'Segoe UI', 'Helvetica Neue', Arial, sans-serif" font-size="12" fill="#8d96a0">the PC</text>
     <rect x="14" y="96" width="48" height="20" rx="10" fill="#12261e"/>
     <text x="38" y="110" text-anchor="middle" font-family="'WiiUE Nunito', Nunito, 'Segoe UI', 'Helvetica Neue', Arial, sans-serif" font-size="11" font-weight="700" fill="#3fb950">Done</text>
   </g>
@@ -132,7 +132,7 @@
     <rect x="14" y="96" width="48" height="20" rx="10" fill="#12261e"/>
     <text x="38" y="110" text-anchor="middle" font-family="'WiiUE Nunito', Nunito, 'Segoe UI', 'Helvetica Neue', Arial, sans-serif" font-size="11" font-weight="700" fill="#3fb950">Done</text>
   </g>
-  <text x="4" y="656" font-family="'WiiUE Nunito', Nunito, 'Segoe UI', 'Helvetica Neue', Arial, sans-serif" font-size="18" font-weight="800" fill="#e6edf3">Your console<tspan font-family="'WiiUE Nunito', Nunito, 'Segoe UI', 'Helvetica Neue', Arial, sans-serif" font-size="13" font-weight="600" fill="#8d96a0" dx="10">0/3 done</tspan></text>
+  <text x="4" y="656" font-family="'WiiUE Nunito', Nunito, 'Segoe UI', 'Helvetica Neue', Arial, sans-serif" font-size="18" font-weight="800" fill="#e6edf3">Real console<tspan font-family="'WiiUE Nunito', Nunito, 'Segoe UI', 'Helvetica Neue', Arial, sans-serif" font-size="13" font-weight="600" fill="#8d96a0" dx="10">0/3 done</tspan></text>
   <g transform="translate(0,670)">
     
     <rect x="1" y="1" width="204" height="126" rx="22" fill="#161b22" stroke="#30363d" stroke-width="2"/>
@@ -213,8 +213,8 @@
     <text x="14" y="26" font-family="'WiiUE Nunito', Nunito, 'Segoe UI', 'Helvetica Neue', Arial, sans-serif" font-size="11" fill="#8d96a0">Phase 19</text>
     
     <text x="14" y="48" font-family="'WiiUE Nunito', Nunito, 'Segoe UI', 'Helvetica Neue', Arial, sans-serif" font-size="15" font-weight="700" fill="#8d96a0">Self-hosted servers</text>
-    <text x="14" y="67" font-family="'WiiUE Nunito', Nunito, 'Segoe UI', 'Helvetica Neue', Arial, sans-serif" font-size="12" fill="#8d96a0">Your own Pretendo account and</text>
-    <text x="14" y="83" font-family="'WiiUE Nunito', Nunito, 'Segoe UI', 'Helvetica Neue', Arial, sans-serif" font-size="12" fill="#8d96a0">friends</text>
+    <text x="14" y="67" font-family="'WiiUE Nunito', Nunito, 'Segoe UI', 'Helvetica Neue', Arial, sans-serif" font-size="12" fill="#8d96a0">Our own Pretendo server,</text>
+    <text x="14" y="83" font-family="'WiiUE Nunito', Nunito, 'Segoe UI', 'Helvetica Neue', Arial, sans-serif" font-size="12" fill="#8d96a0">accounts and friends</text>
     <rect x="14" y="96" width="55" height="20" rx="10" fill="#21262d"/>
     <text x="41.5" y="110" text-anchor="middle" font-family="'WiiUE Nunito', Nunito, 'Segoe UI', 'Helvetica Neue', Arial, sans-serif" font-size="11" font-weight="700" fill="#8d96a0">Later</text>
   </g>
