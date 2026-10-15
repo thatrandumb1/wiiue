@@ -46,7 +46,7 @@ run commercial games yet.
 - `Oct 14, 7:03 PM` · **P9** · Input done: GamePad buttons, sticks, touch screen and motion work from the keyboard, mouse or a game controller · `4b79a22`
 - `Oct 14, 6:47 PM` · **P8** · Graphics done: Wii U shaders are translated to Vulkan and a spinning 3D triangle draws on both screens on the graphics card · `774489c`
 - `Oct 14, 6:25 PM` · **P8** · GX2 graphics library running: a program set up the standard way clears both screens to cycling colors and quits cleanly when the window closes · `07c839b`
-- `Oct 14, 6:15 PM` · **P8** · Milestone: first image on screen. TV and GamePad windows open, and a test program draws text, colors and a moving square at 60 fps · `ec18455`
+- `Oct 14, 6:15 PM` · **P8** · First image on screen. TV and GamePad windows open, and a test program draws text, colors and a moving square at 60 fps · `ec18455`
 - `Oct 14, 5:59 PM` · **P8** · Started graphics
 
 ## History of the Wii U

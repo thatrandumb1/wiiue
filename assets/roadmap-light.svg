@@ -5,7 +5,6 @@
     
     <rect x="1" y="1" width="204" height="126" rx="22" fill="#ffffff" stroke="#3cb371" stroke-width="2"/>
     <text x="14" y="26" font-family="'WiiUE Nunito', Nunito, 'Segoe UI', 'Helvetica Neue', Arial, sans-serif" font-size="11" fill="#6b7782">Phase 00</text>
-    
     <text x="14" y="48" font-family="'WiiUE Nunito', Nunito, 'Segoe UI', 'Helvetica Neue', Arial, sans-serif" font-size="15" font-weight="700" fill="#2f3a44">Tools</text>
     <text x="14" y="67" font-family="'WiiUE Nunito', Nunito, 'Segoe UI', 'Helvetica Neue', Arial, sans-serif" font-size="12" fill="#6b7782">Visual Studio, CMake, Vulkan</text>
     <text x="14" y="83" font-family="'WiiUE Nunito', Nunito, 'Segoe UI', 'Helvetica Neue', Arial, sans-serif" font-size="12" fill="#6b7782">SDK, vcpkg, devkitPro</text>
@@ -16,7 +15,6 @@
     
     <rect x="1" y="1" width="204" height="126" rx="22" fill="#ffffff" stroke="#3cb371" stroke-width="2"/>
     <text x="14" y="26" font-family="'WiiUE Nunito', Nunito, 'Segoe UI', 'Helvetica Neue', Arial, sans-serif" font-size="11" fill="#6b7782">Phase 01</text>
-    
     <text x="14" y="48" font-family="'WiiUE Nunito', Nunito, 'Segoe UI', 'Helvetica Neue', Arial, sans-serif" font-size="15" font-weight="700" fill="#2f3a44">Project skeleton</text>
     <text x="14" y="67" font-family="'WiiUE Nunito', Nunito, 'Segoe UI', 'Helvetica Neue', Arial, sans-serif" font-size="12" fill="#6b7782">Folders, build system, docs,</text>
     <text x="14" y="83" font-family="'WiiUE Nunito', Nunito, 'Segoe UI', 'Helvetica Neue', Arial, sans-serif" font-size="12" fill="#6b7782">git</text>
@@ -28,7 +26,6 @@
     
     <rect x="1" y="1" width="204" height="126" rx="22" fill="#ffffff" stroke="#3cb371" stroke-width="2"/>
     <text x="14" y="26" font-family="'WiiUE Nunito', Nunito, 'Segoe UI', 'Helvetica Neue', Arial, sans-serif" font-size="11" fill="#6b7782">Phase 02</text>
-    
     <text x="14" y="48" font-family="'WiiUE Nunito', Nunito, 'Segoe UI', 'Helvetica Neue', Arial, sans-serif" font-size="15" font-weight="700" fill="#2f3a44">Guest memory</text>
     <text x="14" y="67" font-family="'WiiUE Nunito', Nunito, 'Segoe UI', 'Helvetica Neue', Arial, sans-serif" font-size="12" fill="#6b7782">4 GB address space, big-endian</text>
     <text x="14" y="83" font-family="'WiiUE Nunito', Nunito, 'Segoe UI', 'Helvetica Neue', Arial, sans-serif" font-size="12" fill="#6b7782">access, fault reports</text>
@@ -39,7 +36,6 @@
     
     <rect x="1" y="1" width="204" height="126" rx="22" fill="#ffffff" stroke="#3cb371" stroke-width="2"/>
     <text x="14" y="26" font-family="'WiiUE Nunito', Nunito, 'Segoe UI', 'Helvetica Neue', Arial, sans-serif" font-size="11" fill="#6b7782">Phase 03</text>
-    
     <text x="14" y="48" font-family="'WiiUE Nunito', Nunito, 'Segoe UI', 'Helvetica Neue', Arial, sans-serif" font-size="15" font-weight="700" fill="#2f3a44">Homebrew test programs</text>
     <text x="14" y="67" font-family="'WiiUE Nunito', Nunito, 'Segoe UI', 'Helvetica Neue', Arial, sans-serif" font-size="12" fill="#6b7782">hello.rpx built with devkitPro</text>
     <rect x="14" y="96" width="48" height="20" rx="10" fill="#e3f5ea"/>
@@ -49,7 +45,6 @@
     
     <rect x="1" y="1" width="204" height="126" rx="22" fill="#ffffff" stroke="#3cb371" stroke-width="2"/>
     <text x="14" y="26" font-family="'WiiUE Nunito', Nunito, 'Segoe UI', 'Helvetica Neue', Arial, sans-serif" font-size="11" fill="#6b7782">Phase 04</text>
-    
     <text x="14" y="48" font-family="'WiiUE Nunito', Nunito, 'Segoe UI', 'Helvetica Neue', Arial, sans-serif" font-size="15" font-weight="700" fill="#2f3a44">RPX loader</text>
     <text x="14" y="67" font-family="'WiiUE Nunito', Nunito, 'Segoe UI', 'Helvetica Neue', Arial, sans-serif" font-size="12" fill="#6b7782">Sections, relocations, imports</text>
     <text x="14" y="83" font-family="'WiiUE Nunito', Nunito, 'Segoe UI', 'Helvetica Neue', Arial, sans-serif" font-size="12" fill="#6b7782">to HLE stubs</text>
@@ -60,7 +55,6 @@
     
     <rect x="1" y="1" width="204" height="126" rx="22" fill="#ffffff" stroke="#3cb371" stroke-width="2"/>
     <text x="14" y="26" font-family="'WiiUE Nunito', Nunito, 'Segoe UI', 'Helvetica Neue', Arial, sans-serif" font-size="11" fill="#6b7782">Phase 05</text>
-    
     <text x="14" y="48" font-family="'WiiUE Nunito', Nunito, 'Segoe UI', 'Helvetica Neue', Arial, sans-serif" font-size="15" font-weight="700" fill="#2f3a44">PowerPC CPU</text>
     <text x="14" y="67" font-family="'WiiUE Nunito', Nunito, 'Segoe UI', 'Helvetica Neue', Arial, sans-serif" font-size="12" fill="#6b7782">Interpreter: integer, float,</text>
     <text x="14" y="83" font-family="'WiiUE Nunito', Nunito, 'Segoe UI', 'Helvetica Neue', Arial, sans-serif" font-size="12" fill="#6b7782">paired singles</text>
@@ -71,7 +65,6 @@
     
     <rect x="1" y="1" width="204" height="126" rx="22" fill="#ffffff" stroke="#3cb371" stroke-width="2"/>
     <text x="14" y="26" font-family="'WiiUE Nunito', Nunito, 'Segoe UI', 'Helvetica Neue', Arial, sans-serif" font-size="11" fill="#6b7782">Phase 06</text>
-    <text x="192" y="26" text-anchor="end" font-family="'WiiUE Nunito', Nunito, 'Segoe UI', 'Helvetica Neue', Arial, sans-serif" font-size="10" font-weight="700" letter-spacing="0.6" fill="#0084b8">MILESTONE</text>
     <text x="14" y="48" font-family="'WiiUE Nunito', Nunito, 'Segoe UI', 'Helvetica Neue', Arial, sans-serif" font-size="15" font-weight="700" fill="#2f3a44">Coreinit</text>
     <text x="14" y="67" font-family="'WiiUE Nunito', Nunito, 'Segoe UI', 'Helvetica Neue', Arial, sans-serif" font-size="12" fill="#6b7782">Heaps, threads, locks,</text>
     <text x="14" y="83" font-family="'WiiUE Nunito', Nunito, 'Segoe UI', 'Helvetica Neue', Arial, sans-serif" font-size="12" fill="#6b7782">OSReport</text>
@@ -82,7 +75,6 @@
     
     <rect x="1" y="1" width="204" height="126" rx="22" fill="#ffffff" stroke="#3cb371" stroke-width="2"/>
     <text x="14" y="26" font-family="'WiiUE Nunito', Nunito, 'Segoe UI', 'Helvetica Neue', Arial, sans-serif" font-size="11" fill="#6b7782">Phase 07</text>
-    
     <text x="14" y="48" font-family="'WiiUE Nunito', Nunito, 'Segoe UI', 'Helvetica Neue', Arial, sans-serif" font-size="15" font-weight="700" fill="#2f3a44">File system</text>
     <text x="14" y="67" font-family="'WiiUE Nunito', Nunito, 'Segoe UI', 'Helvetica Neue', Arial, sans-serif" font-size="12" fill="#6b7782">/vol/content and /vol/save on</text>
     <text x="14" y="83" font-family="'WiiUE Nunito', Nunito, 'Segoe UI', 'Helvetica Neue', Arial, sans-serif" font-size="12" fill="#6b7782">the PC</text>
@@ -93,7 +85,6 @@
     
     <rect x="1" y="1" width="204" height="126" rx="22" fill="#ffffff" stroke="#3cb371" stroke-width="2"/>
     <text x="14" y="26" font-family="'WiiUE Nunito', Nunito, 'Segoe UI', 'Helvetica Neue', Arial, sans-serif" font-size="11" fill="#6b7782">Phase 08</text>
-    <text x="192" y="26" text-anchor="end" font-family="'WiiUE Nunito', Nunito, 'Segoe UI', 'Helvetica Neue', Arial, sans-serif" font-size="10" font-weight="700" letter-spacing="0.6" fill="#0084b8">MILESTONE</text>
     <text x="14" y="48" font-family="'WiiUE Nunito', Nunito, 'Segoe UI', 'Helvetica Neue', Arial, sans-serif" font-size="15" font-weight="700" fill="#2f3a44">Graphics</text>
     <text x="14" y="67" font-family="'WiiUE Nunito', Nunito, 'Segoe UI', 'Helvetica Neue', Arial, sans-serif" font-size="12" fill="#6b7782">GX2 to Vulkan, TV and GamePad</text>
     <text x="14" y="83" font-family="'WiiUE Nunito', Nunito, 'Segoe UI', 'Helvetica Neue', Arial, sans-serif" font-size="12" fill="#6b7782">windows</text>
@@ -104,7 +95,6 @@
     
     <rect x="1" y="1" width="204" height="126" rx="22" fill="#ffffff" stroke="#3cb371" stroke-width="2"/>
     <text x="14" y="26" font-family="'WiiUE Nunito', Nunito, 'Segoe UI', 'Helvetica Neue', Arial, sans-serif" font-size="11" fill="#6b7782">Phase 09</text>
-    
     <text x="14" y="48" font-family="'WiiUE Nunito', Nunito, 'Segoe UI', 'Helvetica Neue', Arial, sans-serif" font-size="15" font-weight="700" fill="#2f3a44">Input</text>
     <text x="14" y="67" font-family="'WiiUE Nunito', Nunito, 'Segoe UI', 'Helvetica Neue', Arial, sans-serif" font-size="12" fill="#6b7782">GamePad buttons, sticks,</text>
     <text x="14" y="83" font-family="'WiiUE Nunito', Nunito, 'Segoe UI', 'Helvetica Neue', Arial, sans-serif" font-size="12" fill="#6b7782">touch, gyro</text>
@@ -115,7 +105,6 @@
     
     <rect x="1" y="1" width="204" height="126" rx="22" fill="#ffffff" stroke="#3cb371" stroke-width="2"/>
     <text x="14" y="26" font-family="'WiiUE Nunito', Nunito, 'Segoe UI', 'Helvetica Neue', Arial, sans-serif" font-size="11" fill="#6b7782">Phase 10</text>
-    
     <text x="14" y="48" font-family="'WiiUE Nunito', Nunito, 'Segoe UI', 'Helvetica Neue', Arial, sans-serif" font-size="15" font-weight="700" fill="#2f3a44">Audio</text>
     <text x="14" y="67" font-family="'WiiUE Nunito', Nunito, 'Segoe UI', 'Helvetica Neue', Arial, sans-serif" font-size="12" fill="#6b7782">AX voices, ADPCM, mixing</text>
     <rect x="14" y="96" width="48" height="20" rx="10" fill="#e3f5ea"/>
@@ -125,7 +114,6 @@
     
     <rect x="1" y="1" width="204" height="126" rx="22" fill="#ffffff" stroke="#3cb371" stroke-width="2"/>
     <text x="14" y="26" font-family="'WiiUE Nunito', Nunito, 'Segoe UI', 'Helvetica Neue', Arial, sans-serif" font-size="11" fill="#6b7782">Phase 11</text>
-    
     <text x="14" y="48" font-family="'WiiUE Nunito', Nunito, 'Segoe UI', 'Helvetica Neue', Arial, sans-serif" font-size="15" font-weight="700" fill="#2f3a44">Multi-core</text>
     <text x="14" y="67" font-family="'WiiUE Nunito', Nunito, 'Segoe UI', 'Helvetica Neue', Arial, sans-serif" font-size="12" fill="#6b7782">Three CPU cores, scheduler,</text>
     <text x="14" y="83" font-family="'WiiUE Nunito', Nunito, 'Segoe UI', 'Helvetica Neue', Arial, sans-serif" font-size="12" fill="#6b7782">alarms</text>
@@ -137,7 +125,6 @@
     
     <rect x="1" y="1" width="204" height="126" rx="22" fill="#ffffff" stroke="#d5dbe1" stroke-width="2"/>
     <text x="14" y="26" font-family="'WiiUE Nunito', Nunito, 'Segoe UI', 'Helvetica Neue', Arial, sans-serif" font-size="11" fill="#6b7782">Phase 12</text>
-    
     <text x="14" y="48" font-family="'WiiUE Nunito', Nunito, 'Segoe UI', 'Helvetica Neue', Arial, sans-serif" font-size="15" font-weight="700" fill="#6b7782">Console dump</text>
     <text x="14" y="67" font-family="'WiiUE Nunito', Nunito, 'Segoe UI', 'Helvetica Neue', Arial, sans-serif" font-size="12" fill="#6b7782">System files, fonts, Miis,</text>
     <text x="14" y="83" font-family="'WiiUE Nunito', Nunito, 'Segoe UI', 'Helvetica Neue', Arial, sans-serif" font-size="12" fill="#6b7782">saves</text>
@@ -148,7 +135,6 @@
     
     <rect x="1" y="1" width="204" height="126" rx="22" fill="#ffffff" stroke="#d5dbe1" stroke-width="2"/>
     <text x="14" y="26" font-family="'WiiUE Nunito', Nunito, 'Segoe UI', 'Helvetica Neue', Arial, sans-serif" font-size="11" fill="#6b7782">Phase 13</text>
-    <text x="192" y="26" text-anchor="end" font-family="'WiiUE Nunito', Nunito, 'Segoe UI', 'Helvetica Neue', Arial, sans-serif" font-size="10" font-weight="700" letter-spacing="0.6" fill="#0084b8">MILESTONE</text>
     <text x="14" y="48" font-family="'WiiUE Nunito', Nunito, 'Segoe UI', 'Helvetica Neue', Arial, sans-serif" font-size="15" font-weight="700" fill="#6b7782">Real games</text>
     <text x="14" y="67" font-family="'WiiUE Nunito', Nunito, 'Segoe UI', 'Helvetica Neue', Arial, sans-serif" font-size="12" fill="#6b7782">First commercial game reaches</text>
     <text x="14" y="83" font-family="'WiiUE Nunito', Nunito, 'Segoe UI', 'Helvetica Neue', Arial, sans-serif" font-size="12" fill="#6b7782">gameplay</text>
@@ -159,7 +145,6 @@
     
     <rect x="1" y="1" width="204" height="126" rx="22" fill="#ffffff" stroke="#d5dbe1" stroke-width="2"/>
     <text x="14" y="26" font-family="'WiiUE Nunito', Nunito, 'Segoe UI', 'Helvetica Neue', Arial, sans-serif" font-size="11" fill="#6b7782">Phase 14</text>
-    
     <text x="14" y="48" font-family="'WiiUE Nunito', Nunito, 'Segoe UI', 'Helvetica Neue', Arial, sans-serif" font-size="15" font-weight="700" fill="#6b7782">Speed</text>
     <text x="14" y="67" font-family="'WiiUE Nunito', Nunito, 'Segoe UI', 'Helvetica Neue', Arial, sans-serif" font-size="12" fill="#6b7782">JIT recompiler, shader caches</text>
     <rect x="14" y="96" width="55" height="20" rx="10" fill="#f6f8fa"/>
@@ -170,7 +155,6 @@
     
     <rect x="1" y="1" width="204" height="126" rx="22" fill="#ffffff" stroke="#d5dbe1" stroke-width="2"/>
     <text x="14" y="26" font-family="'WiiUE Nunito', Nunito, 'Segoe UI', 'Helvetica Neue', Arial, sans-serif" font-size="11" fill="#6b7782">Phase 15</text>
-    
     <text x="14" y="48" font-family="'WiiUE Nunito', Nunito, 'Segoe UI', 'Helvetica Neue', Arial, sans-serif" font-size="15" font-weight="700" fill="#6b7782">App UI</text>
     <text x="14" y="67" font-family="'WiiUE Nunito', Nunito, 'Segoe UI', 'Helvetica Neue', Arial, sans-serif" font-size="12" fill="#6b7782">Game list, icons, settings</text>
     <rect x="14" y="96" width="55" height="20" rx="10" fill="#f6f8fa"/>
@@ -180,7 +164,6 @@
     
     <rect x="1" y="1" width="204" height="126" rx="22" fill="#ffffff" stroke="#d5dbe1" stroke-width="2"/>
     <text x="14" y="26" font-family="'WiiUE Nunito', Nunito, 'Segoe UI', 'Helvetica Neue', Arial, sans-serif" font-size="11" fill="#6b7782">Phase 16</text>
-    <text x="192" y="26" text-anchor="end" font-family="'WiiUE Nunito', Nunito, 'Segoe UI', 'Helvetica Neue', Arial, sans-serif" font-size="10" font-weight="700" letter-spacing="0.6" fill="#0084b8">MILESTONE</text>
     <text x="14" y="48" font-family="'WiiUE Nunito', Nunito, 'Segoe UI', 'Helvetica Neue', Arial, sans-serif" font-size="15" font-weight="700" fill="#6b7782">Wii U Menu</text>
     <text x="14" y="67" font-family="'WiiUE Nunito', Nunito, 'Segoe UI', 'Helvetica Neue', Arial, sans-serif" font-size="12" fill="#6b7782">Boot the dumped home menu</text>
     <rect x="14" y="96" width="55" height="20" rx="10" fill="#f6f8fa"/>
@@ -190,7 +173,6 @@
     
     <rect x="1" y="1" width="204" height="126" rx="22" fill="#ffffff" stroke="#d5dbe1" stroke-width="2"/>
     <text x="14" y="26" font-family="'WiiUE Nunito', Nunito, 'Segoe UI', 'Helvetica Neue', Arial, sans-serif" font-size="11" fill="#6b7782">Phase 17</text>
-    
     <text x="14" y="48" font-family="'WiiUE Nunito', Nunito, 'Segoe UI', 'Helvetica Neue', Arial, sans-serif" font-size="15" font-weight="700" fill="#6b7782">Wii games via Dolphin</text>
     <text x="14" y="67" font-family="'WiiUE Nunito', Nunito, 'Segoe UI', 'Helvetica Neue', Arial, sans-serif" font-size="12" fill="#6b7782">Launch vWii titles in Dolphin</text>
     <rect x="14" y="96" width="55" height="20" rx="10" fill="#f6f8fa"/>
@@ -201,7 +183,6 @@
     
     <rect x="1" y="1" width="204" height="126" rx="22" fill="#ffffff" stroke="#d5dbe1" stroke-width="2"/>
     <text x="14" y="26" font-family="'WiiUE Nunito', Nunito, 'Segoe UI', 'Helvetica Neue', Arial, sans-serif" font-size="11" fill="#6b7782">Phase 18</text>
-    
     <text x="14" y="48" font-family="'WiiUE Nunito', Nunito, 'Segoe UI', 'Helvetica Neue', Arial, sans-serif" font-size="15" font-weight="700" fill="#6b7782">Networking</text>
     <text x="14" y="67" font-family="'WiiUE Nunito', Nunito, 'Segoe UI', 'Helvetica Neue', Arial, sans-serif" font-size="12" fill="#6b7782">Sockets, SSL, server redirects</text>
     <rect x="14" y="96" width="55" height="20" rx="10" fill="#f6f8fa"/>
@@ -211,7 +192,6 @@
     
     <rect x="1" y="1" width="204" height="126" rx="22" fill="#ffffff" stroke="#d5dbe1" stroke-width="2"/>
     <text x="14" y="26" font-family="'WiiUE Nunito', Nunito, 'Segoe UI', 'Helvetica Neue', Arial, sans-serif" font-size="11" fill="#6b7782">Phase 19</text>
-    
     <text x="14" y="48" font-family="'WiiUE Nunito', Nunito, 'Segoe UI', 'Helvetica Neue', Arial, sans-serif" font-size="15" font-weight="700" fill="#6b7782">Self-hosted servers</text>
     <text x="14" y="67" font-family="'WiiUE Nunito', Nunito, 'Segoe UI', 'Helvetica Neue', Arial, sans-serif" font-size="12" fill="#6b7782">Our own Pretendo server,</text>
     <text x="14" y="83" font-family="'WiiUE Nunito', Nunito, 'Segoe UI', 'Helvetica Neue', Arial, sans-serif" font-size="12" fill="#6b7782">accounts and friends</text>
@@ -222,7 +202,6 @@
     
     <rect x="1" y="1" width="204" height="126" rx="22" fill="#ffffff" stroke="#d5dbe1" stroke-width="2"/>
     <text x="14" y="26" font-family="'WiiUE Nunito', Nunito, 'Segoe UI', 'Helvetica Neue', Arial, sans-serif" font-size="11" fill="#6b7782">Phase 20</text>
-    
     <text x="14" y="48" font-family="'WiiUE Nunito', Nunito, 'Segoe UI', 'Helvetica Neue', Arial, sans-serif" font-size="15" font-weight="700" fill="#6b7782">Public Pretendo</text>
     <text x="14" y="67" font-family="'WiiUE Nunito', Nunito, 'Segoe UI', 'Helvetica Neue', Arial, sans-serif" font-size="12" fill="#6b7782">Only with Pretendo's</text>
     <text x="14" y="83" font-family="'WiiUE Nunito', Nunito, 'Segoe UI', 'Helvetica Neue', Arial, sans-serif" font-size="12" fill="#6b7782">permission</text>
@@ -234,7 +213,6 @@
     
     <rect x="1" y="1" width="204" height="126" rx="22" fill="#ffffff" stroke="#d5dbe1" stroke-width="2"/>
     <text x="14" y="26" font-family="'WiiUE Nunito', Nunito, 'Segoe UI', 'Helvetica Neue', Arial, sans-serif" font-size="11" fill="#6b7782">Phase 21</text>
-    
     <text x="14" y="48" font-family="'WiiUE Nunito', Nunito, 'Segoe UI', 'Helvetica Neue', Arial, sans-serif" font-size="15" font-weight="700" fill="#6b7782">Real GamePad</text>
     <text x="14" y="67" font-family="'WiiUE Nunito', Nunito, 'Segoe UI', 'Helvetica Neue', Arial, sans-serif" font-size="12" fill="#6b7782">Linux bridge streams to the</text>
     <text x="14" y="83" font-family="'WiiUE Nunito', Nunito, 'Segoe UI', 'Helvetica Neue', Arial, sans-serif" font-size="12" fill="#6b7782">real controller</text>
@@ -245,7 +223,6 @@
     
     <rect x="1" y="1" width="204" height="126" rx="22" fill="#ffffff" stroke="#d5dbe1" stroke-width="2"/>
     <text x="14" y="26" font-family="'WiiUE Nunito', Nunito, 'Segoe UI', 'Helvetica Neue', Arial, sans-serif" font-size="11" fill="#6b7782">Phase 22</text>
-    
     <text x="14" y="48" font-family="'WiiUE Nunito', Nunito, 'Segoe UI', 'Helvetica Neue', Arial, sans-serif" font-size="15" font-weight="700" fill="#6b7782">Extras</text>
     <text x="14" y="67" font-family="'WiiUE Nunito', Nunito, 'Segoe UI', 'Helvetica Neue', Arial, sans-serif" font-size="12" fill="#6b7782">Camera, microphone, amiibo,</text>
     <text x="14" y="83" font-family="'WiiUE Nunito', Nunito, 'Segoe UI', 'Helvetica Neue', Arial, sans-serif" font-size="12" fill="#6b7782">save states</text>
