@@ -2,7 +2,11 @@
 
 <p align="center">
   <a href="https://thatrandumb1.github.io/wiiue/">
-  <img src="assets/logo.svg" alt="WiiUE" width="420">
+  <picture>
+    <source media="(prefers-color-scheme: dark)" srcset="assets/logo-dark.svg">
+    <source media="(prefers-color-scheme: light)" srcset="assets/logo-light.svg">
+    <img src="assets/logo-light.svg" alt="WiiUE" width="420">
+  </picture>
   </a>
 </p>
 
@@ -20,13 +24,21 @@
 </p>
 
 <p align="center">
-  <img src="assets/stats.svg" alt="Project stats" width="860">
+  <picture>
+    <source media="(prefers-color-scheme: dark)" srcset="assets/stats-dark.svg">
+    <source media="(prefers-color-scheme: light)" srcset="assets/stats-light.svg">
+    <img src="assets/stats-light.svg" alt="Project stats" width="860">
+  </picture>
 </p>
 
 ## Roadmap
 
 <p align="center">
-  <img src="assets/roadmap.svg" alt="Roadmap" width="860">
+  <picture>
+    <source media="(prefers-color-scheme: dark)" srcset="assets/roadmap-dark.svg">
+    <source media="(prefers-color-scheme: light)" srcset="assets/roadmap-light.svg">
+    <img src="assets/roadmap-light.svg" alt="Roadmap" width="860">
+  </picture>
 </p>
 
 ## Recent activity
