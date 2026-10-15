@@ -128,8 +128,7 @@
     <text x="14" y="48" font-family="'WiiUE Nunito', Nunito, 'Segoe UI', 'Helvetica Neue', Arial, sans-serif" font-size="15" font-weight="700" fill="#8d96a0">Console dump</text>
     <text x="14" y="67" font-family="'WiiUE Nunito', Nunito, 'Segoe UI', 'Helvetica Neue', Arial, sans-serif" font-size="12" fill="#8d96a0">System files, fonts, Miis,</text>
     <text x="14" y="83" font-family="'WiiUE Nunito', Nunito, 'Segoe UI', 'Helvetica Neue', Arial, sans-serif" font-size="12" fill="#8d96a0">saves</text>
-    <rect x="14" y="96" width="55" height="20" rx="10" fill="#21262d"/>
-    <text x="41.5" y="110" text-anchor="middle" font-family="'WiiUE Nunito', Nunito, 'Segoe UI', 'Helvetica Neue', Arial, sans-serif" font-size="11" font-weight="700" fill="#8d96a0">Later</text>
+    
   </g>
   <g transform="translate(218,670)">
     
@@ -138,8 +137,7 @@
     <text x="14" y="48" font-family="'WiiUE Nunito', Nunito, 'Segoe UI', 'Helvetica Neue', Arial, sans-serif" font-size="15" font-weight="700" fill="#8d96a0">Real games</text>
     <text x="14" y="67" font-family="'WiiUE Nunito', Nunito, 'Segoe UI', 'Helvetica Neue', Arial, sans-serif" font-size="12" fill="#8d96a0">First commercial game reaches</text>
     <text x="14" y="83" font-family="'WiiUE Nunito', Nunito, 'Segoe UI', 'Helvetica Neue', Arial, sans-serif" font-size="12" fill="#8d96a0">gameplay</text>
-    <rect x="14" y="96" width="55" height="20" rx="10" fill="#21262d"/>
-    <text x="41.5" y="110" text-anchor="middle" font-family="'WiiUE Nunito', Nunito, 'Segoe UI', 'Helvetica Neue', Arial, sans-serif" font-size="11" font-weight="700" fill="#8d96a0">Later</text>
+    
   </g>
   <g transform="translate(436,670)">
     
@@ -147,8 +145,7 @@
     <text x="14" y="26" font-family="'WiiUE Nunito', Nunito, 'Segoe UI', 'Helvetica Neue', Arial, sans-serif" font-size="11" fill="#8d96a0">Phase 14</text>
     <text x="14" y="48" font-family="'WiiUE Nunito', Nunito, 'Segoe UI', 'Helvetica Neue', Arial, sans-serif" font-size="15" font-weight="700" fill="#8d96a0">Speed</text>
     <text x="14" y="67" font-family="'WiiUE Nunito', Nunito, 'Segoe UI', 'Helvetica Neue', Arial, sans-serif" font-size="12" fill="#8d96a0">JIT recompiler, shader caches</text>
-    <rect x="14" y="96" width="55" height="20" rx="10" fill="#21262d"/>
-    <text x="41.5" y="110" text-anchor="middle" font-family="'WiiUE Nunito', Nunito, 'Segoe UI', 'Helvetica Neue', Arial, sans-serif" font-size="11" font-weight="700" fill="#8d96a0">Later</text>
+    
   </g>
   <text x="4" y="832" font-family="'WiiUE Nunito', Nunito, 'Segoe UI', 'Helvetica Neue', Arial, sans-serif" font-size="18" font-weight="800" fill="#e6edf3">Full system feel<tspan font-family="'WiiUE Nunito', Nunito, 'Segoe UI', 'Helvetica Neue', Arial, sans-serif" font-size="13" font-weight="600" fill="#8d96a0" dx="10">0/3 done</tspan></text>
   <g transform="translate(0,846)">
@@ -157,8 +154,7 @@
     <text x="14" y="26" font-family="'WiiUE Nunito', Nunito, 'Segoe UI', 'Helvetica Neue', Arial, sans-serif" font-size="11" fill="#8d96a0">Phase 15</text>
     <text x="14" y="48" font-family="'WiiUE Nunito', Nunito, 'Segoe UI', 'Helvetica Neue', Arial, sans-serif" font-size="15" font-weight="700" fill="#8d96a0">App UI</text>
     <text x="14" y="67" font-family="'WiiUE Nunito', Nunito, 'Segoe UI', 'Helvetica Neue', Arial, sans-serif" font-size="12" fill="#8d96a0">Game list, icons, settings</text>
-    <rect x="14" y="96" width="55" height="20" rx="10" fill="#21262d"/>
-    <text x="41.5" y="110" text-anchor="middle" font-family="'WiiUE Nunito', Nunito, 'Segoe UI', 'Helvetica Neue', Arial, sans-serif" font-size="11" font-weight="700" fill="#8d96a0">Later</text>
+    
   </g>
   <g transform="translate(218,846)">
     
@@ -166,8 +162,7 @@
     <text x="14" y="26" font-family="'WiiUE Nunito', Nunito, 'Segoe UI', 'Helvetica Neue', Arial, sans-serif" font-size="11" fill="#8d96a0">Phase 16</text>
     <text x="14" y="48" font-family="'WiiUE Nunito', Nunito, 'Segoe UI', 'Helvetica Neue', Arial, sans-serif" font-size="15" font-weight="700" fill="#8d96a0">Wii U Menu</text>
     <text x="14" y="67" font-family="'WiiUE Nunito', Nunito, 'Segoe UI', 'Helvetica Neue', Arial, sans-serif" font-size="12" fill="#8d96a0">Boot the dumped home menu</text>
-    <rect x="14" y="96" width="55" height="20" rx="10" fill="#21262d"/>
-    <text x="41.5" y="110" text-anchor="middle" font-family="'WiiUE Nunito', Nunito, 'Segoe UI', 'Helvetica Neue', Arial, sans-serif" font-size="11" font-weight="700" fill="#8d96a0">Later</text>
+    
   </g>
   <g transform="translate(436,846)">
     
@@ -175,8 +170,7 @@
     <text x="14" y="26" font-family="'WiiUE Nunito', Nunito, 'Segoe UI', 'Helvetica Neue', Arial, sans-serif" font-size="11" fill="#8d96a0">Phase 17</text>
     <text x="14" y="48" font-family="'WiiUE Nunito', Nunito, 'Segoe UI', 'Helvetica Neue', Arial, sans-serif" font-size="15" font-weight="700" fill="#8d96a0">Wii games via Dolphin</text>
     <text x="14" y="67" font-family="'WiiUE Nunito', Nunito, 'Segoe UI', 'Helvetica Neue', Arial, sans-serif" font-size="12" fill="#8d96a0">Launch vWii titles in Dolphin</text>
-    <rect x="14" y="96" width="55" height="20" rx="10" fill="#21262d"/>
-    <text x="41.5" y="110" text-anchor="middle" font-family="'WiiUE Nunito', Nunito, 'Segoe UI', 'Helvetica Neue', Arial, sans-serif" font-size="11" font-weight="700" fill="#8d96a0">Later</text>
+    
   </g>
   <text x="4" y="1008" font-family="'WiiUE Nunito', Nunito, 'Segoe UI', 'Helvetica Neue', Arial, sans-serif" font-size="18" font-weight="800" fill="#e6edf3">Online<tspan font-family="'WiiUE Nunito', Nunito, 'Segoe UI', 'Helvetica Neue', Arial, sans-serif" font-size="13" font-weight="600" fill="#8d96a0" dx="10">0/3 done</tspan></text>
   <g transform="translate(0,1022)">
@@ -185,8 +179,7 @@
     <text x="14" y="26" font-family="'WiiUE Nunito', Nunito, 'Segoe UI', 'Helvetica Neue', Arial, sans-serif" font-size="11" fill="#8d96a0">Phase 18</text>
     <text x="14" y="48" font-family="'WiiUE Nunito', Nunito, 'Segoe UI', 'Helvetica Neue', Arial, sans-serif" font-size="15" font-weight="700" fill="#8d96a0">Networking</text>
     <text x="14" y="67" font-family="'WiiUE Nunito', Nunito, 'Segoe UI', 'Helvetica Neue', Arial, sans-serif" font-size="12" fill="#8d96a0">Sockets, SSL, server redirects</text>
-    <rect x="14" y="96" width="55" height="20" rx="10" fill="#21262d"/>
-    <text x="41.5" y="110" text-anchor="middle" font-family="'WiiUE Nunito', Nunito, 'Segoe UI', 'Helvetica Neue', Arial, sans-serif" font-size="11" font-weight="700" fill="#8d96a0">Later</text>
+    
   </g>
   <g transform="translate(218,1022)">
     
@@ -195,8 +188,7 @@
     <text x="14" y="48" font-family="'WiiUE Nunito', Nunito, 'Segoe UI', 'Helvetica Neue', Arial, sans-serif" font-size="15" font-weight="700" fill="#8d96a0">Self-hosted servers</text>
     <text x="14" y="67" font-family="'WiiUE Nunito', Nunito, 'Segoe UI', 'Helvetica Neue', Arial, sans-serif" font-size="12" fill="#8d96a0">Our own Pretendo server,</text>
     <text x="14" y="83" font-family="'WiiUE Nunito', Nunito, 'Segoe UI', 'Helvetica Neue', Arial, sans-serif" font-size="12" fill="#8d96a0">accounts and friends</text>
-    <rect x="14" y="96" width="55" height="20" rx="10" fill="#21262d"/>
-    <text x="41.5" y="110" text-anchor="middle" font-family="'WiiUE Nunito', Nunito, 'Segoe UI', 'Helvetica Neue', Arial, sans-serif" font-size="11" font-weight="700" fill="#8d96a0">Later</text>
+    
   </g>
   <g transform="translate(436,1022)">
     
@@ -205,8 +197,7 @@
     <text x="14" y="48" font-family="'WiiUE Nunito', Nunito, 'Segoe UI', 'Helvetica Neue', Arial, sans-serif" font-size="15" font-weight="700" fill="#8d96a0">Public Pretendo</text>
     <text x="14" y="67" font-family="'WiiUE Nunito', Nunito, 'Segoe UI', 'Helvetica Neue', Arial, sans-serif" font-size="12" fill="#8d96a0">Only with Pretendo's</text>
     <text x="14" y="83" font-family="'WiiUE Nunito', Nunito, 'Segoe UI', 'Helvetica Neue', Arial, sans-serif" font-size="12" fill="#8d96a0">permission</text>
-    <rect x="14" y="96" width="55" height="20" rx="10" fill="#21262d"/>
-    <text x="41.5" y="110" text-anchor="middle" font-family="'WiiUE Nunito', Nunito, 'Segoe UI', 'Helvetica Neue', Arial, sans-serif" font-size="11" font-weight="700" fill="#8d96a0">Later</text>
+    
   </g>
   <text x="4" y="1184" font-family="'WiiUE Nunito', Nunito, 'Segoe UI', 'Helvetica Neue', Arial, sans-serif" font-size="18" font-weight="800" fill="#e6edf3">Hardware extras<tspan font-family="'WiiUE Nunito', Nunito, 'Segoe UI', 'Helvetica Neue', Arial, sans-serif" font-size="13" font-weight="600" fill="#8d96a0" dx="10">0/2 done</tspan></text>
   <g transform="translate(0,1198)">
@@ -216,8 +207,7 @@
     <text x="14" y="48" font-family="'WiiUE Nunito', Nunito, 'Segoe UI', 'Helvetica Neue', Arial, sans-serif" font-size="15" font-weight="700" fill="#8d96a0">Real GamePad</text>
     <text x="14" y="67" font-family="'WiiUE Nunito', Nunito, 'Segoe UI', 'Helvetica Neue', Arial, sans-serif" font-size="12" fill="#8d96a0">Linux bridge streams to the</text>
     <text x="14" y="83" font-family="'WiiUE Nunito', Nunito, 'Segoe UI', 'Helvetica Neue', Arial, sans-serif" font-size="12" fill="#8d96a0">real controller</text>
-    <rect x="14" y="96" width="55" height="20" rx="10" fill="#21262d"/>
-    <text x="41.5" y="110" text-anchor="middle" font-family="'WiiUE Nunito', Nunito, 'Segoe UI', 'Helvetica Neue', Arial, sans-serif" font-size="11" font-weight="700" fill="#8d96a0">Later</text>
+    
   </g>
   <g transform="translate(218,1198)">
     
@@ -226,7 +216,6 @@
     <text x="14" y="48" font-family="'WiiUE Nunito', Nunito, 'Segoe UI', 'Helvetica Neue', Arial, sans-serif" font-size="15" font-weight="700" fill="#8d96a0">Extras</text>
     <text x="14" y="67" font-family="'WiiUE Nunito', Nunito, 'Segoe UI', 'Helvetica Neue', Arial, sans-serif" font-size="12" fill="#8d96a0">Camera, microphone, amiibo,</text>
     <text x="14" y="83" font-family="'WiiUE Nunito', Nunito, 'Segoe UI', 'Helvetica Neue', Arial, sans-serif" font-size="12" fill="#8d96a0">save states</text>
-    <rect x="14" y="96" width="55" height="20" rx="10" fill="#21262d"/>
-    <text x="41.5" y="110" text-anchor="middle" font-family="'WiiUE Nunito', Nunito, 'Segoe UI', 'Helvetica Neue', Arial, sans-serif" font-size="11" font-weight="700" fill="#8d96a0">Later</text>
+    
   </g>
 </svg>

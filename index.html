@@ -638,7 +638,8 @@ body {
 <script>
 (function () {
   const GROUPS = ["Foundation", "Core emulator", "Real console", "Full system feel", "Online", "Hardware extras"];
-  const STATUS_LABEL = { done: "Done", active: "In progress", next: "Up next", later: "Later" };
+  // Phases further out show no status chip
+  const STATUS_LABEL = { done: "Done", active: "In progress", next: "Up next" };
   const $ = (id) => document.getElementById(id);
 
   let status = null;
@@ -721,7 +722,8 @@ body {
         body.appendChild(el("h3", null, p.title));
         if (p.detail) body.appendChild(el("p", null, p.detail));
         tile.appendChild(body);
-        tile.appendChild(el("span", "chip", STATUS_LABEL[p.status] || "Later"));
+        const label = STATUS_LABEL[p.status];
+        if (label) tile.appendChild(el("span", "chip", label));
         grid.appendChild(tile);
       }
       section.appendChild(grid);
