@@ -464,11 +464,11 @@ body {
 <script type="application/json" id="snapshot">
 {
   "status": {
-    "headline": "Coreinit: the Wii U's core system library",
-    "detail": "Writing our own versions of the system functions hello.rpx calls: memory heaps, threads, locks, OSReport. Goal: \"Hello from my emulator!\" printed by the emulated program.",
-    "testCases": 33, "assertions": 286, "commits": 6, "lastCommit": "278bc00",
-    "instructions": 677, "instructionsNote": "before the first missing system function",
-    "updatedAt": "2026-10-14T17:25:00-07:00"
+    "headline": "File system: games reading their own files",
+    "detail": "Mapping the Wii U's /vol/content and /vol/save paths to folders on your PC, so programs can open, read and write files. Next after that: graphics.",
+    "testCases": 39, "assertions": 369, "commits": 16, "lastCommit": "1af05ca",
+    "instructions": 10522, "instructionsNote": "hello.rpx, start to finish",
+    "updatedAt": "2026-10-14T17:47:00-07:00"
   },
   "phases": [
     {"n": 0, "group": "Foundation", "title": "Tools", "detail": "Visual Studio, CMake, Vulkan SDK, vcpkg, devkitPro", "status": "done"},
@@ -477,8 +477,8 @@ body {
     {"n": 3, "group": "Core emulator", "title": "Homebrew test programs", "detail": "hello.rpx built with devkitPro", "status": "done"},
     {"n": 4, "group": "Core emulator", "title": "RPX loader", "detail": "Sections, relocations, imports to HLE stubs", "status": "done"},
     {"n": 5, "group": "Core emulator", "title": "PowerPC CPU", "detail": "Interpreter: integer, float, paired singles", "status": "done"},
-    {"n": 6, "group": "Core emulator", "title": "Coreinit", "detail": "Heaps, threads, locks, OSReport", "status": "active", "milestone": true},
-    {"n": 7, "group": "Core emulator", "title": "File system", "detail": "/vol/content and /vol/save on your PC", "status": "next"},
+    {"n": 6, "group": "Core emulator", "title": "Coreinit", "detail": "Heaps, threads, locks, OSReport", "status": "done", "milestone": true},
+    {"n": 7, "group": "Core emulator", "title": "File system", "detail": "/vol/content and /vol/save on your PC", "status": "active"},
     {"n": 8, "group": "Core emulator", "title": "Graphics", "detail": "GX2 to Vulkan, TV and GamePad windows", "status": "next", "milestone": true},
     {"n": 9, "group": "Core emulator", "title": "Input", "detail": "GamePad buttons, sticks, touch, gyro", "status": "next"},
     {"n": 10, "group": "Core emulator", "title": "Audio", "detail": "AX voices, ADPCM, mixing", "status": "next"},
@@ -496,6 +496,8 @@ body {
     {"n": 22, "group": "Hardware extras", "title": "Extras", "detail": "Camera, microphone, amiibo, save states", "status": "later"}
   ],
   "log": [
+    {"at": "2026-10-14T17:47:00-07:00", "phase": 7, "text": "Started the file system"},
+    {"at": "2026-10-14T17:46:00-07:00", "phase": 6, "text": "Milestone: hello.rpx prints \"Hello from my emulator!\" and exits cleanly after 10,522 instructions", "commit": "1af05ca"},
     {"at": "2026-10-14T17:25:00-07:00", "phase": 6, "text": "Progress page opened to the public"},
     {"at": "2026-10-14T17:15:00-07:00", "phase": 6, "text": "Live progress page published", "commit": "278bc00"},
     {"at": "2026-10-14T17:10:00-07:00", "phase": 6, "text": "Started coreinit, the Wii U's core system library"},
