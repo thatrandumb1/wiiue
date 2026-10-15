@@ -587,11 +587,11 @@ body {
 <script type="application/json" id="snapshot">
 {
   "status": {
-    "headline": "Graphics: GX2 running, shaders next",
-    "detail": "Programs now set up graphics with the Wii U's GX2 library and clear the TV and GamePad to any color, and closing the window asks them to quit politely. Next: translating Wii U shaders to Vulkan to draw a triangle.",
-    "testCases": 50, "assertions": 512, "commits": 25, "lastCommit": "07c839b",
-    "instructions": 203272, "instructionsNote": "GX2 test: 600 frames on both screens",
-    "updatedAt": "2026-10-14T18:26:00-07:00"
+    "headline": "Graphics done: first 3D triangle",
+    "detail": "Wii U shaders are now translated to Vulkan and drawn on your graphics card: a test program spins a colored triangle on both the TV and GamePad. Next: GamePad input.",
+    "testCases": 55, "assertions": 551, "commits": 28, "lastCommit": "774489c",
+    "instructions": 488587, "instructionsNote": "Triangle test: 600 frames on both screens",
+    "updatedAt": "2026-10-14T18:48:00-07:00"
   },
   "phases": [
     {"n": 0, "group": "Foundation", "title": "Tools", "detail": "Visual Studio, CMake, Vulkan SDK, vcpkg, devkitPro", "status": "done"},
@@ -602,7 +602,7 @@ body {
     {"n": 5, "group": "Core emulator", "title": "PowerPC CPU", "detail": "Interpreter: integer, float, paired singles", "status": "done"},
     {"n": 6, "group": "Core emulator", "title": "Coreinit", "detail": "Heaps, threads, locks, OSReport", "status": "done", "milestone": true},
     {"n": 7, "group": "Core emulator", "title": "File system", "detail": "/vol/content and /vol/save on your PC", "status": "done"},
-    {"n": 8, "group": "Core emulator", "title": "Graphics", "detail": "GX2 to Vulkan, TV and GamePad windows", "status": "active", "milestone": true},
+    {"n": 8, "group": "Core emulator", "title": "Graphics", "detail": "GX2 to Vulkan, TV and GamePad windows", "status": "done", "milestone": true},
     {"n": 9, "group": "Core emulator", "title": "Input", "detail": "GamePad buttons, sticks, touch, gyro", "status": "next"},
     {"n": 10, "group": "Core emulator", "title": "Audio", "detail": "AX voices, ADPCM, mixing", "status": "next"},
     {"n": 11, "group": "Core emulator", "title": "Multi-core", "detail": "Three CPU cores, scheduler, alarms", "status": "next"},
@@ -619,6 +619,7 @@ body {
     {"n": 22, "group": "Hardware extras", "title": "Extras", "detail": "Camera, microphone, amiibo, save states", "status": "later"}
   ],
   "log": [
+    {"at": "2026-10-14T18:47:00-07:00", "phase": 8, "text": "Graphics done: Wii U shaders are translated to Vulkan and a spinning 3D triangle draws on both screens on the graphics card", "commit": "774489c"},
     {"at": "2026-10-14T18:25:00-07:00", "phase": 8, "text": "GX2 graphics library running: a program set up the standard way clears both screens to cycling colors and quits cleanly when the window closes", "commit": "07c839b"},
     {"at": "2026-10-14T18:15:00-07:00", "phase": 8, "text": "Milestone: first image on screen. TV and GamePad windows open, and a test program draws text, colors and a moving square at 60 fps", "commit": "ec18455"},
     {"at": "2026-10-14T17:59:00-07:00", "phase": 8, "text": "Started graphics"},

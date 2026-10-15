@@ -9,9 +9,9 @@
 
 <p align="center">
   <a href="https://thatrandumb1.github.io/wiiue/"><img src="https://img.shields.io/badge/live%20progress-open%20site-00a6e0?style=for-the-badge" alt="live progress: open site"></a>
-  <img src="https://img.shields.io/badge/phase-8%3A%20Graphics-0084b8?style=for-the-badge" alt="phase: 8: Graphics">
-  <img src="https://img.shields.io/badge/tests-50%20passing-3cb371?style=for-the-badge" alt="tests: 50 passing">
-  <img src="https://img.shields.io/badge/phases%20done-8%20of%2023-6b7782?style=for-the-badge" alt="phases done: 8 of 23">
+  <img src="https://img.shields.io/badge/phase-between%20phases-0084b8?style=for-the-badge" alt="phase: between phases">
+  <img src="https://img.shields.io/badge/tests-55%20passing-3cb371?style=for-the-badge" alt="tests: 55 passing">
+  <img src="https://img.shields.io/badge/phases%20done-9%20of%2023-6b7782?style=for-the-badge" alt="phases done: 9 of 23">
 </p>
 
 <p align="center">
@@ -32,6 +32,7 @@
 
 ## Recent activity
 
+- `Oct 14, 6:47 PM` · **P8** · Graphics done: Wii U shaders are translated to Vulkan and a spinning 3D triangle draws on both screens on the graphics card · `774489c`
 - `Oct 14, 6:25 PM` · **P8** · GX2 graphics library running: a program set up the standard way clears both screens to cycling colors and quits cleanly when the window closes · `07c839b`
 - `Oct 14, 6:15 PM` · **P8** · Milestone: first image on screen. TV and GamePad windows open, and a test program draws text, colors and a moving square at 60 fps · `ec18455`
 - `Oct 14, 5:59 PM` · **P8** · Started graphics
@@ -39,7 +40,6 @@
 - `Oct 14, 5:47 PM` · **P7** · Started the file system
 - `Oct 14, 5:46 PM` · **P6** · Milestone: hello.rpx prints "Hello from my emulator!" and exits cleanly after 10,522 instructions · `1af05ca`
 - `Oct 14, 5:25 PM` · **P6** · Progress page opened to the public
-- `Oct 14, 5:15 PM` · **P6** · Live progress page published · `278bc00`
 
 ## History of the Wii U
 
@@ -70,5 +70,5 @@ The console this project brings back.
 
 ---
 
-<sub>Last updated Oct 14, 2026, 6:26 PM PDT. Full live view: <a href="https://thatrandumb1.github.io/wiiue/">https://thatrandumb1.github.io/wiiue/</a><br>
+<sub>Last updated Oct 14, 2026, 6:48 PM PDT. Full live view: <a href="https://thatrandumb1.github.io/wiiue/">https://thatrandumb1.github.io/wiiue/</a><br>
 Fan project page. Not affiliated with or endorsed by Nintendo.</sub>

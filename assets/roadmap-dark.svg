@@ -23,7 +23,7 @@
     <rect x="14" y="96" width="48" height="20" rx="10" fill="#12261e"/>
     <text x="38" y="110" text-anchor="middle" font-family="'WiiUE Nunito', Nunito, 'Segoe UI', 'Helvetica Neue', Arial, sans-serif" font-size="11" font-weight="700" fill="#3fb950">Done</text>
   </g>
-  <text x="4" y="200" font-family="'WiiUE Nunito', Nunito, 'Segoe UI', 'Helvetica Neue', Arial, sans-serif" font-size="18" font-weight="800" fill="#e6edf3">Core emulator<tspan font-family="'WiiUE Nunito', Nunito, 'Segoe UI', 'Helvetica Neue', Arial, sans-serif" font-size="13" font-weight="600" fill="#8d96a0" dx="10">6/10 done</tspan></text>
+  <text x="4" y="200" font-family="'WiiUE Nunito', Nunito, 'Segoe UI', 'Helvetica Neue', Arial, sans-serif" font-size="18" font-weight="800" fill="#e6edf3">Core emulator<tspan font-family="'WiiUE Nunito', Nunito, 'Segoe UI', 'Helvetica Neue', Arial, sans-serif" font-size="13" font-weight="600" fill="#8d96a0" dx="10">7/10 done</tspan></text>
   <g transform="translate(0,214)">
     
     <rect x="1" y="1" width="204" height="126" rx="22" fill="#161b22" stroke="#3fb950" stroke-width="2"/>
@@ -90,15 +90,15 @@
     <text x="38" y="110" text-anchor="middle" font-family="'WiiUE Nunito', Nunito, 'Segoe UI', 'Helvetica Neue', Arial, sans-serif" font-size="11" font-weight="700" fill="#3fb950">Done</text>
   </g>
   <g transform="translate(436,354)">
-    <rect x="-3" y="-3" width="212" height="134" rx="25" fill="none" stroke="#0f3346" stroke-width="5"/>
-    <rect x="1" y="1" width="204" height="126" rx="22" fill="#161b22" stroke="#2cc0f2" stroke-width="2"/>
+    
+    <rect x="1" y="1" width="204" height="126" rx="22" fill="#161b22" stroke="#3fb950" stroke-width="2"/>
     <text x="14" y="26" font-family="'WiiUE Nunito', Nunito, 'Segoe UI', 'Helvetica Neue', Arial, sans-serif" font-size="11" fill="#8d96a0">Phase 08</text>
     <text x="192" y="26" text-anchor="end" font-family="'WiiUE Nunito', Nunito, 'Segoe UI', 'Helvetica Neue', Arial, sans-serif" font-size="10" font-weight="700" letter-spacing="0.6" fill="#6fd6f8">MILESTONE</text>
     <text x="14" y="48" font-family="'WiiUE Nunito', Nunito, 'Segoe UI', 'Helvetica Neue', Arial, sans-serif" font-size="15" font-weight="700" fill="#e6edf3">Graphics</text>
     <text x="14" y="67" font-family="'WiiUE Nunito', Nunito, 'Segoe UI', 'Helvetica Neue', Arial, sans-serif" font-size="12" fill="#8d96a0">GX2 to Vulkan, TV and GamePad</text>
     <text x="14" y="83" font-family="'WiiUE Nunito', Nunito, 'Segoe UI', 'Helvetica Neue', Arial, sans-serif" font-size="12" fill="#8d96a0">windows</text>
-    <rect x="14" y="96" width="97" height="20" rx="10" fill="#2cc0f2"/>
-    <text x="62.5" y="110" text-anchor="middle" font-family="'WiiUE Nunito', Nunito, 'Segoe UI', 'Helvetica Neue', Arial, sans-serif" font-size="11" font-weight="700" fill="#ffffff">In progress</text>
+    <rect x="14" y="96" width="48" height="20" rx="10" fill="#12261e"/>
+    <text x="38" y="110" text-anchor="middle" font-family="'WiiUE Nunito', Nunito, 'Segoe UI', 'Helvetica Neue', Arial, sans-serif" font-size="11" font-weight="700" fill="#3fb950">Done</text>
   </g>
   <g transform="translate(654,354)">
     
