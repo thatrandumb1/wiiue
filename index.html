@@ -350,6 +350,98 @@ body {
 }
 .foot { font-size: 12px; color: var(--ink-soft); text-align: center; }
 
+/* ---- page structure: side panel + main column ---- */
+.wrap { position: relative; z-index: 1; }
+.side, .main { display: grid; gap: 22px; align-content: start; min-width: 0; }
+
+/* Empty space between cards lets clicks through to the screensaver logo behind */
+.wrap, .side, .main, .top, .stats, .roadmap, .groups, .groups > div, .tiles { pointer-events: none; }
+.bar, .now, .stat, .tile, .feed, .section-head, .empty, .foot { pointer-events: auto; }
+
+/* ---- layout + screensaver controls ---- */
+.seg {
+  display: inline-flex;
+  padding: 3px;
+  gap: 2px;
+  border-radius: var(--radius-pill);
+  background: var(--surface-2);
+  border: 1px solid var(--line);
+}
+.seg button, .toggle {
+  font: inherit;
+  font-size: 13px;
+  font-weight: 700;
+  border: 0;
+  border-radius: var(--radius-pill);
+  padding: 4px 12px;
+  background: transparent;
+  color: var(--ink-soft);
+  cursor: pointer;
+}
+.seg button[aria-pressed="true"] { background: var(--surface); color: var(--accent-deep); box-shadow: var(--shadow); }
+.toggle { border: 1px solid var(--line); background: var(--surface-2); }
+.toggle[aria-pressed="true"] { background: var(--accent-wash); color: var(--accent-deep); border-color: transparent; }
+.seg button:focus-visible, .toggle:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+
+/* ---- screensaver ---- */
+.dvd-layer {
+  position: fixed;
+  inset: 0;
+  z-index: 0;
+  overflow: hidden;
+  pointer-events: none;
+}
+.dvd {
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: clamp(150px, 18vw, 240px);
+  height: auto;
+  aspect-ratio: 1960 / 460;
+  opacity: 0.32;
+  cursor: grab;
+  pointer-events: auto;
+  touch-action: none;
+  user-select: none;
+  will-change: transform;
+  transition: opacity 0.2s ease;
+}
+.dvd:hover { opacity: 0.55; }
+.dvd.dragging { cursor: grabbing; opacity: 0.75; }
+.dvd.corner { animation: corner 0.9s ease-out; }
+@keyframes corner {
+  0% { filter: drop-shadow(0 0 0 transparent); }
+  30% { filter: drop-shadow(0 0 18px var(--accent)); opacity: 0.95; }
+  100% { filter: drop-shadow(0 0 0 transparent); }
+}
+.dvd-layer.off { display: none; }
+
+/* ---- side layout: controls and status stay in a panel on the left ---- */
+@media (min-width: 960px) {
+  .wrap[data-layout="side"] {
+    max-width: 1440px;
+    grid-template-columns: 380px minmax(0, 1fr);
+    align-items: start;
+    column-gap: 26px;
+  }
+  .wrap[data-layout="side"] .side {
+    position: sticky;
+    top: calc(18px + env(safe-area-inset-top, 0px));
+    max-height: calc(100vh - 36px);
+    overflow-y: auto;
+    gap: 16px;
+    padding-bottom: 4px;
+  }
+  .wrap[data-layout="side"] .top { grid-template-columns: minmax(0, 1fr); }
+  .wrap[data-layout="side"] .bar { border-radius: 26px; padding: 14px 16px; gap: 10px; }
+  .wrap[data-layout="side"] .bar .spacer { flex-basis: 100%; height: 0; }
+  .wrap[data-layout="side"] .now h1 { font-size: 26px; }
+  .wrap[data-layout="side"] .stat .value { font-size: 24px; }
+}
+@media (max-width: 959px) {
+  .seg { display: none; }
+}
+
 @media (max-width: 760px) {
   .top { grid-template-columns: minmax(0, 1fr); }
   .feed li { grid-template-columns: minmax(0, 1fr); gap: 2px; }
@@ -357,37 +449,54 @@ body {
 @media (prefers-reduced-motion: reduce) {
   .live .dot { animation: none; }
   .tile, .meter > span { transition: none; }
+  .dvd.corner { animation: none; }
 }
 </style>
 
-<div class="wrap">
+<!-- Logo artwork, drawn once and reused by the header and the bouncing screensaver -->
+<svg width="0" height="0" style="position:absolute" aria-hidden="true" focusable="false">
+  <symbol id="logo-art" viewBox="20 150 1960 460">
+    <defs>
+      <clipPath id="w-clip"><rect x="0" y="188" width="700" height="420"/></clipPath>
+      <mask id="u-cut">
+        <rect x="1040" y="160" width="520" height="380" fill="#fff"/>
+        <path d="M1180,150 V330 A116,116 0 0 0 1412,330 V150 Z" fill="#000"/>
+        <path d="M1229,150 V333 A66.5,66.5 0 0 0 1362,333 V150 Z" fill="#fff"/>
+      </mask>
+    </defs>
+    <g fill="var(--logo-grey)">
+      <polyline clip-path="url(#w-clip)" points="63,120 205,548 338,232 470,548 619,120" fill="none"
+                stroke="var(--logo-grey)" stroke-width="96" stroke-linejoin="round"/>
+      <circle cx="734" cy="213" r="54"/>
+      <circle cx="911" cy="213" r="54"/>
+      <rect x="688" y="311" width="92" height="279"/>
+      <rect x="865" y="311" width="93" height="279"/>
+    </g>
+    <g fill="var(--logo-blue)">
+      <rect x="1062" y="177" width="474" height="349" rx="72" mask="url(#u-cut)"/>
+      <path d="M1688,177 H1915 A42.5,42.5 0 0 1 1915,262 H1730 V330 H1888 A41.5,41.5 0 0 1 1888,413 H1730 V497 H1916 A46.5,46.5 0 0 1 1916,590 H1688 A70,70 0 0 1 1618,520 V247 A70,70 0 0 1 1688,177 Z"/>
+    </g>
+  </symbol>
+</svg>
+
+<!-- Screensaver: the logo bounces around behind the page; grab it to drag or fling it -->
+<div class="dvd-layer" aria-hidden="true">
+  <svg class="dvd" id="dvd" viewBox="20 150 1960 460"><use href="#logo-art"/></svg>
+</div>
+
+<div class="wrap" id="wrap" data-layout="top">
+ <aside class="side">
   <header class="bar">
     <div class="brand">
-      <svg class="logo" viewBox="20 150 1960 460" role="img" aria-label="WiiUE">
-        <defs>
-          <clipPath id="w-clip"><rect x="0" y="188" width="700" height="420"/></clipPath>
-          <mask id="u-cut">
-            <rect x="1040" y="160" width="520" height="380" fill="#fff"/>
-            <path d="M1180,150 V330 A116,116 0 0 0 1412,330 V150 Z" fill="#000"/>
-            <path d="M1229,150 V333 A66.5,66.5 0 0 0 1362,333 V150 Z" fill="#fff"/>
-          </mask>
-        </defs>
-        <g fill="var(--logo-grey)">
-          <polyline clip-path="url(#w-clip)" points="63,120 205,548 338,232 470,548 619,120" fill="none"
-                    stroke="var(--logo-grey)" stroke-width="96" stroke-linejoin="round"/>
-          <circle cx="734" cy="213" r="54"/>
-          <circle cx="911" cy="213" r="54"/>
-          <rect x="688" y="311" width="92" height="279"/>
-          <rect x="865" y="311" width="93" height="279"/>
-        </g>
-        <g fill="var(--logo-blue)">
-          <rect x="1062" y="177" width="474" height="349" rx="72" mask="url(#u-cut)"/>
-          <path d="M1688,177 H1915 A42.5,42.5 0 0 1 1915,262 H1730 V330 H1888 A41.5,41.5 0 0 1 1888,413 H1730 V497 H1916 A46.5,46.5 0 0 1 1916,590 H1688 A70,70 0 0 1 1618,520 V247 A70,70 0 0 1 1688,177 Z"/>
-        </g>
-      </svg>
+      <svg class="logo" viewBox="20 150 1960 460" role="img" aria-label="WiiUE"><use href="#logo-art"/></svg>
       <small>Wii U emulator, built from scratch</small>
     </div>
     <div class="spacer"></div>
+    <div class="seg" role="group" aria-label="Layout">
+      <button type="button" id="layout-top" aria-pressed="true">Top</button>
+      <button type="button" id="layout-side" aria-pressed="false">Side</button>
+    </div>
+    <button type="button" class="toggle" id="saver-toggle" aria-pressed="true" title="Bouncing logo in the background">Screensaver</button>
     <span class="pill" id="conn"><span class="dot"></span><span id="conn-text">Connecting</span></span>
     <span class="time" id="updated">No updates yet</span>
   </header>
@@ -407,8 +516,10 @@ body {
       <div class="stat"><span class="label">Instructions run</span><span class="value" id="stat-instr">–</span><span class="sub" id="stat-instr-sub">by hello.rpx</span></div>
     </div>
   </section>
+ </aside>
 
-  <section>
+ <main class="main">
+  <section class="roadmap">
     <div class="section-head"><h2>Roadmap</h2><span id="roadmap-note">22 phases from tools to real hardware</span></div>
     <div class="groups" id="groups">
       <div class="empty">The roadmap loads from the project's live record. If nothing shows up, open this page while signed in.</div>
@@ -421,6 +532,7 @@ body {
   </section>
 
   <p class="foot">Fan project page. Not affiliated with or endorsed by Nintendo.</p>
+ </main>
 </div>
 
 <!-- Snapshot of the live record, built into the page so visitors who can't reach the
@@ -650,6 +762,186 @@ body {
       if (status && status.updatedAt) $("updated").textContent = "Updated " + relTime(status.updatedAt);
     }, 30000);
   }
+
+  // ---- per-viewer preferences (browser storage may be unavailable; everything works without it)
+  function loadPref(key, fallback) {
+    try {
+      const v = localStorage.getItem("wiiue." + key);
+      return v == null ? fallback : v;
+    } catch (e) {
+      return fallback;
+    }
+  }
+  function savePref(key, value) {
+    try {
+      localStorage.setItem("wiiue." + key, value);
+    } catch (e) {
+      /* ignore */
+    }
+  }
+
+  // ---- layout: status bar on top, or a side panel ----
+  function setLayout(layout) {
+    $("wrap").dataset.layout = layout;
+    $("layout-top").setAttribute("aria-pressed", String(layout === "top"));
+    $("layout-side").setAttribute("aria-pressed", String(layout === "side"));
+    savePref("layout", layout);
+    window.dispatchEvent(new Event("resize")); // keep the screensaver logo inside the new bounds
+  }
+  $("layout-top").addEventListener("click", () => setLayout("top"));
+  $("layout-side").addEventListener("click", () => setLayout("side"));
+  setLayout(loadPref("layout", "top") === "side" ? "side" : "top");
+
+  // ---- screensaver: bouncing logo, changes color on every wall, drag and fling ----
+  function startScreensaver() {
+    const logo = $("dvd");
+    const layer = logo.parentElement;
+    const toggle = $("saver-toggle");
+    const BASE_SPEED = 120; // px per second
+    const MAX_SPEED = 1600;
+    // First entry: the logo's own colors. The rest recolor the whole logo, screensaver style.
+    const COLORS = [null, "#ff5a5f", "#ffb400", "#3ccf6e", "#a66bff", "#ff6fd8", "#2cc0f2", "#ff8a3d"];
+
+    let x = 0;
+    let y = 0;
+    let vx = BASE_SPEED * 0.8;
+    let vy = BASE_SPEED * 0.6;
+    let colorIndex = 0;
+    let running = false;
+    let dragging = false;
+    let dragOffsetX = 0;
+    let dragOffsetY = 0;
+    let samples = [];
+    let last = 0;
+
+    const reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+
+    function bounds() {
+      return { w: Math.max(0, window.innerWidth - logo.clientWidth), h: Math.max(0, window.innerHeight - logo.clientHeight) };
+    }
+
+    function place() {
+      logo.style.transform = "translate(" + x.toFixed(1) + "px, " + y.toFixed(1) + "px)";
+    }
+
+    function nextColor() {
+      colorIndex = (colorIndex + 1) % COLORS.length;
+      const c = COLORS[colorIndex];
+      if (c) {
+        logo.style.setProperty("--logo-grey", c);
+        logo.style.setProperty("--logo-blue", c);
+      } else {
+        logo.style.removeProperty("--logo-grey");
+        logo.style.removeProperty("--logo-blue");
+      }
+    }
+
+    function cornerHit() {
+      logo.classList.remove("corner");
+      void logo.getBoundingClientRect(); // restart the animation
+      logo.classList.add("corner");
+    }
+
+    function frame(t) {
+      const dt = last ? Math.min((t - last) / 1000, 0.05) : 0;
+      last = t;
+
+      if (running && !dragging && dt > 0) {
+        // A fling slows back down to the normal drifting speed
+        const speed = Math.hypot(vx, vy) || 1;
+        const target = speed + (BASE_SPEED - speed) * Math.min(1, dt * 1.2);
+        vx *= target / speed;
+        vy *= target / speed;
+
+        x += vx * dt;
+        y += vy * dt;
+
+        const b = bounds();
+        let hitX = false;
+        let hitY = false;
+        if (x <= 0) { x = 0; vx = Math.abs(vx); hitX = true; }
+        if (x >= b.w) { x = b.w; vx = -Math.abs(vx); hitX = true; }
+        if (y <= 0) { y = 0; vy = Math.abs(vy); hitY = true; }
+        if (y >= b.h) { y = b.h; vy = -Math.abs(vy); hitY = true; }
+        if (hitX || hitY) nextColor();
+        if (hitX && hitY) cornerHit();
+        place();
+      }
+      requestAnimationFrame(frame);
+    }
+
+    logo.addEventListener("pointerdown", (e) => {
+      dragging = true;
+      logo.classList.add("dragging");
+      logo.setPointerCapture(e.pointerId);
+      dragOffsetX = e.clientX - x;
+      dragOffsetY = e.clientY - y;
+      samples = [{ t: performance.now(), x: e.clientX, y: e.clientY }];
+      e.preventDefault();
+    });
+
+    logo.addEventListener("pointermove", (e) => {
+      if (!dragging) return;
+      const b = bounds();
+      x = Math.min(Math.max(e.clientX - dragOffsetX, 0), b.w);
+      y = Math.min(Math.max(e.clientY - dragOffsetY, 0), b.h);
+      place();
+      const now = performance.now();
+      samples.push({ t: now, x: e.clientX, y: e.clientY });
+      samples = samples.filter((s) => now - s.t < 120);
+    });
+
+    function endDrag(e) {
+      if (!dragging) return;
+      dragging = false;
+      logo.classList.remove("dragging");
+      if (logo.hasPointerCapture(e.pointerId)) logo.releasePointerCapture(e.pointerId);
+
+      // Throw velocity from the last ~120 ms of movement
+      const first = samples[0];
+      const end = samples[samples.length - 1];
+      const span = end && first ? (end.t - first.t) / 1000 : 0;
+      if (span > 0.01) {
+        let fx = (end.x - first.x) / span;
+        let fy = (end.y - first.y) / span;
+        const speed = Math.hypot(fx, fy);
+        if (speed > MAX_SPEED) { fx *= MAX_SPEED / speed; fy *= MAX_SPEED / speed; }
+        if (speed > 30) { vx = fx; vy = fy; }
+      }
+      last = 0;
+    }
+    logo.addEventListener("pointerup", endDrag);
+    logo.addEventListener("pointercancel", endDrag);
+
+    window.addEventListener("resize", () => {
+      const b = bounds();
+      x = Math.min(x, b.w);
+      y = Math.min(y, b.h);
+      place();
+    });
+
+    function setRunning(on) {
+      running = on;
+      layer.classList.toggle("off", !on);
+      toggle.setAttribute("aria-pressed", String(on));
+      savePref("screensaver", on ? "on" : "off");
+      last = 0;
+    }
+    toggle.addEventListener("click", () => setRunning(!running));
+
+    // Start somewhere random, heading diagonally
+    const b = bounds();
+    x = Math.random() * b.w;
+    y = Math.random() * b.h;
+    if (Math.random() < 0.5) vx = -vx;
+    if (Math.random() < 0.5) vy = -vy;
+    place();
+
+    const pref = loadPref("screensaver", reduceMotion ? "off" : "on");
+    setRunning(pref === "on");
+    requestAnimationFrame(frame);
+  }
+  startScreensaver();
 
   start();
 })();
