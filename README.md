@@ -5,7 +5,7 @@
   <a href="https://thatrandumb1.github.io/wiiue/#gh-dark-mode-only"><img src="assets/logo-dark.svg" alt="WiiUE" width="420"></a>
 </p>
 
-<p align="center"><b>Wii U emulator, built from scratch</b></p>
+<p align="center"><b>The Wii U emulator, but everything works.</b></p>
 
 <p align="center">
   <a href="https://thatrandumb1.github.io/wiiue/"><img src="https://img.shields.io/badge/live%20progress-open%20site-00a6e0?style=for-the-badge" alt="live progress: open site"></a>
