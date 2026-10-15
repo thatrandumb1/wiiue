@@ -589,9 +589,9 @@ body {
   "status": {
     "headline": "Core emulator done: three cores",
     "detail": "Programs now run many threads across the Wii U's three CPU cores, with priorities, locks, events, message queues, sleeps and timers. That completes the core emulator (phases 5-11). Next: your console dump, then real games.",
-    "testCases": 74, "assertions": 1149, "commits": 34, "lastCommit": "14bae43",
+    "testCases": 76, "assertions": 1177, "commits": 36, "lastCommit": "901aadc",
     "instructions": 14002270, "instructionsNote": "Threads test: 9 checks on 3 cores",
-    "updatedAt": "2026-10-14T20:14:00-07:00"
+    "updatedAt": "2026-10-14T20:45:00-07:00"
   },
   "phases": [
     {"n": 0, "group": "Foundation", "title": "Tools", "detail": "Visual Studio, CMake, Vulkan SDK, vcpkg, devkitPro", "status": "done"},
@@ -619,6 +619,7 @@ body {
     {"n": 22, "group": "Hardware extras", "title": "Extras", "detail": "Camera, microphone, amiibo, save states", "status": "later"}
   ],
   "log": [
+    {"at": "2026-10-14T20:44:00-07:00", "phase": 8, "text": "First real 3D: depth buffers and back-face culling work, and a test program spins two cubes in perspective", "commit": "901aadc"},
     {"at": "2026-10-14T20:13:00-07:00", "phase": 11, "text": "Multi-core done: threads run on all three cores with priorities, locks, events, queues, sleeps and alarms; the threads test passes 9/9", "commit": "14bae43"},
     {"at": "2026-10-14T19:35:00-07:00", "phase": 10, "text": "Audio done: the AX mixer plays PCM and ADPCM voices with pitch and volume on your speakers; a test program plays a C-E-G-C tune", "commit": "e8c71ee"},
     {"at": "2026-10-14T19:03:00-07:00", "phase": 9, "text": "Input done: GamePad buttons, sticks, touch screen and motion work from the keyboard, mouse or a game controller", "commit": "4b79a22"},
