@@ -266,6 +266,24 @@ body {
 .tile.later h3 { color: var(--ink-soft); }
 
 /* ---- activity feed (second-screen panel) ---- */
+.shots {
+  background: var(--surface);
+  border: 1px solid var(--line);
+  border-radius: 28px;
+  padding: 18px 20px;
+  box-shadow: var(--shadow);
+}
+.shots figure { margin: 0; }
+.shots img {
+  display: block;
+  width: 100%;
+  height: auto;
+  aspect-ratio: 16 / 9;
+  border-radius: 16px;
+  border: 1px solid var(--line);
+  background: #000;
+}
+.shots figcaption { margin-top: 10px; font-size: 13px; color: var(--ink-soft); }
 .feed {
   background: var(--surface);
   border: 1px solid var(--line);
@@ -390,7 +408,7 @@ body {
 
 /* Empty space between cards lets clicks through to the screensaver logo behind */
 .wrap, .side, .main, .top, .stats, .roadmap, .groups, .groups > div, .tiles { pointer-events: none; }
-.bar, .now, .stat, .tile, .feed, .history, .section-head, .empty, .foot { pointer-events: auto; }
+.bar, .now, .stat, .tile, .shots, .feed, .history, .section-head, .empty, .foot { pointer-events: auto; }
 
 /* ---- screensaver control ---- */
 .toggle {
@@ -531,6 +549,14 @@ body {
  </aside>
 
  <main class="main">
+  <section class="shots" aria-labelledby="shots-title">
+    <div class="section-head"><h2 id="shots-title">Latest screenshot</h2><span>captured by the emulator</span></div>
+    <figure>
+      <img src="shots/smm-boot.png" alt="Super Mario Maker's boot screen as rendered by WiiUE: Builder Mario holding a question block on an orange background" width="1280" height="720" loading="lazy">
+      <figcaption>Super Mario Maker's boot screen, the first frame of a commercial game drawn by WiiUE (October 15, 2026).</figcaption>
+    </figure>
+  </section>
+
   <section class="roadmap">
     <div class="section-head"><h2>Roadmap</h2><span id="roadmap-note">22 phases from tools to real hardware</span></div>
     <div class="groups" id="groups">
@@ -579,13 +605,7 @@ body {
      live database (signed out) still see current progress. Refreshed on every republish. -->
 <script type="application/json" id="snapshot">
 {
-  "status": {
-    "headline": "Super Mario Maker is running",
-    "detail": "Mario Maker now runs for over a minute without crashing: 20 threads including Nintendo's sound engine and its boot-scene loader, 284 different system calls, and 149,000 draw calls sent to the GPU. Accounts, saves, Mii data and decompression now work from the console dump. The picture is still black: next comes the graphics it needs (textures, display lists, shader constant buffers).",
-    "testCases": 82, "assertions": 1243, "commits": 48, "lastCommit": "d5d01ec",
-    "instructions": 2489189334, "instructionsNote": "Super Mario Maker in 60 seconds",
-    "updatedAt": "2026-10-15T20:58:00-07:00"
-  },
+  "status": {"headline": "First picture from Super Mario Maker", "detail": "Super Mario Maker's boot screen now draws correctly: Builder Mario on the orange background, then the game's logo. The graphics path was rebuilt: display lists, textures read from the GPU's tiled memory layout, shader branches and uniform blocks, blending, and render targets kept on the graphics card. Next: the white screen after loading, then the title scene.", "testCases": 88, "assertions": 1430, "commits": 52, "lastCommit": "e7f2d3e", "instructions": 13394162231, "instructionsNote": "Super Mario Maker in 340 seconds", "updatedAt": "2026-10-15T22:45:00-07:00"},
   "phases": [
     {"n": 0, "group": "Foundation", "title": "Tools", "detail": "Visual Studio, CMake, Vulkan SDK, vcpkg, devkitPro", "status": "done"},
     {"n": 1, "group": "Foundation", "title": "Project skeleton", "detail": "Folders, build system, docs, git", "status": "done"},
@@ -612,6 +632,7 @@ body {
     {"n": 22, "group": "Hardware extras", "title": "Extras", "detail": "Camera, microphone, amiibo, save states", "status": "later"}
   ],
   "log": [
+    {"at": "2026-10-15T22:40:00-07:00", "phase": 13, "text": "First picture from a real game: Super Mario Maker's boot screen (Builder Mario, then the logo) renders on the GPU after rebuilding the graphics path", "commit": "e7f2d3e"},
     {"at": "2026-10-15T20:57:00-07:00", "phase": 13, "text": "Super Mario Maker runs: 2.5 billion instructions in a minute, 20 threads, 149,000 draw calls; accounts, saves and Mii data work. Next: making its graphics show up", "commit": "d5d01ec"},
     {"at": "2026-10-15T20:20:00-07:00", "phase": 12, "text": "Console dump done: a real Wii U's system apps, games, updates and saves are in place, and Super Mario Maker loads and starts from it", "commit": "27a0848"},
     {"at": "2026-10-14T20:44:00-07:00", "phase": 8, "text": "First real 3D: depth buffers and back-face culling work, and a test program spins two cubes in perspective", "commit": "901aadc"},

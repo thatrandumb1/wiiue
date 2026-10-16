@@ -3,8 +3,8 @@
   <g transform="translate(0,0)">
     <rect x="0.5" y="0.5" width="205" height="117" rx="18" fill="#ffffff" stroke="#d5dbe1"/>
     <text x="16" y="28" font-family="'WiiUE Nunito', Nunito, 'Segoe UI', 'Helvetica Neue', Arial, sans-serif" font-size="11" font-weight="700" letter-spacing="1" fill="#6b7782">TESTS PASSING</text>
-    <text x="16" y="64" font-family="'WiiUE Nunito', Nunito, 'Segoe UI', 'Helvetica Neue', Arial, sans-serif" font-size="28" font-weight="800" fill="#2f3a44">82</text>
-    <text x="16" y="88" font-family="'WiiUE Nunito', Nunito, 'Segoe UI', 'Helvetica Neue', Arial, sans-serif" font-size="12" fill="#6b7782">1243 checks, all passing</text>
+    <text x="16" y="64" font-family="'WiiUE Nunito', Nunito, 'Segoe UI', 'Helvetica Neue', Arial, sans-serif" font-size="28" font-weight="800" fill="#2f3a44">88</text>
+    <text x="16" y="88" font-family="'WiiUE Nunito', Nunito, 'Segoe UI', 'Helvetica Neue', Arial, sans-serif" font-size="12" fill="#6b7782">1430 checks, all passing</text>
   </g>
   <g transform="translate(218,0)">
     <rect x="0.5" y="0.5" width="205" height="117" rx="18" fill="#ffffff" stroke="#d5dbe1"/>
@@ -15,14 +15,14 @@
   <g transform="translate(436,0)">
     <rect x="0.5" y="0.5" width="205" height="117" rx="18" fill="#ffffff" stroke="#d5dbe1"/>
     <text x="16" y="28" font-family="'WiiUE Nunito', Nunito, 'Segoe UI', 'Helvetica Neue', Arial, sans-serif" font-size="11" font-weight="700" letter-spacing="1" fill="#6b7782">COMMITS</text>
-    <text x="16" y="64" font-family="'WiiUE Nunito', Nunito, 'Segoe UI', 'Helvetica Neue', Arial, sans-serif" font-size="28" font-weight="800" fill="#2f3a44">48</text>
-    <text x="16" y="88" font-family="'WiiUE Nunito', Nunito, 'Segoe UI', 'Helvetica Neue', Arial, sans-serif" font-size="12" fill="#6b7782">latest d5d01ec</text>
+    <text x="16" y="64" font-family="'WiiUE Nunito', Nunito, 'Segoe UI', 'Helvetica Neue', Arial, sans-serif" font-size="28" font-weight="800" fill="#2f3a44">52</text>
+    <text x="16" y="88" font-family="'WiiUE Nunito', Nunito, 'Segoe UI', 'Helvetica Neue', Arial, sans-serif" font-size="12" fill="#6b7782">latest e7f2d3e</text>
   </g>
   <g transform="translate(654,0)">
     <rect x="0.5" y="0.5" width="205" height="117" rx="18" fill="#ffffff" stroke="#d5dbe1"/>
     <text x="16" y="28" font-family="'WiiUE Nunito', Nunito, 'Segoe UI', 'Helvetica Neue', Arial, sans-serif" font-size="11" font-weight="700" letter-spacing="1" fill="#6b7782">INSTRUCTIONS RUN</text>
-    <text x="16" y="64" font-family="'WiiUE Nunito', Nunito, 'Segoe UI', 'Helvetica Neue', Arial, sans-serif" font-size="28" font-weight="800" fill="#2f3a44">2,489,189,334</text>
-    <text x="16" y="88" font-family="'WiiUE Nunito', Nunito, 'Segoe UI', 'Helvetica Neue', Arial, sans-serif" font-size="12" fill="#6b7782">Super Mario Maker in 60</text>
+    <text x="16" y="64" font-family="'WiiUE Nunito', Nunito, 'Segoe UI', 'Helvetica Neue', Arial, sans-serif" font-size="28" font-weight="800" fill="#2f3a44">13,394,162,231</text>
+    <text x="16" y="88" font-family="'WiiUE Nunito', Nunito, 'Segoe UI', 'Helvetica Neue', Arial, sans-serif" font-size="12" fill="#6b7782">Super Mario Maker in 340</text>
     <text x="16" y="104" font-family="'WiiUE Nunito', Nunito, 'Segoe UI', 'Helvetica Neue', Arial, sans-serif" font-size="12" fill="#6b7782">seconds</text>
   </g>
 </svg>

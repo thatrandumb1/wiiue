@@ -11,7 +11,7 @@
   <a href="https://thatrandumb1.github.io/wiiue/"><img src="https://img.shields.io/badge/live%20progress-open%20site-00a6e0?style=for-the-badge" alt="live progress: open site"></a>
   <a href="https://github.com/thatrandumb1/wiiue/releases/latest"><img src="https://img.shields.io/badge/download-demos%20for%20Windows-e60012?style=for-the-badge" alt="download: demos for Windows"></a>
   <img src="https://img.shields.io/badge/phase-13%3A%20Real%20games-0084b8?style=for-the-badge" alt="phase: 13: Real games">
-  <img src="https://img.shields.io/badge/tests-82%20passing-3cb371?style=for-the-badge" alt="tests: 82 passing">
+  <img src="https://img.shields.io/badge/tests-88%20passing-3cb371?style=for-the-badge" alt="tests: 88 passing">
   <img src="https://img.shields.io/badge/phases%20done-13%20of%2023-6b7782?style=for-the-badge" alt="phases done: 13 of 23">
 </p>
 
@@ -40,6 +40,7 @@ run commercial games yet.
 
 ## Recent activity
 
+- `Oct 15, 10:40 PM` · **P13** · First picture from a real game: Super Mario Maker's boot screen (Builder Mario, then the logo) renders on the GPU after rebuilding the graphics path · `e7f2d3e`
 - `Oct 15, 8:57 PM` · **P13** · Super Mario Maker runs: 2.5 billion instructions in a minute, 20 threads, 149,000 draw calls; accounts, saves and Mii data work. Next: making its graphics show up · `d5d01ec`
 - `Oct 15, 8:20 PM` · **P12** · Console dump done: a real Wii U's system apps, games, updates and saves are in place, and Super Mario Maker loads and starts from it · `27a0848`
 - `Oct 14, 8:44 PM` · **P8** · First real 3D: depth buffers and back-face culling work, and a test program spins two cubes in perspective · `901aadc`
@@ -47,7 +48,6 @@ run commercial games yet.
 - `Oct 14, 7:35 PM` · **P10** · Audio done: the AX mixer plays PCM and ADPCM voices with pitch and volume on the PC's speakers; a test program plays a C-E-G-C tune · `e8c71ee`
 - `Oct 14, 7:03 PM` · **P9** · Input done: GamePad buttons, sticks, touch screen and motion work from the keyboard, mouse or a game controller · `4b79a22`
 - `Oct 14, 6:47 PM` · **P8** · Graphics done: Wii U shaders are translated to Vulkan and a spinning 3D triangle draws on both screens on the graphics card · `774489c`
-- `Oct 14, 6:25 PM` · **P8** · GX2 graphics library running: a program set up the standard way clears both screens to cycling colors and quits cleanly when the window closes · `07c839b`
 
 ## History of the Wii U
 
@@ -78,5 +78,5 @@ The console this project brings back.
 
 ---
 
-<sub>Last updated Oct 15, 2026, 8:58 PM PDT. Full live view: <a href="https://thatrandumb1.github.io/wiiue/">https://thatrandumb1.github.io/wiiue/</a><br>
+<sub>Last updated Oct 15, 2026, 10:45 PM PDT. Full live view: <a href="https://thatrandumb1.github.io/wiiue/">https://thatrandumb1.github.io/wiiue/</a><br>
 Fan project page. Not affiliated with or endorsed by Nintendo.</sub>
