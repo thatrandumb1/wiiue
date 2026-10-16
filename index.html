@@ -45,7 +45,7 @@
 * { box-sizing: border-box; }
 /* Every piece of text wraps instead of overflowing: long words and URLs break if they must,
    and flex/grid children may shrink below their content width */
-*, *::before, *::after { overflow-wrap: anywhere; word-break: normal; white-space: normal; min-width: 0; }
+*, *::before, *::after { overflow-wrap: break-word; word-break: normal; white-space: normal; }
 body {
   margin: 0;
   background-color: var(--bg);
@@ -182,6 +182,7 @@ body {
   gap: 12px;
 }
 .stat {
+  min-width: 0;
   background: var(--surface);
   border: 1px solid var(--line);
   border-radius: 18px;
@@ -196,7 +197,7 @@ body {
 .stat .value {
   font-family: var(--font-display);
   font-weight: 800;
-  font-size: 28px;
+  font-size: clamp(22px, 5vw, 28px);
   font-variant-numeric: tabular-nums;
   line-height: 1.1;
 }
@@ -275,6 +276,7 @@ body {
   padding: 18px 20px;
   box-shadow: var(--shadow);
 }
+.shot-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 260px), 1fr)); gap: 16px; }
 .shots figure { margin: 0; }
 .shots img {
   display: block;
@@ -551,11 +553,17 @@ body {
 
  <main class="main">
   <section class="shots" aria-labelledby="shots-title">
-    <div class="section-head"><h2 id="shots-title">Latest screenshot</h2><span>captured by the emulator</span></div>
-    <figure>
-      <img src="shots/smm-boot.png" alt="Super Mario Maker's boot screen as rendered by WiiUE: Builder Mario holding a question block on an orange background" width="1280" height="720" loading="lazy">
-      <figcaption>Super Mario Maker's boot screen, the first frame of a commercial game drawn by WiiUE (October 15, 2026).</figcaption>
-    </figure>
+    <div class="section-head"><h2 id="shots-title">Latest screenshots</h2><span>captured by the emulator</span></div>
+    <div class="shot-grid">
+      <figure>
+        <img src="shots/smm-boot.png" alt="Super Mario Maker's boot screen as rendered by WiiUE: Builder Mario holding a question block on an orange background" width="1280" height="720" loading="lazy">
+        <figcaption>Super Mario Maker's boot screen, the first frame of a commercial game drawn by WiiUE (October 15, 2026).</figcaption>
+      </figure>
+      <figure>
+        <img src="shots/smm-logo.png" alt="The Super Mario Maker logo in black on an orange background, as rendered by WiiUE" width="1280" height="720" loading="lazy">
+        <figcaption>A few seconds later on the same boot screen: the Super Mario Maker logo.</figcaption>
+      </figure>
+    </div>
   </section>
 
   <section class="roadmap">
@@ -716,7 +724,8 @@ body {
     $("stat-tests-sub").textContent = status.assertions != null ? status.assertions + " checks, all passing" : "unit tests";
     $("stat-commits").textContent = status.commits != null ? String(status.commits) : "–";
     $("stat-commits-sub").textContent = status.lastCommit ? "latest " + status.lastCommit : "latest –";
-    $("stat-instr").textContent = status.instructions != null ? Number(status.instructions).toLocaleString() : "–";
+    // Zero-width spaces after the separators let a long count wrap at the commas in a narrow tile
+    $("stat-instr").textContent = status.instructions != null ? Number(status.instructions).toLocaleString().replace(/([,.  ])/g, "$1​") : "–";
     $("stat-instr-sub").textContent = status.instructionsNote || "by hello.rpx";
     $("updated").textContent = status.updatedAt ? "Updated " + relTime(status.updatedAt) : "No updates yet";
   }
