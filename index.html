@@ -580,11 +580,11 @@ body {
 <script type="application/json" id="snapshot">
 {
   "status": {
-    "headline": "Console dumped: real games load",
-    "detail": "A real Wii U Deluxe is now dumped: 52 system apps, 9 games with their updates, and saves. WiiUE lists them and launches any one by name, with updates layered over the base game and the system fonts loaded from the dump. Super Mario Maker already loads its 12 MB of code and starts running. Next: getting real games to play, starting with Mario Maker.",
-    "testCases": 81, "assertions": 1229, "commits": 46, "lastCommit": "27a0848",
-    "instructions": 544081, "instructionsNote": "Relocations applied loading Super Mario Maker",
-    "updatedAt": "2026-10-15T20:21:00-07:00"
+    "headline": "Super Mario Maker is running",
+    "detail": "Mario Maker now runs for over a minute without crashing: 20 threads including Nintendo's sound engine and its boot-scene loader, 284 different system calls, and 149,000 draw calls sent to the GPU. Accounts, saves, Mii data and decompression now work from the console dump. The picture is still black: next comes the graphics it needs (textures, display lists, shader constant buffers).",
+    "testCases": 82, "assertions": 1243, "commits": 48, "lastCommit": "d5d01ec",
+    "instructions": 2489189334, "instructionsNote": "Super Mario Maker in 60 seconds",
+    "updatedAt": "2026-10-15T20:58:00-07:00"
   },
   "phases": [
     {"n": 0, "group": "Foundation", "title": "Tools", "detail": "Visual Studio, CMake, Vulkan SDK, vcpkg, devkitPro", "status": "done"},
@@ -600,7 +600,7 @@ body {
     {"n": 10, "group": "Core emulator", "title": "Audio", "detail": "AX voices, ADPCM, mixing", "status": "done"},
     {"n": 11, "group": "Core emulator", "title": "Multi-core", "detail": "Three CPU cores, scheduler, alarms", "status": "done"},
     {"n": 12, "group": "Real console", "title": "Console dump", "detail": "System files, fonts, Miis, saves", "status": "done"},
-    {"n": 13, "group": "Real console", "title": "Real games", "detail": "First commercial game reaches gameplay", "status": "next"},
+    {"n": 13, "group": "Real console", "title": "Real games", "detail": "First commercial game reaches gameplay", "status": "active"},
     {"n": 14, "group": "Real console", "title": "Speed", "detail": "JIT recompiler, shader caches", "status": "later"},
     {"n": 15, "group": "Full system feel", "title": "App UI", "detail": "Game list, icons, settings", "status": "later"},
     {"n": 16, "group": "Full system feel", "title": "Wii U Menu", "detail": "Boot the dumped home menu", "status": "later"},
@@ -612,6 +612,7 @@ body {
     {"n": 22, "group": "Hardware extras", "title": "Extras", "detail": "Camera, microphone, amiibo, save states", "status": "later"}
   ],
   "log": [
+    {"at": "2026-10-15T20:57:00-07:00", "phase": 13, "text": "Super Mario Maker runs: 2.5 billion instructions in a minute, 20 threads, 149,000 draw calls; accounts, saves and Mii data work. Next: making its graphics show up", "commit": "d5d01ec"},
     {"at": "2026-10-15T20:20:00-07:00", "phase": 12, "text": "Console dump done: a real Wii U's system apps, games, updates and saves are in place, and Super Mario Maker loads and starts from it", "commit": "27a0848"},
     {"at": "2026-10-14T20:44:00-07:00", "phase": 8, "text": "First real 3D: depth buffers and back-face culling work, and a test program spins two cubes in perspective", "commit": "901aadc"},
     {"at": "2026-10-14T20:13:00-07:00", "phase": 11, "text": "Multi-core done: threads run on all three cores with priorities, locks, events, queues, sleeps and alarms; the threads test passes 9/9", "commit": "14bae43"},
