@@ -614,7 +614,7 @@ body {
      live database (signed out) still see current progress. Refreshed on every republish. -->
 <script type="application/json" id="snapshot">
 {
-  "status": {"headline": "First picture from Super Mario Maker", "detail": "Super Mario Maker's boot screen now draws correctly: Builder Mario on the orange background, then the game's logo. The graphics path was rebuilt: display lists, textures read from the GPU's tiled memory layout, shader branches and uniform blocks, blending, and render targets kept on the graphics card. Next: the white screen after loading, then the title scene.", "testCases": 88, "assertions": 1430, "commits": 52, "lastCommit": "e7f2d3e", "instructions": 13394162231, "instructionsNote": "Super Mario Maker in 340 seconds", "updatedAt": "2026-10-15T22:45:00-07:00"},
+  "status": {"headline": "Super Mario Maker gets past its boot screen", "detail": "Super Mario Maker now loads its next scene: about 2,000 draw calls a frame, with every shader translating and every display list found. The white screen after the logo turned out to be the game's own loading cover, not a bug. The emulator is still too slow, so loading behind it takes several minutes. Next: getting through that load faster, geometry shaders, and the title screen.", "testCases": 90, "assertions": 1475, "commits": 56, "lastCommit": "d80d8e7", "instructions": 18159419643, "instructionsNote": "Super Mario Maker in 570 seconds", "updatedAt": "2026-10-16T16:24:00-07:00"},
   "phases": [
     {"n": 0, "group": "Foundation", "title": "Tools", "detail": "Visual Studio, CMake, Vulkan SDK, vcpkg, devkitPro", "status": "done"},
     {"n": 1, "group": "Foundation", "title": "Project skeleton", "detail": "Folders, build system, docs, git", "status": "done"},
@@ -641,6 +641,8 @@ body {
     {"n": 22, "group": "Hardware extras", "title": "Extras", "detail": "Camera, microphone, amiibo, save states", "status": "later"}
   ],
   "log": [
+    {"at": "2026-10-16T16:20:00-07:00", "phase": 13, "text": "Super Mario Maker loads its next scene: about 2,000 draw calls a frame, every shader translates and no display list goes missing. The white screen after the logo is the game's own loading cover", "commit": "d80d8e7"},
+    {"at": "2026-10-15T23:42:00-07:00", "phase": 13, "text": "Super Mario Maker's boot loading goes from about 4 minutes to 45 seconds, thanks to a native replacement for its Yaz0 decompressor", "commit": "6c54d2d"},
     {"at": "2026-10-15T22:40:00-07:00", "phase": 13, "text": "First picture from a real game: Super Mario Maker's boot screen (Builder Mario, then the logo) renders on the GPU after rebuilding the graphics path", "commit": "e7f2d3e"},
     {"at": "2026-10-15T20:57:00-07:00", "phase": 13, "text": "Super Mario Maker runs: 2.5 billion instructions in a minute, 20 threads, 149,000 draw calls; accounts, saves and Mii data work. Next: making its graphics show up", "commit": "d5d01ec"},
     {"at": "2026-10-15T20:20:00-07:00", "phase": 12, "text": "Console dump done: a real Wii U's system apps, games, updates and saves are in place, and Super Mario Maker loads and starts from it", "commit": "27a0848"},
