@@ -40,6 +40,7 @@ run commercial games yet.
 
 ## Recent activity
 
+- `Oct 16, 7:55 PM` · **P13** · Phase 13 Progress: Garbled text fixed! Finally fixed the text! Screenshots will be released soon.
 - `Oct 16, 6:55 PM` · **P13** · Super Mario Maker reaches its title screen, with a 3D course behind the menu: fixed vertex formats, uniform byte order, leftover render targets and 3D textures, plus the TV's colour gamma and a faster-loading timing mode · `47d080a`
 - `Oct 16, 6:14 PM` · **P13** · Second update from thatrandumb1 on Phase 13! Fixed some contrasts bugs to make the display color accurate.
 - `Oct 16, 5:18 PM` · **P13** · Little update from thatrandumb1 on Phase 13! (TESTING POST SYSTEM!). Phase 13 is taking longer than expected, and WAY more complicated then I thought, but the progress is going pretty well! Still testing the Mario Maker until I get a decent result before optimizing it. The emulator should release sometime this month!
@@ -47,7 +48,6 @@ run commercial games yet.
 - `Oct 16, 4:20 PM` · **P13** · Super Mario Maker loads its next scene: about 2,000 draw calls a frame, every shader translates and no display list goes missing. The white screen after the logo is the game's own loading cover · `d80d8e7`
 - `Oct 15, 11:42 PM` · **P13** · Super Mario Maker's boot loading goes from about 4 minutes to 45 seconds, thanks to a native replacement for its Yaz0 decompressor · `6c54d2d`
 - `Oct 15, 10:40 PM` · **P13** · First picture from a real game: Super Mario Maker's boot screen (Builder Mario, then the logo) renders on the GPU after rebuilding the graphics path · `e7f2d3e`
-- `Oct 15, 8:57 PM` · **P13** · Super Mario Maker runs: 2.5 billion instructions in a minute, 20 threads, 149,000 draw calls; accounts, saves and Mii data work. Next: making its graphics show up · `d5d01ec`
 
 ## History of the Wii U
 
@@ -78,5 +78,5 @@ The console this project brings back.
 
 ---
 
-<sub>Last updated Oct 16, 2026, 7:02 PM PDT. Full live view: <a href="https://thatrandumb1.github.io/wiiue/">https://thatrandumb1.github.io/wiiue/</a><br>
+<sub>Last updated Oct 16, 2026, 7:55 PM PDT. Full live view: <a href="https://thatrandumb1.github.io/wiiue/">https://thatrandumb1.github.io/wiiue/</a><br>
 Fan project page. Not affiliated with or endorsed by Nintendo.</sub>
