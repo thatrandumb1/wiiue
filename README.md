@@ -40,7 +40,7 @@ run commercial games yet.
 
 ## Recent activity
 
-- `Oct 16, 10:15 PM` · **P13** · In relation to WiiUE: Possible forks of this project that may be malicious. It has come to my attention that a account named Astra_Intelligence has been sneaking into other people's repositories without permission. I will request a DMCA of that fork and will update you guys soon! Be on the look out! The only real page fro WiiUE is https://github.com/thatrandumb1/wiiue
+- `Oct 16, 10:15 PM` · **P13** · In relation to WiiUE: Possible forks of this project that may be malicious. It has come to my attention that a account named Astra_Intelligence has been sneaking into other people's repositories without permission. I will request a DMCA of that fork and will update you guys soon! Be on the look out! The only real page for WiiUE is https://github.com/thatrandumb1/wiiue !
 - `Oct 16, 7:55 PM` · **P13** · Phase 13 Progress: Garbled text fixed! Finally fixed the text! Screenshots will be released soon.
 - `Oct 16, 6:55 PM` · **P13** · Super Mario Maker reaches its title screen, with a 3D course behind the menu: fixed vertex formats, uniform byte order, leftover render targets and 3D textures, plus the TV's colour gamma and a faster-loading timing mode · `47d080a`
 - `Oct 16, 6:14 PM` · **P13** · Second update from thatrandumb1 on Phase 13! Fixed some contrasts bugs to make the display color accurate.
