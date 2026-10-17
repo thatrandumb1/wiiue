@@ -7,6 +7,7 @@
 <link rel="icon" type="image/svg+xml" href="assets/favicon.svg">
 </head>
 <body>
+<!--page-start-->
 <title>WiiUE</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -687,7 +688,7 @@ body {
      live database (signed out) still see current progress. Refreshed on every republish. -->
 <script type="application/json" id="snapshot">
 {
-  "status": {"headline": "Little update from thatrandumb1 on Phase 13!", "detail": "Phase 13 is taking longer than expected, and WAY more complicated then I thought, but the progress is going pretty well! Still testing the Mario Maker until I get a decent result before optimizing it. The emulator should release sometime this month!", "testCases": 90, "assertions": 1475, "commits": 56, "lastCommit": "d80d8e7", "instructions": 18159419643, "instructionsNote": "Super Mario Maker in 570 seconds", "updatedAt": "2026-10-16T17:12:07-07:00"},
+  "status": {"headline": "Little update from thatrandumb1 on Phase 13! (TESTING POST SYSTEM!)", "detail": "Phase 13 is taking longer than expected, and WAY more complicated then I thought, but the progress is going pretty well! Still testing the Mario Maker until I get a decent result before optimizing it. The emulator should release sometime this month!", "testCases": 90, "assertions": 1475, "commits": 56, "lastCommit": "d80d8e7", "instructions": 18159419643, "instructionsNote": "Super Mario Maker in 570 seconds", "updatedAt": "2026-10-16T17:18:44-07:00"},
   "phases": [
     {"n": 0, "group": "Foundation", "title": "Tools", "detail": "Visual Studio, CMake, Vulkan SDK, vcpkg, devkitPro", "status": "done"},
     {"n": 1, "group": "Foundation", "title": "Project skeleton", "detail": "Folders, build system, docs, git", "status": "done"},
@@ -714,6 +715,7 @@ body {
     {"n": 22, "group": "Hardware extras", "title": "Extras", "detail": "Camera, microphone, amiibo, save states", "status": "later"}
   ],
   "log": [
+    {"at": "2026-10-16T17:18:44-07:00", "phase": 13, "text": "Little update from thatrandumb1 on Phase 13! (TESTING POST SYSTEM!). Phase 13 is taking longer than expected, and WAY more complicated then I thought, but the progress is going pretty well! Still testing the Mario Maker until I get a decent result before optimizing it. The emulator should release sometime this month!"},
     {"at": "2026-10-16T17:12:07-07:00", "phase": 13, "text": "Little update from thatrandumb1 on Phase 13! Phase 13 is taking longer than expected, and WAY more complicated then I thought, but the progress is going pretty well! Still testing the Mario Maker until I get a decent result before optimizing it. The emulator should release sometime this month!"},
     {"at": "2026-10-16T16:20:00-07:00", "phase": 13, "text": "Super Mario Maker loads its next scene: about 2,000 draw calls a frame, every shader translates and no display list goes missing. The white screen after the logo is the game's own loading cover", "commit": "d80d8e7"},
     {"at": "2026-10-15T23:42:00-07:00", "phase": 13, "text": "Super Mario Maker's boot loading goes from about 4 minutes to 45 seconds, thanks to a native replacement for its Yaz0 decompressor", "commit": "6c54d2d"},
@@ -743,6 +745,7 @@ body {
 }
 </script>
 
+<!--page-script-->
 <script>
 (function () {
   const GROUPS = ["Foundation", "Core emulator", "Real console", "Full system feel", "Online", "Hardware extras"];
@@ -750,9 +753,20 @@ body {
   const STATUS_LABEL = { done: "Done", active: "In progress", next: "Up next" };
   const $ = (id) => document.getElementById(id);
 
+  // The page's own source, captured before anything renders. After a post the editor republishes it
+  // with a fresh snapshot (artifact capability), so signed-out visitors see the post at once.
+  const PAGE_SOURCE = (() => {
+    const html = document.body.innerHTML;
+    const start = html.indexOf("<!--page-start-->");
+    const end = html.indexOf("<!--page-script-->");
+    if (start < 0 || end < start || !document.currentScript) return null;
+    return html.slice(start, end) + "<!--page-script-->\n" + document.currentScript.outerHTML + "\n";
+  })();
+
   let status = null;
   let phases = [];
   let log = [];
+  let snapLog = []; // the built-in snapshot's log: the live query only returns the newest 60
 
   function relTime(iso) {
     if (!iso) return "";
@@ -875,6 +889,7 @@ body {
       status = snap.status || null;
       phases = Array.isArray(snap.phases) ? snap.phases : [];
       log = Array.isArray(snap.log) ? snap.log : [];
+      snapLog = log.slice();
     } catch (e) {
       status = null;
       phases = [];
@@ -889,6 +904,7 @@ body {
     renderPhases();
     renderStatus();
     renderLog();
+    showPostedNote();
 
     const db = window.claude && window.claude.use ? await window.claude.use("db") : null;
     if (!db) {
@@ -991,26 +1007,114 @@ body {
       const at = localIso(new Date());
       try {
         await db.doc("tracker/status").update({ headline, detail, updatedAt: at });
+        let entry = null;
         if (toLog.checked) {
           const active = phases.find((p) => p.status === "active");
           const id = "e" + String(lastLogNumber + 1).padStart(3, "0");
           lastLogNumber += 1;
-          const entry = { at, text: detail ? headline + (/[.!?:]$/.test(headline) ? " " : ". ") + detail : headline };
+          entry = { at, text: detail ? headline + (/[.!?:]$/.test(headline) ? " " : ". ") + detail : headline };
           if (active) entry.phase = active.n;
           await db.doc("log/" + id).set(entry);
         }
-        open(false);
-        const note = $("now-note");
-        note.textContent = "";
-        note.append(el("b", null, "Posted."), " Signed-in visitors see it now. Signed-out visitors and the GitHub site " +
-          "still show the last sync until you tell Claude ", el("b", null, "“sync the site”"), ".");
-        note.hidden = false;
+        msg.textContent = "Publishing…";
+        const result = await publishPage(Object.assign({}, status, { headline, detail, updatedAt: at }), entry);
+        // On success (and on a conflict) this view reloads; the note comes back from sessionStorage
+        if (result !== "published" && result !== "conflict") {
+          open(false);
+          showPostedNote(result);
+        }
       } catch (err) {
         msg.textContent = "Couldn't post: " + ((err && err.message) || "the live record refused the change") + ".";
       } finally {
         save.disabled = false;
       }
     });
+  }
+
+  // ---- republishing the page with a fresh snapshot (artifact capability) ----
+  // Same shape the Artifact tool publishes: doctype and its small reset head, then the page as written
+  const PAGE_HEAD = '<!doctype html><html><head><meta charset=utf8><meta name=viewport content="width=device-width,initial-scale=1,viewport-fit=cover"><style>:root{color-scheme:light;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}html{scroll-padding-top:env(safe-area-inset-top,0px)}body{margin:0;padding:0;font:14px -apple-system,BlinkMacSystemFont,sans-serif;background:#fff;color:#000}img{max-width:100%}[hidden]:not([hidden=until-found i]){display:none!important}</style></head><body>\n';
+
+  // Same layout and field order as tools/sync-snapshot.js, so either can write the block
+  const STATUS_KEYS = ["headline", "detail", "testCases", "assertions", "commits", "lastCommit", "instructions", "instructionsNote", "updatedAt"];
+  const PHASE_KEYS = ["n", "group", "title", "detail", "status", "milestone"];
+  const LOG_KEYS = ["at", "phase", "text", "commit"];
+  function ordered(obj, keys) {
+    const out = {};
+    for (const k of keys) if (obj[k] != null) out[k] = obj[k];
+    for (const k of Object.keys(obj)) if (!(k in out) && obj[k] != null) out[k] = obj[k];
+    return out;
+  }
+  // "<" escaped so posted text can't end the script block early
+  const flatJson = (obj) =>
+    ("{" + Object.entries(obj).map(([k, v]) => JSON.stringify(k) + ": " + JSON.stringify(v)).join(", ") + "}").replace(/</g, "\\u003c");
+  function snapshotBlock(st, ph, lg) {
+    return "{\n" +
+      '  "status": ' + flatJson(ordered(st, STATUS_KEYS)) + ",\n" +
+      '  "phases": [\n' + ph.map((p) => "    " + flatJson(ordered(p, PHASE_KEYS))).join(",\n") + "\n  ],\n" +
+      '  "log": [\n' + lg.map((e) => "    " + flatJson(ordered(e, LOG_KEYS))).join(",\n") + "\n  ]\n}\n";
+  }
+
+  function stashNote(value) {
+    try {
+      if (value) sessionStorage.setItem("wiiue.posted", value);
+      else sessionStorage.removeItem("wiiue.posted");
+    } catch (e) {
+      /* ignore */
+    }
+  }
+
+  // Returns "published", "conflict" or why it couldn't publish
+  async function publishPage(newStatus, newEntry) {
+    const re = /(<script type="application\/json" id="snapshot">\r?\n)[\s\S]*?(<\/script>)/;
+    if (!PAGE_SOURCE || !re.test(PAGE_SOURCE)) return "no page source";
+    const artifact = window.claude && window.claude.use ? await window.claude.use("artifact") : null;
+    if (!artifact) return "publishing isn't available here";
+    const seen = new Set();
+    const entries = [];
+    for (const e of [newEntry].concat(log, snapLog)) {
+      if (!e || seen.has(e.at + "|" + e.text)) continue;
+      seen.add(e.at + "|" + e.text);
+      entries.push(e);
+    }
+    entries.sort((a, b) => Date.parse(b.at) - Date.parse(a.at));
+    const ph = phases.slice().sort((a, b) => a.n - b.n);
+    const html = PAGE_HEAD + PAGE_SOURCE.replace(re, (_, open, close) => open + snapshotBlock(newStatus, ph, entries) + close) + "</body></html>";
+    stashNote("published");
+    try {
+      await artifact.publish(html);
+      return "published";
+    } catch (err) {
+      const code = (err && err.code) || "upstream_error";
+      // conflict: someone published first and this view is already reloading to it; the next sync catches up
+      stashNote(code === "conflict" ? "conflict" : null);
+      return code === "conflict" ? "conflict" : "the page refused to publish (" + code + ")";
+    }
+  }
+
+  // After a post, what's live where. Called with a reason when publishing failed, and on load after
+  // the reload that a publish (or a conflict) causes.
+  function showPostedNote(failure) {
+    let kind = failure ? "failed" : null;
+    if (!kind) {
+      try {
+        kind = sessionStorage.getItem("wiiue.posted");
+        sessionStorage.removeItem("wiiue.posted");
+      } catch (e) {
+        kind = null;
+      }
+    }
+    if (!kind) return;
+    const note = $("now-note");
+    note.textContent = "";
+    if (kind === "published") {
+      note.append(el("b", null, "Posted."), " Everyone on this page sees it now. The GitHub site picks it up at the next automatic sync.");
+    } else {
+      note.append(el("b", null, "Posted."), " Signed-in visitors see it now. " +
+        (kind === "conflict" ? "Someone else published the page at the same moment, so" : "The public copy didn't update (" + failure + "), so") +
+        " signed-out visitors and the GitHub site catch up at the next automatic sync.");
+    }
+    note.hidden = false;
   }
 
   // ---- per-viewer preferences (browser storage may be unavailable; everything works without it)
