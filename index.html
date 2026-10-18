@@ -379,6 +379,67 @@ body {
 }
 .commit { font-family: var(--font-mono); font-size: 12px; color: var(--ink-soft); margin-left: 6px; }
 
+/* ---- activity entry editor (owner and editors only, writes the live record) ---- */
+.feed [hidden] { display: none !important; }
+.log-edit {
+  font: inherit;
+  font-size: 12px;
+  font-weight: 700;
+  margin-left: 8px;
+  padding: 0 8px;
+  border: 1px solid var(--line);
+  border-radius: var(--radius-pill);
+  background: var(--surface-2);
+  color: var(--accent-deep);
+  cursor: pointer;
+}
+.log-edit:hover { background: var(--accent-wash); }
+.log-form { display: grid; gap: 8px; }
+.log-form label { display: grid; gap: 4px; font-size: 12px; font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase; color: var(--ink-soft); }
+.log-form .row { display: flex; gap: 10px; flex-wrap: wrap; }
+.log-form .row label { flex: 1 1 120px; }
+.log-form input, .log-form textarea {
+  font: inherit;
+  font-size: 15px;
+  letter-spacing: normal;
+  text-transform: none;
+  width: 100%;
+  border: 1px solid var(--line);
+  border-radius: 10px;
+  padding: 7px 10px;
+  background: #fff;
+  color: var(--ink);
+}
+.log-form textarea { min-height: 84px; resize: vertical; }
+.log-form .actions { display: flex; align-items: center; gap: 8px; flex-wrap: wrap; }
+.log-form button {
+  font: inherit;
+  font-size: 13px;
+  font-weight: 800;
+  border-radius: var(--radius-pill);
+  padding: 5px 14px;
+  cursor: pointer;
+  border: 1px solid var(--accent-deep);
+  background: var(--surface);
+  color: var(--accent-deep);
+}
+.log-form .save { background: var(--accent-deep); color: #fff; }
+.log-form .delete { border-color: #c0392b; color: #c0392b; }
+.log-form .delete.confirm { background: #c0392b; color: #fff; }
+.log-form button:disabled { opacity: 0.6; cursor: default; }
+.log-form .msg { font-size: 13px; font-weight: 700; }
+.log-edit:focus-visible, .log-form :focus-visible { outline: 2px solid var(--accent-deep); outline-offset: 2px; }
+.log-note {
+  margin: 0 0 10px;
+  font-size: 13px;
+  font-weight: 600;
+  border-radius: 12px;
+  padding: 8px 12px;
+  background: var(--accent-wash);
+  color: var(--ink);
+}
+.log-note b { font-weight: 800; }
+
 /* ---- history ---- */
 .history {
   background: var(--surface);
@@ -630,16 +691,16 @@ body {
     <div class="section-head"><h2 id="shots-title">Latest screenshots</h2><span>captured by the emulator</span></div>
     <div class="shot-grid">
       <figure>
-        <img src="shots/smm-title.png" alt="Super Mario Maker's title screen as rendered by WiiUE: the logo, two clapperboard buttons, a coin counter and version 1.47 over a 3D underground course with a blue arrow sign" width="1280" height="720" loading="lazy">
-        <figcaption>Super Mario Maker's title screen, with a 3D underground course behind the menu (October 16, 2026).</figcaption>
+        <img src="shots/smm-editor.png" alt="Super Mario Maker's course editor as rendered by WiiUE: a New Super Mario Bros. U underground course on a grid, with the parts palette along the top, Mario at the start and the Play clapperboard in the corner" width="1280" height="720" loading="lazy">
+        <figcaption>Past the title: tapping Make opens Super Mario Maker's course editor, driven by scripted GamePad input (October 17, 2026).</figcaption>
       </figure>
       <figure>
-        <img src="shots/smm-boot.png" alt="Super Mario Maker's boot screen as rendered by WiiUE: Builder Mario holding a question block on an orange background" width="1280" height="720" loading="lazy">
-        <figcaption>Super Mario Maker's boot screen, the first frame of a commercial game drawn by WiiUE (October 15, 2026).</figcaption>
+        <img src="shots/smm-play-menu.png" alt="Super Mario Maker's Play menu as rendered by WiiUE: 10 Mario Challenge and Course World buttons over an SMB1 underground course" width="1280" height="720" loading="lazy">
+        <figcaption>Tapping Play instead opens the Play menu: 10 Mario Challenge and Course World (October 17, 2026).</figcaption>
       </figure>
       <figure>
-        <img src="shots/smm-logo.png" alt="The Super Mario Maker logo in black on an orange background, as rendered by WiiUE" width="1280" height="720" loading="lazy">
-        <figcaption>A few seconds later on the same boot screen: the Super Mario Maker logo.</figcaption>
+        <img src="shots/smm-title.png" alt="Super Mario Maker's title screen as rendered by WiiUE: the logo and Make and Play clapperboards over a 3D New Super Mario Bros. U course with a shaded 3D Mario, hills and a castle" width="1280" height="720" loading="lazy">
+        <figcaption>The title screen with 3D Mario properly shaded on a New Super Mario Bros. U course (October 17, 2026).</figcaption>
       </figure>
     </div>
   </section>
@@ -653,6 +714,7 @@ body {
 
   <section class="feed">
     <div class="section-head"><h2>Activity</h2><span>newest first</span></div>
+    <p class="log-note" id="log-note" role="status" hidden></p>
     <ol id="log"><li><span class="when">–</span><span class="what">Updates are posted here after each step is built, tested and committed.</span></li></ol>
   </section>
 
@@ -719,38 +781,38 @@ body {
     {"n": 22, "group": "Hardware extras", "title": "Extras", "detail": "Camera, microphone, amiibo, save states", "status": "later"}
   ],
   "log": [
-    {"at": "2026-10-17T17:48:29-07:00", "phase": 13, "text": "Phase 13 Progress: Phase 13 continued! Progress has resumed for WiiUE today!"},
-    {"at": "2026-10-16T23:39:09-07:00", "phase": 13, "text": "Update on the forks made by Astra_Intelligence! I have determined that it does not seem to harm the respitory or mislead people into downloading the wrong thing. It does seem to promote a website but other than that nothing much. I am new to GitHub so it is expected for me to be a bit concerned. Anyway, see you guys soon!"},
-    {"at": "2026-10-16T22:15:37-07:00", "phase": 13, "text": "In relation to WiiUE: Possible forks of this project that has a chance of being malicious. It has come to my attention that a account named Astra_Intelligence has been sneaking into other people's repositories without permission. I will look into that fork and will update you guys soon! Be on the look out! The only real page for WiiUE is https://github.com/thatrandumb1/wiiue !"},
-    {"at": "2026-10-16T19:55:15-07:00", "phase": 13, "text": "Phase 13 Progress: Garbled text fixed! Finally fixed the text! Screenshots will be released soon."},
-    {"at": "2026-10-16T18:55:00-07:00", "phase": 13, "text": "Super Mario Maker reaches its title screen, with a 3D course behind the menu: fixed vertex formats, uniform byte order, leftover render targets and 3D textures, plus the TV's colour gamma and a faster-loading timing mode", "commit": "47d080a"},
-    {"at": "2026-10-16T18:14:46-07:00", "phase": 13, "text": "Second update from thatrandumb1 on Phase 13! Fixed some contrasts bugs to make the display color accurate."},
-    {"at": "2026-10-16T17:18:44-07:00", "phase": 13, "text": "Little update from thatrandumb1 on Phase 13! (TESTING POST SYSTEM!). Phase 13 is taking longer than expected, and WAY more complicated then I thought, but the progress is going pretty well! Still testing the Mario Maker until I get a decent result before optimizing it. The emulator should release sometime this month!"},
-    {"at": "2026-10-16T17:12:07-07:00", "phase": 13, "text": "Little update from thatrandumb1 on Phase 13! Phase 13 is taking longer than expected, and WAY more complicated then I thought, but the progress is going pretty well! Still testing the Mario Maker until I get a decent result before optimizing it. The emulator should release sometime this month!"},
-    {"at": "2026-10-16T16:20:00-07:00", "phase": 13, "text": "Super Mario Maker loads its next scene: about 2,000 draw calls a frame, every shader translates and no display list goes missing. The white screen after the logo is the game's own loading cover", "commit": "d80d8e7"},
-    {"at": "2026-10-15T23:42:00-07:00", "phase": 13, "text": "Super Mario Maker's boot loading goes from about 4 minutes to 45 seconds, thanks to a native replacement for its Yaz0 decompressor", "commit": "6c54d2d"},
-    {"at": "2026-10-15T22:40:00-07:00", "phase": 13, "text": "First picture from a real game: Super Mario Maker's boot screen (Builder Mario, then the logo) renders on the GPU after rebuilding the graphics path", "commit": "e7f2d3e"},
-    {"at": "2026-10-15T20:57:00-07:00", "phase": 13, "text": "Super Mario Maker runs: 2.5 billion instructions in a minute, 20 threads, 149,000 draw calls; accounts, saves and Mii data work. Next: making its graphics show up", "commit": "d5d01ec"},
-    {"at": "2026-10-15T20:20:00-07:00", "phase": 12, "text": "Console dump done: a real Wii U's system apps, games, updates and saves are in place, and Super Mario Maker loads and starts from it", "commit": "27a0848"},
-    {"at": "2026-10-14T20:44:00-07:00", "phase": 8, "text": "First real 3D: depth buffers and back-face culling work, and a test program spins two cubes in perspective", "commit": "901aadc"},
-    {"at": "2026-10-14T20:13:00-07:00", "phase": 11, "text": "Multi-core done: threads run on all three cores with priorities, locks, events, queues, sleeps and alarms; the threads test passes 9/9", "commit": "14bae43"},
-    {"at": "2026-10-14T19:35:00-07:00", "phase": 10, "text": "Audio done: the AX mixer plays PCM and ADPCM voices with pitch and volume on the PC's speakers; a test program plays a C-E-G-C tune", "commit": "e8c71ee"},
-    {"at": "2026-10-14T19:03:00-07:00", "phase": 9, "text": "Input done: GamePad buttons, sticks, touch screen and motion work from the keyboard, mouse or a game controller", "commit": "4b79a22"},
-    {"at": "2026-10-14T18:47:00-07:00", "phase": 8, "text": "Graphics done: Wii U shaders are translated to Vulkan and a spinning 3D triangle draws on both screens on the graphics card", "commit": "774489c"},
-    {"at": "2026-10-14T18:25:00-07:00", "phase": 8, "text": "GX2 graphics library running: a program set up the standard way clears both screens to cycling colors and quits cleanly when the window closes", "commit": "07c839b"},
-    {"at": "2026-10-14T18:15:00-07:00", "phase": 8, "text": "First image on screen. TV and GamePad windows open, and a test program draws text, colors and a moving square at 60 fps", "commit": "ec18455"},
-    {"at": "2026-10-14T17:59:00-07:00", "phase": 8, "text": "Started graphics"},
-    {"at": "2026-10-14T17:58:00-07:00", "phase": 7, "text": "File system done: a test program reads game content, writes the SD card and passes all 26 file checks", "commit": "0a2ab66"},
-    {"at": "2026-10-14T17:47:00-07:00", "phase": 7, "text": "Started the file system"},
-    {"at": "2026-10-14T17:46:00-07:00", "phase": 6, "text": "First program runs: hello.rpx prints \"Hello from my emulator!\" and exits cleanly after 10,522 instructions", "commit": "1af05ca"},
-    {"at": "2026-10-14T17:25:00-07:00", "phase": 6, "text": "Progress page opened to the public"},
-    {"at": "2026-10-14T17:15:00-07:00", "phase": 6, "text": "Live progress page published", "commit": "278bc00"},
-    {"at": "2026-10-14T17:10:00-07:00", "phase": 6, "text": "Started coreinit, the Wii U's core system library"},
-    {"at": "2026-10-14T17:07:18-07:00", "phase": 5, "text": "CPU interpreter runs: 677 instructions of real startup code before the first missing system call", "commit": "1b9757a"},
-    {"at": "2026-10-14T16:55:35-07:00", "phase": 4, "text": "RPX loader: hello.rpx loads, matches the compiler's output byte for byte", "commit": "cf9af50"},
-    {"at": "2026-10-14T16:47:32-07:00", "phase": 2, "text": "Guest memory working: 4 GB address space, big-endian reads and writes", "commit": "47ff654"},
-    {"at": "2026-10-14T16:44:09-07:00", "phase": 0, "text": "All tools installed after fixing a stuck devkitPro install; hello.rpx builds", "commit": "bb71fe2"},
-    {"at": "2026-10-14T16:08:18-07:00", "phase": 1, "text": "Project created: build system, docs, folder for the console dump", "commit": "7417865"}
+    {"id": "e032", "at": "2026-10-17T17:48:29-07:00", "phase": 13, "text": "Phase 13 Progress: Phase 13 continued! Progress has resumed for WiiUE today!"},
+    {"id": "e031", "at": "2026-10-16T23:39:09-07:00", "phase": 13, "text": "Update on the forks made by Astra_Intelligence! I have determined that it does not seem to harm the respitory or mislead people into downloading the wrong thing. It does seem to promote a website but other than that nothing much. I am new to GitHub so it is expected for me to be a bit concerned. Anyway, see you guys soon!"},
+    {"id": "e030", "at": "2026-10-16T22:15:37-07:00", "phase": 13, "text": "In relation to WiiUE: Possible forks of this project that has a chance of being malicious. It has come to my attention that a account named Astra_Intelligence has been sneaking into other people's repositories without permission. I will look into that fork and will update you guys soon! Be on the look out! The only real page for WiiUE is https://github.com/thatrandumb1/wiiue !"},
+    {"id": "e029", "at": "2026-10-16T19:55:15-07:00", "phase": 13, "text": "Phase 13 Progress: Garbled text fixed! Finally fixed the text! Screenshots will be released soon."},
+    {"id": "e028", "at": "2026-10-16T18:55:00-07:00", "phase": 13, "text": "Super Mario Maker reaches its title screen, with a 3D course behind the menu: fixed vertex formats, uniform byte order, leftover render targets and 3D textures, plus the TV's colour gamma and a faster-loading timing mode", "commit": "47d080a"},
+    {"id": "e027", "at": "2026-10-16T18:14:46-07:00", "phase": 13, "text": "Second update from thatrandumb1 on Phase 13! Fixed some contrasts bugs to make the display color accurate."},
+    {"id": "e026", "at": "2026-10-16T17:18:44-07:00", "phase": 13, "text": "Little update from thatrandumb1 on Phase 13! (TESTING POST SYSTEM!). Phase 13 is taking longer than expected, and WAY more complicated then I thought, but the progress is going pretty well! Still testing the Mario Maker until I get a decent result before optimizing it. The emulator should release sometime this month!"},
+    {"id": "e025", "at": "2026-10-16T17:12:07-07:00", "phase": 13, "text": "Little update from thatrandumb1 on Phase 13! Phase 13 is taking longer than expected, and WAY more complicated then I thought, but the progress is going pretty well! Still testing the Mario Maker until I get a decent result before optimizing it. The emulator should release sometime this month!"},
+    {"id": "e024", "at": "2026-10-16T16:20:00-07:00", "phase": 13, "text": "Super Mario Maker loads its next scene: about 2,000 draw calls a frame, every shader translates and no display list goes missing. The white screen after the logo is the game's own loading cover", "commit": "d80d8e7"},
+    {"id": "e023", "at": "2026-10-15T23:42:00-07:00", "phase": 13, "text": "Super Mario Maker's boot loading goes from about 4 minutes to 45 seconds, thanks to a native replacement for its Yaz0 decompressor", "commit": "6c54d2d"},
+    {"id": "e022", "at": "2026-10-15T22:40:00-07:00", "phase": 13, "text": "First picture from a real game: Super Mario Maker's boot screen (Builder Mario, then the logo) renders on the GPU after rebuilding the graphics path", "commit": "e7f2d3e"},
+    {"id": "e021", "at": "2026-10-15T20:57:00-07:00", "phase": 13, "text": "Super Mario Maker runs: 2.5 billion instructions in a minute, 20 threads, 149,000 draw calls; accounts, saves and Mii data work. Next: making its graphics show up", "commit": "d5d01ec"},
+    {"id": "e020", "at": "2026-10-15T20:20:00-07:00", "phase": 12, "text": "Console dump done: a real Wii U's system apps, games, updates and saves are in place, and Super Mario Maker loads and starts from it", "commit": "27a0848"},
+    {"id": "e019", "at": "2026-10-14T20:44:00-07:00", "phase": 8, "text": "First real 3D: depth buffers and back-face culling work, and a test program spins two cubes in perspective", "commit": "901aadc"},
+    {"id": "e018", "at": "2026-10-14T20:13:00-07:00", "phase": 11, "text": "Multi-core done: threads run on all three cores with priorities, locks, events, queues, sleeps and alarms; the threads test passes 9/9", "commit": "14bae43"},
+    {"id": "e017", "at": "2026-10-14T19:35:00-07:00", "phase": 10, "text": "Audio done: the AX mixer plays PCM and ADPCM voices with pitch and volume on the PC's speakers; a test program plays a C-E-G-C tune", "commit": "e8c71ee"},
+    {"id": "e016", "at": "2026-10-14T19:03:00-07:00", "phase": 9, "text": "Input done: GamePad buttons, sticks, touch screen and motion work from the keyboard, mouse or a game controller", "commit": "4b79a22"},
+    {"id": "e015", "at": "2026-10-14T18:47:00-07:00", "phase": 8, "text": "Graphics done: Wii U shaders are translated to Vulkan and a spinning 3D triangle draws on both screens on the graphics card", "commit": "774489c"},
+    {"id": "e014", "at": "2026-10-14T18:25:00-07:00", "phase": 8, "text": "GX2 graphics library running: a program set up the standard way clears both screens to cycling colors and quits cleanly when the window closes", "commit": "07c839b"},
+    {"id": "e013", "at": "2026-10-14T18:15:00-07:00", "phase": 8, "text": "First image on screen. TV and GamePad windows open, and a test program draws text, colors and a moving square at 60 fps", "commit": "ec18455"},
+    {"id": "e012", "at": "2026-10-14T17:59:00-07:00", "phase": 8, "text": "Started graphics"},
+    {"id": "e011", "at": "2026-10-14T17:58:00-07:00", "phase": 7, "text": "File system done: a test program reads game content, writes the SD card and passes all 26 file checks", "commit": "0a2ab66"},
+    {"id": "e010", "at": "2026-10-14T17:47:00-07:00", "phase": 7, "text": "Started the file system"},
+    {"id": "e009", "at": "2026-10-14T17:46:00-07:00", "phase": 6, "text": "First program runs: hello.rpx prints \"Hello from my emulator!\" and exits cleanly after 10,522 instructions", "commit": "1af05ca"},
+    {"id": "e008", "at": "2026-10-14T17:25:00-07:00", "phase": 6, "text": "Progress page opened to the public"},
+    {"id": "e007", "at": "2026-10-14T17:15:00-07:00", "phase": 6, "text": "Live progress page published", "commit": "278bc00"},
+    {"id": "e006", "at": "2026-10-14T17:10:00-07:00", "phase": 6, "text": "Started coreinit, the Wii U's core system library"},
+    {"id": "e005", "at": "2026-10-14T17:07:18-07:00", "phase": 5, "text": "CPU interpreter runs: 677 instructions of real startup code before the first missing system call", "commit": "1b9757a"},
+    {"id": "e004", "at": "2026-10-14T16:55:35-07:00", "phase": 4, "text": "RPX loader: hello.rpx loads, matches the compiler's output byte for byte", "commit": "cf9af50"},
+    {"id": "e003", "at": "2026-10-14T16:47:32-07:00", "phase": 2, "text": "Guest memory working: 4 GB address space, big-endian reads and writes", "commit": "47ff654"},
+    {"id": "e002", "at": "2026-10-14T16:44:09-07:00", "phase": 0, "text": "All tools installed after fixing a stuck devkitPro install; hello.rpx builds", "commit": "bb71fe2"},
+    {"id": "e001", "at": "2026-10-14T16:08:18-07:00", "phase": 1, "text": "Project created: build system, docs, folder for the console dump", "commit": "7417865"}
   ]
 }
 </script>
@@ -777,6 +839,12 @@ body {
   let phases = [];
   let log = [];
   let snapLog = []; // the built-in snapshot's log: the live query only returns the newest 60
+  const LOG_LIMIT = 60;
+  let logLive = false; // the live query has answered at least once
+  let liveFloor = -Infinity; // entries newer than this are all in the live query (it isn't cut off below them)
+  let logDb = null; // set for the owner and editors: activity entries get an Edit button
+  let editing = null; // id of the activity entry whose editor is open
+  let logDirty = false; // a render was skipped while the editor was open
 
   function relTime(iso) {
     if (!iso) return "";
@@ -865,6 +933,11 @@ body {
   }
 
   function renderLog() {
+    // A live update mid-edit would throw away the open editor: catch up when it closes
+    if (editing) {
+      logDirty = true;
+      return;
+    }
     const list = $("log");
     list.textContent = "";
     if (!log.length) {
@@ -881,6 +954,13 @@ body {
       if (entry.phase != null) what.appendChild(el("span", "tag", "P" + entry.phase));
       what.appendChild(document.createTextNode(entry.text || ""));
       if (entry.commit) what.appendChild(el("span", "commit", entry.commit));
+      if (logDb && entry.id) {
+        const edit = el("button", "log-edit", "Edit");
+        edit.type = "button";
+        edit.setAttribute("aria-label", "Edit this entry");
+        edit.addEventListener("click", () => openLogEditor(li, what, entry));
+        what.appendChild(edit);
+      }
       li.appendChild(what);
       list.appendChild(li);
     }
@@ -938,9 +1018,12 @@ body {
       renderStatus();
     }, onError);
 
-    db.collection("log").orderBy("at", "desc").limit(60).onSnapshot((snap) => {
+    db.collection("log").orderBy("at", "desc").limit(LOG_LIMIT).onSnapshot((snap) => {
       if (snap.empty) return;
-      log = snap.docs.map((d) => d.data());
+      // Each entry keeps its doc id, so it can be edited and the snapshot can carry it
+      log = snap.docs.map((d) => Object.assign({}, d.data(), { id: d.id }));
+      logLive = true;
+      liveFloor = log.length >= LOG_LIMIT ? Date.parse(log[log.length - 1].at) : -Infinity;
       for (const d of snap.docs) {
         const n = /^e(\d+)$/.exec(d.id);
         if (n) lastLogNumber = Math.max(lastLogNumber, Number(n[1]));
@@ -951,7 +1034,11 @@ body {
 
     // The owner and editors can post a new "now working on" update from the page
     const user = await window.claude.use("user");
-    if (user && (await user.canEdit())) startEditor(db);
+    if (user && (await user.canEdit())) {
+      startEditor(db);
+      logDb = db;
+      renderLog();
+    }
 
     // Keep relative times fresh (display only, no writes)
     setInterval(() => {
@@ -1025,13 +1112,14 @@ body {
           entry = { at, text: detail ? headline + (/[.!?:]$/.test(headline) ? " " : ". ") + detail : headline };
           if (active) entry.phase = active.n;
           await db.doc("log/" + id).set(entry);
+          entry = Object.assign({ id }, entry);
         }
         msg.textContent = "Publishing…";
-        const result = await publishPage(Object.assign({}, status, { headline, detail, updatedAt: at }), entry);
+        const result = await publishPage(Object.assign({}, status, { headline, detail, updatedAt: at }), entry, "post");
         // On success (and on a conflict) this view reloads; the note comes back from sessionStorage
         if (result !== "published" && result !== "conflict") {
           open(false);
-          showPostedNote(result);
+          showPostedNote(result, "post");
         }
       } catch (err) {
         msg.textContent = "Couldn't post: " + ((err && err.message) || "the live record refused the change") + ".";
@@ -1041,14 +1129,178 @@ body {
     });
   }
 
+  // ---- activity entry editor: rewrites or deletes one log/eNNN doc in place, then republishes the
+  // page like a post does. Also stamps tracker/status.logEditedAt, which the scheduled GitHub sync
+  // compares against the snapshot to notice edits further down the feed.
+  const ENTRY_FIELDS = ["id", "at", "phase", "text", "commit"];
+
+  // Swap (or with no replacement, drop) an entry in the live and snapshot lists, so the republish
+  // carries the change even before the live query reports it. Snapshot entries from before entries
+  // carried ids match on time and text.
+  function replaceLocal(old, repl) {
+    const same = (e) => (e.id ? e.id === old.id : e.at === old.at && e.text === old.text);
+    log = log.flatMap((e) => (same(e) ? (repl ? [repl] : []) : [e]));
+    snapLog = snapLog.flatMap((e) => (same(e) ? (repl ? [repl] : []) : [e]));
+  }
+
+  function openLogEditor(li, what, entry) {
+    if (editing || !logDb) return;
+    editing = entry.id;
+    $("log-note").hidden = true;
+
+    const form = el("form", "log-form");
+    const textLabel = el("label", null, "Entry");
+    const textIn = el("textarea");
+    textIn.maxLength = 2000;
+    textIn.required = true;
+    textIn.value = entry.text || "";
+    textLabel.appendChild(textIn);
+    const row = el("div", "row");
+    const phaseLabel = el("label", null, "Phase");
+    const phaseIn = el("input");
+    phaseIn.type = "number";
+    phaseIn.min = "0";
+    phaseIn.max = "99";
+    phaseIn.value = entry.phase != null ? String(entry.phase) : "";
+    phaseLabel.appendChild(phaseIn);
+    const commitLabel = el("label", null, "Commit");
+    const commitIn = el("input");
+    commitIn.type = "text";
+    commitIn.maxLength = 40;
+    commitIn.placeholder = "none";
+    commitIn.value = entry.commit || "";
+    commitLabel.appendChild(commitIn);
+    row.append(phaseLabel, commitLabel);
+    const actions = el("div", "actions");
+    const save = el("button", "save", "Save");
+    save.type = "submit";
+    const del = el("button", "delete", "Delete");
+    del.type = "button";
+    const cancel = el("button", "cancel", "Cancel");
+    cancel.type = "button";
+    const msg = el("span", "msg");
+    msg.setAttribute("role", "status");
+    actions.append(save, del, cancel, msg);
+    form.append(textLabel, row, actions);
+
+    let confirming = false;
+    let busy = false;
+    function close() {
+      editing = null;
+      form.remove();
+      what.hidden = false;
+      if (logDirty) {
+        logDirty = false;
+        renderLog();
+      }
+    }
+    function setBusy(on, text) {
+      busy = on;
+      save.disabled = del.disabled = cancel.disabled = on;
+      msg.textContent = text || "";
+    }
+    function unconfirm() {
+      confirming = false;
+      del.textContent = "Delete";
+      del.classList.remove("confirm");
+    }
+
+    // After the log doc changed: mark it for the GitHub sync, then republish like a post
+    async function finish(action) {
+      const at = localIso(new Date());
+      try {
+        await logDb.doc("tracker/status").update({ logEditedAt: at });
+      } catch (e) {
+        /* the edit itself is saved; the sync then only notices it with the next post */
+      }
+      msg.textContent = "Publishing…";
+      const result = await publishPage(Object.assign({}, status, { logEditedAt: at }), null, action);
+      // On success (and on a conflict) this view reloads; the note comes back from sessionStorage
+      if (result !== "published" && result !== "conflict") {
+        close();
+        showPostedNote(result, action);
+      }
+    }
+
+    form.addEventListener("submit", async (e) => {
+      e.preventDefault();
+      if (busy) return;
+      unconfirm();
+      const text = textIn.value.trim();
+      const phase = phaseIn.value.trim();
+      const commit = commitIn.value.trim();
+      if (!text) {
+        msg.textContent = "Write something, or delete the entry.";
+        return;
+      }
+      if (phase && !/^\d{1,2}$/.test(phase)) {
+        msg.textContent = "Phase is a number from 0 to 99.";
+        return;
+      }
+      // Same doc, same time; fields this editor doesn't show are kept
+      const data = { at: entry.at };
+      if (phase) data.phase = Number(phase);
+      data.text = text;
+      if (commit) data.commit = commit;
+      for (const k of Object.keys(entry)) if (!ENTRY_FIELDS.includes(k) && entry[k] != null) data[k] = entry[k];
+      if (text === entry.text && data.phase === entry.phase && (commit || null) === (entry.commit || null)) {
+        close();
+        return;
+      }
+      setBusy(true, "Saving…");
+      try {
+        await logDb.doc("log/" + entry.id).set(data);
+        replaceLocal(entry, Object.assign({ id: entry.id }, data));
+        await finish("edit");
+      } catch (err) {
+        msg.textContent = "Couldn't save: " + ((err && err.message) || "the live record refused the change") + ".";
+      } finally {
+        if (form.isConnected) setBusy(false, msg.textContent);
+      }
+    });
+
+    del.addEventListener("click", async () => {
+      if (busy) return;
+      if (!confirming) {
+        confirming = true;
+        del.textContent = "Yes, delete it";
+        del.classList.add("confirm");
+        msg.textContent = "Deletes this entry for everyone.";
+        return;
+      }
+      setBusy(true, "Deleting…");
+      try {
+        await logDb.doc("log/" + entry.id).delete();
+        replaceLocal(entry, null);
+        await finish("delete");
+      } catch (err) {
+        msg.textContent = "Couldn't delete: " + ((err && err.message) || "the live record refused the change") + ".";
+      } finally {
+        if (form.isConnected) {
+          setBusy(false, msg.textContent);
+          unconfirm();
+        }
+      }
+    });
+
+    cancel.addEventListener("click", close);
+    form.addEventListener("keydown", (e) => {
+      if (e.key === "Escape" && !busy) close();
+    });
+
+    what.hidden = true;
+    li.appendChild(form);
+    textIn.focus();
+  }
+
   // ---- republishing the page with a fresh snapshot (artifact capability) ----
   // Same shape the Artifact tool publishes: doctype and its small reset head, then the page as written
   const PAGE_HEAD = '<!doctype html><html><head><meta charset=utf8><meta name=viewport content="width=device-width,initial-scale=1,viewport-fit=cover"><style>:root{color-scheme:light;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}html{scroll-padding-top:env(safe-area-inset-top,0px)}body{margin:0;padding:0;font:14px -apple-system,BlinkMacSystemFont,sans-serif;background:#fff;color:#000}img{max-width:100%}[hidden]:not([hidden=until-found i]){display:none!important}</style></head><body>\n';
 
   // Same layout and field order as tools/sync-snapshot.js, so either can write the block
-  const STATUS_KEYS = ["headline", "detail", "testCases", "assertions", "commits", "lastCommit", "instructions", "instructionsNote", "updatedAt"];
+  const STATUS_KEYS = ["headline", "detail", "testCases", "assertions", "commits", "lastCommit", "instructions", "instructionsNote", "updatedAt", "logEditedAt"];
   const PHASE_KEYS = ["n", "group", "title", "detail", "status", "milestone"];
-  const LOG_KEYS = ["at", "phase", "text", "commit"];
+  const LOG_KEYS = ["id", "at", "phase", "text", "commit"];
   function ordered(obj, keys) {
     const out = {};
     for (const k of keys) if (obj[k] != null) out[k] = obj[k];
@@ -1074,53 +1326,65 @@ body {
     }
   }
 
-  // Returns "published", "conflict" or why it couldn't publish
-  async function publishPage(newStatus, newEntry) {
+  // Returns "published", "conflict" or why it couldn't publish. action ("post", "edit" or "delete")
+  // picks the note shown after the reload.
+  async function publishPage(newStatus, newEntry, action) {
     const re = /(<script type="application\/json" id="snapshot">\r?\n)[\s\S]*?(<\/script>)/;
     if (!PAGE_SOURCE || !re.test(PAGE_SOURCE)) return "no page source";
+    if (!newStatus) return "the live record hasn't loaded";
     const artifact = window.claude && window.claude.use ? await window.claude.use("artifact") : null;
     if (!artifact) return "publishing isn't available here";
+    // Live entries win; the snapshot only fills in older ones the live query doesn't reach (inside
+    // its range, an entry missing from the live query was deleted)
     const seen = new Set();
     const entries = [];
     for (const e of [newEntry].concat(log, snapLog)) {
-      if (!e || seen.has(e.at + "|" + e.text)) continue;
-      seen.add(e.at + "|" + e.text);
+      if (!e) continue;
+      if (logLive && snapLog.includes(e) && !log.includes(e) && Date.parse(e.at) > liveFloor) continue;
+      const keys = [e.at + "|" + e.text];
+      if (e.id) keys.push("#" + e.id);
+      if (keys.some((k) => seen.has(k))) continue;
+      for (const k of keys) seen.add(k);
       entries.push(e);
     }
     entries.sort((a, b) => Date.parse(b.at) - Date.parse(a.at));
     const ph = phases.slice().sort((a, b) => a.n - b.n);
     const html = PAGE_HEAD + PAGE_SOURCE.replace(re, (_, open, close) => open + snapshotBlock(newStatus, ph, entries) + close) + "</body></html>";
-    stashNote("published");
+    stashNote("published:" + action);
     try {
       await artifact.publish(html);
       return "published";
     } catch (err) {
       const code = (err && err.code) || "upstream_error";
       // conflict: someone published first and this view is already reloading to it; the next sync catches up
-      stashNote(code === "conflict" ? "conflict" : null);
+      stashNote(code === "conflict" ? "conflict:" + action : null);
       return code === "conflict" ? "conflict" : "the page refused to publish (" + code + ")";
     }
   }
 
-  // After a post, what's live where. Called with a reason when publishing failed, and on load after
-  // the reload that a publish (or a conflict) causes.
-  function showPostedNote(failure) {
+  // After a post, edit or delete, what's live where. Called with a reason when publishing failed, and
+  // on load after the reload that a publish (or a conflict) causes.
+  function showPostedNote(failure, failedAction) {
     let kind = failure ? "failed" : null;
+    let action = failedAction || "post";
     if (!kind) {
       try {
-        kind = sessionStorage.getItem("wiiue.posted");
+        const saved = sessionStorage.getItem("wiiue.posted");
         sessionStorage.removeItem("wiiue.posted");
+        if (saved) [kind, action = "post"] = saved.split(":");
       } catch (e) {
         kind = null;
       }
     }
     if (!kind) return;
-    const note = $("now-note");
+    const done = { post: "Posted.", edit: "Saved.", delete: "Deleted." }[action] || "Posted.";
+    const what = action === "post" ? "it" : "the change";
+    const note = $(action === "post" ? "now-note" : "log-note");
     note.textContent = "";
     if (kind === "published") {
-      note.append(el("b", null, "Posted."), " Everyone on this page sees it now. The GitHub site picks it up at the next automatic sync.");
+      note.append(el("b", null, done), " Everyone on this page sees " + what + " now. The GitHub site picks it up at the next automatic sync.");
     } else {
-      note.append(el("b", null, "Posted."), " Signed-in visitors see it now. " +
+      note.append(el("b", null, done), " Signed-in visitors see " + what + " now. " +
         (kind === "conflict" ? "Someone else published the page at the same moment, so" : "The public copy didn't update (" + failure + "), so") +
         " signed-out visitors and the GitHub site catch up at the next automatic sync.");
     }
