@@ -40,6 +40,7 @@ run commercial games yet.
 
 ## Recent activity
 
+- `Oct 21, 4:29 PM` · **P13** · Even more Phase 13 progress! WiiUE is still being worked on as of 10.21.2026!
 - `Oct 19, 12:53 AM` · **P13** · Phase 13 Progress: Splatoon graphics! Splatoon graphics have been successfully compiled! This is a huge step up from Mario Maker as Splatoon graphics are way heavier than Mario Maker graphics. Anyway, I should be done with Phase 13 soon!
 - `Oct 17, 9:05 PM` · **P13** · Phase 13 Progress: New screenshots! New screenshots showing gameplay after the main menu have been released! Along with a showcase of the 3D main menu variants.
 - `Oct 17, 5:48 PM` · **P13** · Phase 13 Progress: Phase 13 continued! Progress has resumed for WiiUE today!
@@ -47,7 +48,6 @@ run commercial games yet.
 - `Oct 16, 10:15 PM` · **P13** · In relation to WiiUE: Possible forks of this project that has a chance of being malicious. It has come to my attention that a account named Astra_Intelligence has been sneaking into other people's repositories without permission. I will look into that fork and will update you guys soon! Be on the look out! The only real page for WiiUE is https://github.com/thatrandumb1/wiiue !
 - `Oct 16, 7:55 PM` · **P13** · Phase 13 Progress: Garbled text fixed! Finally fixed the text! Screenshots will be released soon.
 - `Oct 16, 6:55 PM` · **P13** · Super Mario Maker reaches its title screen, with a 3D course behind the menu: fixed vertex formats, uniform byte order, leftover render targets and 3D textures, plus the TV's colour gamma and a faster-loading timing mode · `47d080a`
-- `Oct 16, 6:14 PM` · **P13** · Second update from thatrandumb1 on Phase 13! Fixed some contrasts bugs to make the display color accurate.
 
 ## History of the Wii U
 
@@ -78,5 +78,5 @@ The console this project brings back.
 
 ---
 
-<sub>Last updated Oct 19, 2026, 12:53 AM PDT. Full live view: <a href="https://thatrandumb1.github.io/wiiue/">https://thatrandumb1.github.io/wiiue/</a><br>
+<sub>Last updated Oct 21, 2026, 4:29 PM PDT. Full live view: <a href="https://thatrandumb1.github.io/wiiue/">https://thatrandumb1.github.io/wiiue/</a><br>
 Fan project page. Not affiliated with or endorsed by Nintendo.</sub>
