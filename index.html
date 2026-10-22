@@ -379,56 +379,6 @@ body {
 }
 .commit { font-family: var(--font-mono); font-size: 12px; color: var(--ink-soft); margin-left: 6px; }
 
-/* ---- activity entry editor (owner and editors only, writes the live record) ---- */
-.feed [hidden] { display: none !important; }
-.log-edit {
-  font: inherit;
-  font-size: 12px;
-  font-weight: 700;
-  margin-left: 8px;
-  padding: 0 8px;
-  border: 1px solid var(--line);
-  border-radius: var(--radius-pill);
-  background: var(--surface-2);
-  color: var(--accent-deep);
-  cursor: pointer;
-}
-.log-edit:hover { background: var(--accent-wash); }
-.log-form { display: grid; gap: 8px; }
-.log-form label { display: grid; gap: 4px; font-size: 12px; font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase; color: var(--ink-soft); }
-.log-form .row { display: flex; gap: 10px; flex-wrap: wrap; }
-.log-form .row label { flex: 1 1 120px; }
-.log-form input, .log-form textarea {
-  font: inherit;
-  font-size: 15px;
-  letter-spacing: normal;
-  text-transform: none;
-  width: 100%;
-  border: 1px solid var(--line);
-  border-radius: 10px;
-  padding: 7px 10px;
-  background: #fff;
-  color: var(--ink);
-}
-.log-form textarea { min-height: 84px; resize: vertical; }
-.log-form .actions { display: flex; align-items: center; gap: 8px; flex-wrap: wrap; }
-.log-form button {
-  font: inherit;
-  font-size: 13px;
-  font-weight: 800;
-  border-radius: var(--radius-pill);
-  padding: 5px 14px;
-  cursor: pointer;
-  border: 1px solid var(--accent-deep);
-  background: var(--surface);
-  color: var(--accent-deep);
-}
-.log-form .save { background: var(--accent-deep); color: #fff; }
-.log-form .delete { border-color: #c0392b; color: #c0392b; }
-.log-form .delete.confirm { background: #c0392b; color: #fff; }
-.log-form button:disabled { opacity: 0.6; cursor: default; }
-.log-form .msg { font-size: 13px; font-weight: 700; }
-.log-edit:focus-visible, .log-form :focus-visible { outline: 2px solid var(--accent-deep); outline-offset: 2px; }
 .log-note {
   margin: 0 0 10px;
   font-size: 13px;
@@ -865,9 +815,6 @@ body {
   const LOG_LIMIT = 60;
   let logLive = false; // the live query has answered at least once
   let liveFloor = -Infinity; // entries newer than this are all in the live query (it isn't cut off below them)
-  let logDb = null; // set for the owner and editors: activity entries get an Edit button
-  let editing = null; // id of the activity entry whose editor is open
-  let logDirty = false; // a render was skipped while the editor was open
 
   function relTime(iso) {
     if (!iso) return "";
@@ -956,11 +903,6 @@ body {
   }
 
   function renderLog() {
-    // A live update mid-edit would throw away the open editor: catch up when it closes
-    if (editing) {
-      logDirty = true;
-      return;
-    }
     const list = $("log");
     list.textContent = "";
     if (!log.length) {
@@ -977,13 +919,6 @@ body {
       if (entry.phase != null) what.appendChild(el("span", "tag", "P" + entry.phase));
       what.appendChild(document.createTextNode(entry.text || ""));
       if (entry.commit) what.appendChild(el("span", "commit", entry.commit));
-      if (logDb && entry.id) {
-        const edit = el("button", "log-edit", "Edit");
-        edit.type = "button";
-        edit.setAttribute("aria-label", "Edit this entry");
-        edit.addEventListener("click", () => openLogEditor(li, what, entry));
-        what.appendChild(edit);
-      }
       li.appendChild(what);
       list.appendChild(li);
     }
@@ -1043,7 +978,7 @@ body {
 
     db.collection("log").orderBy("at", "desc").limit(LOG_LIMIT).onSnapshot((snap) => {
       if (snap.empty) return;
-      // Each entry keeps its doc id, so it can be edited and the snapshot can carry it
+      // Each entry keeps its doc id, so the snapshot can carry it
       log = snap.docs.map((d) => Object.assign({}, d.data(), { id: d.id }));
       logLive = true;
       liveFloor = log.length >= LOG_LIMIT ? Date.parse(log[log.length - 1].at) : -Infinity;
@@ -1059,8 +994,6 @@ body {
     const user = await window.claude.use("user");
     if (user && (await user.canEdit())) {
       startEditor(db);
-      logDb = db;
-      renderLog();
     }
 
     // Keep relative times fresh (display only, no writes)
@@ -1150,170 +1083,6 @@ body {
         save.disabled = false;
       }
     });
-  }
-
-  // ---- activity entry editor: rewrites or deletes one log/eNNN doc in place, then republishes the
-  // page like a post does. Also stamps tracker/status.logEditedAt, which the scheduled GitHub sync
-  // compares against the snapshot to notice edits further down the feed.
-  const ENTRY_FIELDS = ["id", "at", "phase", "text", "commit"];
-
-  // Swap (or with no replacement, drop) an entry in the live and snapshot lists, so the republish
-  // carries the change even before the live query reports it. Snapshot entries from before entries
-  // carried ids match on time and text.
-  function replaceLocal(old, repl) {
-    const same = (e) => (e.id ? e.id === old.id : e.at === old.at && e.text === old.text);
-    log = log.flatMap((e) => (same(e) ? (repl ? [repl] : []) : [e]));
-    snapLog = snapLog.flatMap((e) => (same(e) ? (repl ? [repl] : []) : [e]));
-  }
-
-  function openLogEditor(li, what, entry) {
-    if (editing || !logDb) return;
-    editing = entry.id;
-    $("log-note").hidden = true;
-
-    const form = el("form", "log-form");
-    const textLabel = el("label", null, "Entry");
-    const textIn = el("textarea");
-    textIn.maxLength = 2000;
-    textIn.required = true;
-    textIn.value = entry.text || "";
-    textLabel.appendChild(textIn);
-    const row = el("div", "row");
-    const phaseLabel = el("label", null, "Phase");
-    const phaseIn = el("input");
-    phaseIn.type = "number";
-    phaseIn.min = "0";
-    phaseIn.max = "99";
-    phaseIn.value = entry.phase != null ? String(entry.phase) : "";
-    phaseLabel.appendChild(phaseIn);
-    const commitLabel = el("label", null, "Commit");
-    const commitIn = el("input");
-    commitIn.type = "text";
-    commitIn.maxLength = 40;
-    commitIn.placeholder = "none";
-    commitIn.value = entry.commit || "";
-    commitLabel.appendChild(commitIn);
-    row.append(phaseLabel, commitLabel);
-    const actions = el("div", "actions");
-    const save = el("button", "save", "Save");
-    save.type = "submit";
-    const del = el("button", "delete", "Delete");
-    del.type = "button";
-    const cancel = el("button", "cancel", "Cancel");
-    cancel.type = "button";
-    const msg = el("span", "msg");
-    msg.setAttribute("role", "status");
-    actions.append(save, del, cancel, msg);
-    form.append(textLabel, row, actions);
-
-    let confirming = false;
-    let busy = false;
-    function close() {
-      editing = null;
-      form.remove();
-      what.hidden = false;
-      if (logDirty) {
-        logDirty = false;
-        renderLog();
-      }
-    }
-    function setBusy(on, text) {
-      busy = on;
-      save.disabled = del.disabled = cancel.disabled = on;
-      msg.textContent = text || "";
-    }
-    function unconfirm() {
-      confirming = false;
-      del.textContent = "Delete";
-      del.classList.remove("confirm");
-    }
-
-    // After the log doc changed: mark it for the GitHub sync, then republish like a post
-    async function finish(action) {
-      const at = localIso(new Date());
-      try {
-        await logDb.doc("tracker/status").update({ logEditedAt: at });
-      } catch (e) {
-        /* the edit itself is saved; the sync then only notices it with the next post */
-      }
-      msg.textContent = "Publishing…";
-      const result = await publishPage(Object.assign({}, status, { logEditedAt: at }), null, action);
-      // On success (and on a conflict) this view reloads; the note comes back from sessionStorage
-      if (result !== "published" && result !== "conflict") {
-        close();
-        showPostedNote(result, action);
-      }
-    }
-
-    form.addEventListener("submit", async (e) => {
-      e.preventDefault();
-      if (busy) return;
-      unconfirm();
-      const text = textIn.value.trim();
-      const phase = phaseIn.value.trim();
-      const commit = commitIn.value.trim();
-      if (!text) {
-        msg.textContent = "Write something, or delete the entry.";
-        return;
-      }
-      if (phase && !/^\d{1,2}$/.test(phase)) {
-        msg.textContent = "Phase is a number from 0 to 99.";
-        return;
-      }
-      // Same doc, same time; fields this editor doesn't show are kept
-      const data = { at: entry.at };
-      if (phase) data.phase = Number(phase);
-      data.text = text;
-      if (commit) data.commit = commit;
-      for (const k of Object.keys(entry)) if (!ENTRY_FIELDS.includes(k) && entry[k] != null) data[k] = entry[k];
-      if (text === entry.text && data.phase === entry.phase && (commit || null) === (entry.commit || null)) {
-        close();
-        return;
-      }
-      setBusy(true, "Saving…");
-      try {
-        await logDb.doc("log/" + entry.id).set(data);
-        replaceLocal(entry, Object.assign({ id: entry.id }, data));
-        await finish("edit");
-      } catch (err) {
-        msg.textContent = "Couldn't save: " + ((err && err.message) || "the live record refused the change") + ".";
-      } finally {
-        if (form.isConnected) setBusy(false, msg.textContent);
-      }
-    });
-
-    del.addEventListener("click", async () => {
-      if (busy) return;
-      if (!confirming) {
-        confirming = true;
-        del.textContent = "Yes, delete it";
-        del.classList.add("confirm");
-        msg.textContent = "Deletes this entry for everyone.";
-        return;
-      }
-      setBusy(true, "Deleting…");
-      try {
-        await logDb.doc("log/" + entry.id).delete();
-        replaceLocal(entry, null);
-        await finish("delete");
-      } catch (err) {
-        msg.textContent = "Couldn't delete: " + ((err && err.message) || "the live record refused the change") + ".";
-      } finally {
-        if (form.isConnected) {
-          setBusy(false, msg.textContent);
-          unconfirm();
-        }
-      }
-    });
-
-    cancel.addEventListener("click", close);
-    form.addEventListener("keydown", (e) => {
-      if (e.key === "Escape" && !busy) close();
-    });
-
-    what.hidden = true;
-    li.appendChild(form);
-    textIn.focus();
   }
 
   // ---- republishing the page with a fresh snapshot (artifact capability) ----
