@@ -10,9 +10,9 @@
 <p align="center">
   <a href="https://thatrandumb1.github.io/wiiue/"><img src="https://img.shields.io/badge/live%20progress-open%20site-00a6e0?style=for-the-badge" alt="live progress: open site"></a>
   <a href="https://github.com/thatrandumb1/wiiue/releases/latest"><img src="https://img.shields.io/badge/download-demos%20for%20Windows-e60012?style=for-the-badge" alt="download: demos for Windows"></a>
-  <img src="https://img.shields.io/badge/phase-13%3A%20Real%20games-0084b8?style=for-the-badge" alt="phase: 13: Real games">
-  <img src="https://img.shields.io/badge/tests-90%20passing-3cb371?style=for-the-badge" alt="tests: 90 passing">
-  <img src="https://img.shields.io/badge/phases%20done-13%20of%2023-6b7782?style=for-the-badge" alt="phases done: 13 of 23">
+  <img src="https://img.shields.io/badge/phase-14%3A%20Speed-0084b8?style=for-the-badge" alt="phase: 14: Speed">
+  <img src="https://img.shields.io/badge/tests-118%20passing-3cb371?style=for-the-badge" alt="tests: 118 passing">
+  <img src="https://img.shields.io/badge/phases%20done-14%20of%2023-6b7782?style=for-the-badge" alt="phases done: 14 of 23">
 </p>
 
 <p align="center">
@@ -40,14 +40,14 @@ run commercial games yet.
 
 ## Recent activity
 
+- `Oct 21, 9:39 PM` · **P13** · Phase 13 done: Super Mario Maker clears the first 10 Mario Challenge course and reaches course 2, and Splatoon plays Mission 1. Both games run too slowly to play yet (Splatoon at about 1/9 speed), which is what Phase 14 is for · `3fea85e`
 - `Oct 21, 4:29 PM` · **P13** · Even more Phase 13 progress! WiiUE is still being worked on as of 10.21.2026!
+- `Oct 21, 3:29 PM` · **P13** · Splatoon reaches Mission 1: Octo Valley, the kettle Super Jump, walking and shooting. Painted ink, squid form and enemy ink all work · `dbd114d`
+- `Oct 21, 2:35 PM` · **P14** · Phase 14 started: a block JIT recompiler and a faster renderer take Super Mario Maker's title screen from about 0.17x to 0.83x real time · `732ba51`
 - `Oct 19, 12:53 AM` · **P13** · Phase 13 Progress: Splatoon graphics! Splatoon graphics have been successfully compiled! This is a huge step up from Mario Maker as Splatoon graphics are way heavier than Mario Maker graphics. Anyway, I should be done with Phase 13 soon!
 - `Oct 17, 9:05 PM` · **P13** · Phase 13 Progress: New screenshots! New screenshots showing gameplay after the main menu have been released! Along with a showcase of the 3D main menu variants.
 - `Oct 17, 5:48 PM` · **P13** · Phase 13 Progress: Phase 13 continued! Progress has resumed for WiiUE today!
 - `Oct 16, 11:39 PM` · **P13** · Update on the forks made by Astra_Intelligence! I have determined that it does not seem to harm the respitory or mislead people into downloading the wrong thing. It does seem to promote a website but other than that nothing much. I am new to GitHub so it is expected for me to be a bit concerned. Anyway, see you guys soon!
-- `Oct 16, 10:15 PM` · **P13** · In relation to WiiUE: Possible forks of this project that has a chance of being malicious. It has come to my attention that a account named Astra_Intelligence has been sneaking into other people's repositories without permission. I will look into that fork and will update you guys soon! Be on the look out! The only real page for WiiUE is https://github.com/thatrandumb1/wiiue !
-- `Oct 16, 7:55 PM` · **P13** · Phase 13 Progress: Garbled text fixed! Finally fixed the text! Screenshots will be released soon.
-- `Oct 16, 6:55 PM` · **P13** · Super Mario Maker reaches its title screen, with a 3D course behind the menu: fixed vertex formats, uniform byte order, leftover render targets and 3D textures, plus the TV's colour gamma and a faster-loading timing mode · `47d080a`
 
 ## History of the Wii U
 
@@ -78,5 +78,5 @@ The console this project brings back.
 
 ---
 
-<sub>Last updated Oct 21, 2026, 4:29 PM PDT. Full live view: <a href="https://thatrandumb1.github.io/wiiue/">https://thatrandumb1.github.io/wiiue/</a><br>
+<sub>Last updated Oct 22, 2026, 12:15 AM PDT. Full live view: <a href="https://thatrandumb1.github.io/wiiue/">https://thatrandumb1.github.io/wiiue/</a><br>
 Fan project page. Not affiliated with or endorsed by Nintendo.</sub>

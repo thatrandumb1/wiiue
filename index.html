@@ -691,6 +691,18 @@ body {
     <div class="section-head"><h2 id="shots-title">Latest screenshots</h2><span>captured by the emulator</span></div>
     <div class="shot-grid">
       <figure>
+        <img src="shots/splatoon-squid.png" alt="Splatoon Mission 1 as rendered by WiiUE: the Inkling in squid form swimming through freshly painted yellow ink on a metal rooftop, with the ink tank gauge beside it" width="1280" height="720" loading="lazy">
+        <figcaption>Splatoon Mission 1: painted ink and squid form, swimming through the player's own yellow ink (October 21, 2026).</figcaption>
+      </figure>
+      <figure>
+        <img src="shots/splatoon-mission1.png" alt="Splatoon Mission 1 as rendered by WiiUE: the Inkling on a yellow launch pad overlooking rooftops splattered with pink enemy ink, a crane and the floating stage ahead" width="1280" height="720" loading="lazy">
+        <figcaption>Inside Mission 1, "Octotrooper Hideout", with enemy ink on the rooftops ahead (October 21, 2026).</figcaption>
+      </figure>
+      <figure>
+        <img src="shots/splatoon-kettle.png" alt="Splatoon's Octo Valley as rendered by WiiUE: the Inkling standing on the Mission 1 kettle, with the banner &quot;01 Octotrooper Hideout, Catch That Zapfish!&quot; and a ZL Enter prompt" width="1280" height="720" loading="lazy">
+        <figcaption>Octo Valley: the kettle for Mission 1, "Catch That Zapfish!" (October 21, 2026).</figcaption>
+      </figure>
+      <figure>
         <img src="shots/splatoon-plaza.png" alt="Splatoon's Inkopolis Plaza as rendered by WiiUE: an Inkling in a yellow shirt standing on yellow tactile paving, facing the green Deca Tower, with other Inklings around the plaza" width="1280" height="720" loading="lazy">
         <figcaption>Splatoon: Inkopolis Plaza in third person, after fixes for GPU-compressed reflections and the color-grading LUT (October 18, 2026).</figcaption>
       </figure>
@@ -758,7 +770,7 @@ body {
      live database (signed out) still see current progress. Refreshed on every republish. -->
 <script type="application/json" id="snapshot">
 {
-  "status": {"headline": "Even more Phase 13 progress!", "detail": "WiiUE is still being worked on as of 10.21.2026!", "testCases": 90, "assertions": 1475, "commits": 62, "lastCommit": "47d080a", "instructions": 6625102041, "instructionsNote": "Super Mario Maker to its title screen in 200 seconds", "updatedAt": "2026-10-21T16:29:46-07:00", "logEditedAt": "2026-10-16T23:00:07-07:00"},
+  "status": {"headline": "Phase 14: Speed", "detail": "Super Mario Maker and Splatoon both reach gameplay, so Phase 13 is done. Now making them fast enough to play: with the new JIT, Mario Maker's title screen runs at about 0.83x real time and Splatoon's Mission 1 at about 1/9.", "testCases": 118, "assertions": 52398, "commits": 95, "lastCommit": "327f344", "instructions": 6625102041, "instructionsNote": "Super Mario Maker to its title screen in 200 seconds", "updatedAt": "2026-10-22T00:15:00-07:00", "logEditedAt": "2026-10-16T23:00:07-07:00"},
   "phases": [
     {"n": 0, "group": "Foundation", "title": "Tools", "detail": "Visual Studio, CMake, Vulkan SDK, vcpkg, devkitPro", "status": "done"},
     {"n": 1, "group": "Foundation", "title": "Project skeleton", "detail": "Folders, build system, docs, git", "status": "done"},
@@ -773,8 +785,8 @@ body {
     {"n": 10, "group": "Core emulator", "title": "Audio", "detail": "AX voices, ADPCM, mixing", "status": "done"},
     {"n": 11, "group": "Core emulator", "title": "Multi-core", "detail": "Three CPU cores, scheduler, alarms", "status": "done"},
     {"n": 12, "group": "Real console", "title": "Console dump", "detail": "System files, fonts, Miis, saves", "status": "done"},
-    {"n": 13, "group": "Real console", "title": "Real games", "detail": "First commercial game reaches gameplay", "status": "active"},
-    {"n": 14, "group": "Real console", "title": "Speed", "detail": "JIT recompiler, shader caches", "status": "later"},
+    {"n": 13, "group": "Real console", "title": "Real games", "detail": "First commercial game reaches gameplay", "status": "done"},
+    {"n": 14, "group": "Real console", "title": "Speed", "detail": "JIT recompiler, faster renderer, shader caches", "status": "active"},
     {"n": 15, "group": "Full system feel", "title": "App UI", "detail": "Game list, icons, settings", "status": "later"},
     {"n": 16, "group": "Full system feel", "title": "Wii U Menu", "detail": "Boot the dumped home menu", "status": "later"},
     {"n": 17, "group": "Full system feel", "title": "Wii games via Dolphin", "detail": "Launch vWii titles in Dolphin", "status": "later"},
@@ -785,7 +797,10 @@ body {
     {"n": 22, "group": "Hardware extras", "title": "Extras", "detail": "Camera, microphone, amiibo, save states", "status": "later"}
   ],
   "log": [
+    {"id": "e038", "at": "2026-10-21T21:39:42-07:00", "phase": 13, "text": "Phase 13 done: Super Mario Maker clears the first 10 Mario Challenge course and reaches course 2, and Splatoon plays Mission 1. Both games run too slowly to play yet (Splatoon at about 1/9 speed), which is what Phase 14 is for", "commit": "3fea85e"},
     {"id": "e035", "at": "2026-10-21T16:29:46-07:00", "phase": 13, "text": "Even more Phase 13 progress! WiiUE is still being worked on as of 10.21.2026!"},
+    {"id": "e037", "at": "2026-10-21T15:29:21-07:00", "phase": 13, "text": "Splatoon reaches Mission 1: Octo Valley, the kettle Super Jump, walking and shooting. Painted ink, squid form and enemy ink all work", "commit": "dbd114d"},
+    {"id": "e036", "at": "2026-10-21T14:35:48-07:00", "phase": 14, "text": "Phase 14 started: a block JIT recompiler and a faster renderer take Super Mario Maker's title screen from about 0.17x to 0.83x real time", "commit": "732ba51"},
     {"id": "e034", "at": "2026-10-19T00:53:10-07:00", "phase": 13, "text": "Phase 13 Progress: Splatoon graphics! Splatoon graphics have been successfully compiled! This is a huge step up from Mario Maker as Splatoon graphics are way heavier than Mario Maker graphics. Anyway, I should be done with Phase 13 soon!"},
     {"id": "e033", "at": "2026-10-17T21:05:20-07:00", "phase": 13, "text": "Phase 13 Progress: New screenshots! New screenshots showing gameplay after the main menu have been released! Along with a showcase of the 3D main menu variants."},
     {"id": "e032", "at": "2026-10-17T17:48:29-07:00", "phase": 13, "text": "Phase 13 Progress: Phase 13 continued! Progress has resumed for WiiUE today!"},
