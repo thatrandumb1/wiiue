@@ -40,6 +40,7 @@ run commercial games yet.
 
 ## Recent activity
 
+- `Oct 22, 12:42 AM` · **P14** · Phase 14: Speed Update #2. I am aiming for a new release on GitHub soon. It should be after Phase 14 is done and wrapped up. Expect it soon!
 - `Oct 21, 9:39 PM` · **P13** · Phase 13 done: Super Mario Maker clears the first 10 Mario Challenge course and reaches course 2, and Splatoon plays Mission 1. Both games run too slowly to play yet (Splatoon at about 1/9 speed), which is what Phase 14 is for · `3fea85e`
 - `Oct 21, 4:29 PM` · **P13** · Even more Phase 13 progress! WiiUE is still being worked on as of 10.21.2026!
 - `Oct 21, 3:29 PM` · **P13** · Splatoon reaches Mission 1: Octo Valley, the kettle Super Jump, walking and shooting. Painted ink, squid form and enemy ink all work · `dbd114d`
@@ -47,7 +48,6 @@ run commercial games yet.
 - `Oct 19, 12:53 AM` · **P13** · Phase 13 Progress: Splatoon graphics! Splatoon graphics have been successfully compiled! This is a huge step up from Mario Maker as Splatoon graphics are way heavier than Mario Maker graphics. Anyway, I should be done with Phase 13 soon!
 - `Oct 17, 9:05 PM` · **P13** · Phase 13 Progress: New screenshots! New screenshots showing gameplay after the main menu have been released! Along with a showcase of the 3D main menu variants.
 - `Oct 17, 5:48 PM` · **P13** · Phase 13 Progress: Phase 13 continued! Progress has resumed for WiiUE today!
-- `Oct 16, 11:39 PM` · **P13** · Update on the forks made by Astra_Intelligence! I have determined that it does not seem to harm the respitory or mislead people into downloading the wrong thing. It does seem to promote a website but other than that nothing much. I am new to GitHub so it is expected for me to be a bit concerned. Anyway, see you guys soon!
 
 ## History of the Wii U
 
@@ -78,5 +78,5 @@ The console this project brings back.
 
 ---
 
-<sub>Last updated Oct 22, 2026, 12:15 AM PDT. Full live view: <a href="https://thatrandumb1.github.io/wiiue/">https://thatrandumb1.github.io/wiiue/</a><br>
+<sub>Last updated Oct 22, 2026, 12:42 AM PDT. Full live view: <a href="https://thatrandumb1.github.io/wiiue/">https://thatrandumb1.github.io/wiiue/</a><br>
 Fan project page. Not affiliated with or endorsed by Nintendo.</sub>
