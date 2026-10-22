@@ -39,8 +39,28 @@
   --font-mono: "Nunito", "Segoe UI", system-ui, sans-serif;
   --radius-tile: 22px;
   --radius-pill: 999px;
-  /* Light theme only, whatever the viewer's system or app theme */
-  color-scheme: light;
+  /* Follows the viewer's system theme: light by default, dark below, switching live */
+  color-scheme: light dark;
+}
+@media (prefers-color-scheme: dark) {
+  :root {
+    --bg: #12171c;
+    --stripe: #161c22;
+    --surface: #1d242b;
+    --surface-2: #242c34;
+    --line: #34404a;
+    --ink: #e2e8ed;
+    --ink-soft: #9ba7b2;
+    --accent: #2cb8ec;
+    --accent-deep: #5cc8f2;
+    --accent-wash: #113646;
+    --done: #4fcb87;
+    --done-wash: #163527;
+    --later: #5e6973;
+    --logo-grey: #a3a3a3;
+    --logo-blue: #22aae2;
+    --shadow: 0 1px 0 rgba(0, 0, 0, 0.3), 0 6px 18px rgba(0, 0, 0, 0.35);
+  }
 }
 
 * { box-sizing: border-box; }
@@ -208,7 +228,7 @@ body {
   border-radius: 12px;
   padding: 9px 12px;
   background: #fff;
-  color: var(--ink);
+  color: #2f3a44; /* white fields on the blue tile in both themes */
 }
 .now-form textarea { min-height: 96px; resize: vertical; font-weight: 400; }
 .now-form .check { display: flex; align-items: center; gap: 8px; text-transform: none; letter-spacing: normal; font-size: 14px; font-weight: 600; }
@@ -222,7 +242,7 @@ body {
   cursor: pointer;
   border: 1px solid #fff;
 }
-.now-form .save { background: #fff; color: var(--accent-deep); }
+.now-form .save { background: #fff; color: #0084b8; }
 .now-form .cancel { background: transparent; color: #fff; border-color: rgba(255, 255, 255, 0.55); }
 .now-form button:disabled { opacity: 0.6; cursor: default; }
 .now-form .msg { font-size: 13px; font-weight: 700; }
