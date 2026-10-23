@@ -603,7 +603,21 @@ body {
 }
 
 /* ---- settings (bottom left): theme picker ---- */
-.settings { position: fixed; left: 16px; bottom: 16px; z-index: 5; display: grid; justify-items: start; gap: 8px; }
+/* Pinned to the corner of what's on screen: the page runs under the phone's home bar and
+   browser toolbar (viewport-fit=cover), so stay inside their safe-area insets */
+.settings {
+  position: fixed;
+  left: calc(16px + env(safe-area-inset-left, 0px));
+  bottom: calc(16px + env(safe-area-inset-bottom, 0px));
+  z-index: 5;
+  display: grid;
+  justify-items: start;
+  gap: 8px;
+}
+@media (max-width: 760px) {
+  /* Room below the last section, so the button never sits on top of it */
+  .wrap { padding-bottom: calc(76px + env(safe-area-inset-bottom, 0px)); }
+}
 .settings-button {
   display: inline-flex;
   align-items: center;
