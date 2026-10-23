@@ -589,6 +589,10 @@ body {
 .dvd-layer.off { display: none; }
 
 @media (max-width: 760px) {
+  /* The bar wraps onto several rows here: a pill's round ends would cut into them */
+  .bar { border-radius: var(--radius-tile); padding: 14px 16px; gap: 10px; }
+  .bar .brand { flex: 1 1 100%; min-width: 0; }
+  .bar .spacer { display: none; }
   .top { grid-template-columns: minmax(0, 1fr); }
   .feed li { grid-template-columns: minmax(0, 1fr); gap: 2px; }
 }
