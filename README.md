@@ -11,7 +11,7 @@
   <a href="https://thatrandumb1.github.io/wiiue/"><img src="https://img.shields.io/badge/live%20progress-open%20site-00a6e0?style=for-the-badge" alt="live progress: open site"></a>
   <a href="https://github.com/thatrandumb1/wiiue/releases/latest"><img src="https://img.shields.io/badge/download-demos%20for%20Windows-e60012?style=for-the-badge" alt="download: demos for Windows"></a>
   <img src="https://img.shields.io/badge/phase-14%3A%20Speed-0084b8?style=for-the-badge" alt="phase: 14: Speed">
-  <img src="https://img.shields.io/badge/tests-118%20passing-3cb371?style=for-the-badge" alt="tests: 118 passing">
+  <img src="https://img.shields.io/badge/tests-130%20passing-3cb371?style=for-the-badge" alt="tests: 130 passing">
   <img src="https://img.shields.io/badge/phases%20done-14%20of%2023-6b7782?style=for-the-badge" alt="phases done: 14 of 23">
 </p>
 
@@ -40,6 +40,7 @@ run commercial games yet.
 
 ## Recent activity
 
+- `Oct 23, 7:45 PM` · **P14** · Phase 14 progress: the renderer now runs on its own thread, and each of the three guest CPU cores runs on its own host thread. Splatoon's Mission 1 run takes 94 seconds for 74 seconds of game time (about 0.8x speed), down from 810 seconds when Phase 14 started. Also new: smoother audio, F11 fullscreen, the frame rate in the window title, and key bindings in controls.ini with mouse-look aiming through the GamePad gyro · `a0aa801`
 - `Oct 22, 12:42 AM` · **P14** · Phase 14: Speed Update #2. I am aiming for a new release on GitHub soon. It should be after Phase 14 is done and wrapped up. Expect it soon!
 - `Oct 21, 9:39 PM` · **P13** · Phase 13 done: Super Mario Maker clears the first 10 Mario Challenge course and reaches course 2, and Splatoon plays Mission 1. Both games run too slowly to play yet (Splatoon at about 1/9 speed), which is what Phase 14 is for · `3fea85e`
 - `Oct 21, 4:29 PM` · **P13** · Even more Phase 13 progress! WiiUE is still being worked on as of 10.21.2026!
@@ -47,7 +48,6 @@ run commercial games yet.
 - `Oct 21, 2:35 PM` · **P14** · Phase 14 started: a block JIT recompiler and a faster renderer take Super Mario Maker's title screen from about 0.17x to 0.83x real time · `732ba51`
 - `Oct 19, 12:53 AM` · **P13** · Phase 13 Progress: Splatoon graphics! Splatoon graphics have been successfully compiled! This is a huge step up from Mario Maker as Splatoon graphics are way heavier than Mario Maker graphics. Anyway, I should be done with Phase 13 soon!
 - `Oct 17, 9:05 PM` · **P13** · Phase 13 Progress: New screenshots! New screenshots showing gameplay after the main menu have been released! Along with a showcase of the 3D main menu variants.
-- `Oct 17, 5:48 PM` · **P13** · Phase 13 Progress: Phase 13 continued! Progress has resumed for WiiUE today!
 
 ## History of the Wii U
 
@@ -78,5 +78,5 @@ The console this project brings back.
 
 ---
 
-<sub>Last updated Oct 22, 2026, 12:42 AM PDT. Full live view: <a href="https://thatrandumb1.github.io/wiiue/">https://thatrandumb1.github.io/wiiue/</a><br>
+<sub>Last updated Oct 23, 2026, 7:45 PM PDT. Full live view: <a href="https://thatrandumb1.github.io/wiiue/">https://thatrandumb1.github.io/wiiue/</a><br>
 Fan project page. Not affiliated with or endorsed by Nintendo.</sub>

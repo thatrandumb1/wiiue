@@ -649,6 +649,216 @@ body {
 .settings-panel legend { padding: 0; margin-bottom: 6px; font-size: 12px; font-weight: 800; letter-spacing: 0.08em; text-transform: uppercase; color: var(--ink-soft); }
 .settings-panel label { display: flex; align-items: center; gap: 8px; font-size: 14px; font-weight: 600; cursor: pointer; }
 .settings-panel input { accent-color: var(--accent); margin: 0; }
+.settings-panel fieldset + fieldset { margin-top: 12px; }
+.settings-panel .reset {
+  font: inherit; font-size: 13px; font-weight: 700; margin-top: 4px; justify-self: start;
+  border: 1px solid var(--line); border-radius: var(--radius-pill); padding: 4px 12px;
+  background: var(--surface-2); color: var(--ink); cursor: pointer;
+}
+.settings-panel .reset:hover { border-color: var(--accent); color: var(--accent-deep); }
+
+/* ---- desktop mode (claude.ai page only; switched on by the script, never on the GitHub mirror) ----
+   The page becomes a full-screen desktop: each section is a window you can drag by its title bar,
+   minimize to the taskbar, maximize or close; open windows are tiled to fill the screen. Layout is kept in this browser.
+   Everything animates; prefers-reduced-motion turns the motion off. */
+html.desktop, html.desktop body { height: 100%; overflow: hidden; }
+html.desktop .wrap { max-width: none; padding: 8px 10px 0; gap: 0; z-index: 3; }
+html.desktop .top, html.desktop .main { display: none; }
+html.desktop .bar { animation: slide-down 0.5s cubic-bezier(0.2, 0.9, 0.3, 1.2) backwards; }
+.desk {
+  position: fixed;
+  left: 0;
+  right: 0;
+  top: var(--desk-top, 72px);
+  bottom: calc(54px + env(safe-area-inset-bottom, 0px));
+  z-index: 2;
+  pointer-events: none;
+}
+.win {
+  position: absolute;
+  display: flex;
+  flex-direction: column;
+  min-width: 0;
+  background: var(--surface);
+  border: 1px solid var(--line);
+  border-radius: 16px;
+  box-shadow: var(--shadow);
+  overflow: hidden;
+  pointer-events: auto;
+  transform-origin: 50% 100%;
+  transition: box-shadow 0.25s ease, border-color 0.25s ease, background-color 0.3s ease, opacity 0.25s ease, transform 0.25s ease;
+  animation: win-in 0.45s cubic-bezier(0.2, 0.9, 0.3, 1.15) backwards;
+  animation-delay: calc(var(--n, 0) * 70ms + 120ms);
+}
+.win[hidden] { display: none; }
+.win.anim { transition: left 0.3s cubic-bezier(0.2, 0.9, 0.3, 1), top 0.3s cubic-bezier(0.2, 0.9, 0.3, 1), width 0.3s cubic-bezier(0.2, 0.9, 0.3, 1), height 0.3s cubic-bezier(0.2, 0.9, 0.3, 1), box-shadow 0.25s ease, opacity 0.25s ease, transform 0.25s ease; }
+.win.front { border-color: var(--accent); box-shadow: 0 0 0 3px var(--accent-wash), 0 14px 40px rgba(0, 0, 0, 0.22); }
+.win.going-min { opacity: 0; transform: translateY(60%) scale(0.2); }
+.win.going-close { opacity: 0; transform: scale(0.85); }
+.win.moving { transition: none; opacity: 0.92; box-shadow: 0 0 0 3px var(--accent-wash), 0 22px 50px rgba(0, 0, 0, 0.3); }
+.win.moving, .win.moving * { user-select: none; }
+.win-bar {
+  flex: none;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  padding: 5px 6px 5px 12px;
+  background: var(--surface-2);
+  border-bottom: 1px solid var(--line);
+  cursor: grab;
+  touch-action: none;
+  user-select: none;
+  transition: background-color 0.25s ease;
+}
+.win.front .win-bar { background: var(--accent-wash); }
+.win.moving .win-bar { cursor: grabbing; }
+.win-bar:focus-visible { outline: 2px solid var(--accent); outline-offset: -2px; }
+.win-dot { width: 10px; height: 10px; border-radius: 50%; background: var(--accent); flex: none; transition: transform 0.3s ease; }
+.win.front .win-dot { animation: pulse 1.8s ease-in-out infinite; }
+.win-title { flex: 1; min-width: 0; font-size: 13px; font-weight: 800; letter-spacing: 0.04em; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.win-btn {
+  flex: none;
+  display: inline-flex; align-items: center; justify-content: center;
+  width: 28px; height: 26px; padding: 0;
+  border: 1px solid transparent; border-radius: 8px;
+  background: transparent; color: var(--ink-soft); cursor: pointer;
+  transition: background-color 0.15s ease, color 0.15s ease, transform 0.12s ease;
+}
+.win-btn svg { width: 14px; height: 14px; display: block; }
+.win-btn:hover { background: var(--surface); border-color: var(--line); color: var(--accent-deep); transform: translateY(-1px); }
+.win-btn.close:hover { background: #e5484d; border-color: transparent; color: #fff; }
+.win-btn:active { transform: scale(0.88); }
+.win-btn:focus-visible { outline: 2px solid var(--accent); outline-offset: 1px; }
+.win-body { flex: 1; min-height: 0; overflow: auto; overscroll-behavior: contain; display: grid; align-content: start; container-type: inline-size; }
+/* Narrow windows get the phone layout of their content */
+@container (max-width: 620px) {
+  .history-grid { grid-template-columns: minmax(0, 1fr); }
+  .timeline li { grid-template-columns: 66px minmax(0, 1fr); gap: 10px; }
+  .timeline li::before { left: 72px; }
+  .timeline li::after { left: 67px; }
+  .timeline time { padding-right: 12px; font-size: 12px; }
+}
+@container (max-width: 420px) {
+  .feed li { grid-template-columns: minmax(0, 1fr); gap: 2px; }
+}
+.win-body > * { animation: fade-up 0.5s ease backwards; animation-delay: calc(var(--n, 0) * 70ms + 300ms); }
+/* Sections sit flush inside their window; the title bar names them */
+.win-body > .shots, .win-body > .feed, .win-body > .history { border: 0; border-radius: 0; box-shadow: none; }
+.win-body > .roadmap, .win-body > .stats { padding: 14px; }
+.win-body > .now { border-radius: 0; min-height: 100%; box-shadow: none; align-content: start; }
+.win-body > .foot { padding: 0 14px 14px; animation-delay: 600ms; }
+.win .section-head h2 { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; }
+.win .section-head { margin-top: 0; }
+.win .stats { grid-template-columns: repeat(auto-fit, minmax(min(100%, 150px), 1fr)); align-content: start; }
+
+/* Taskbar along the bottom; the Settings button sits at its left end */
+.taskbar {
+  position: fixed; left: 0; right: 0; bottom: 0; height: calc(54px + env(safe-area-inset-bottom, 0px)); z-index: 4;
+  display: flex; align-items: center; gap: 6px;
+  padding: 0 10px env(safe-area-inset-bottom, 0px) calc(128px + env(safe-area-inset-left, 0px));
+  background: color-mix(in srgb, var(--surface) 82%, transparent);
+  backdrop-filter: blur(10px);
+  border-top: 1px solid var(--line);
+  overflow-x: auto; scrollbar-width: none;
+  animation: slide-up 0.5s cubic-bezier(0.2, 0.9, 0.3, 1.2) 0.1s backwards;
+}
+.taskbar::-webkit-scrollbar { display: none; }
+.task {
+  flex: none; position: relative;
+  display: inline-flex; align-items: center; gap: 6px;
+  font: inherit; font-size: 13px; font-weight: 700;
+  padding: 6px 12px; border-radius: 12px;
+  border: 1px solid var(--line); background: var(--surface-2); color: var(--ink-soft);
+  cursor: pointer;
+  transition: background-color 0.2s ease, color 0.2s ease, transform 0.15s ease, border-color 0.2s ease, opacity 0.2s ease;
+  animation: pop-in 0.4s cubic-bezier(0.2, 0.9, 0.3, 1.4) backwards;
+  animation-delay: calc(var(--n, 0) * 50ms + 250ms);
+}
+.task::after {
+  content: ""; position: absolute; left: 50%; bottom: 2px; width: 0; height: 3px; border-radius: 2px;
+  background: var(--accent); transform: translateX(-50%); transition: width 0.25s ease;
+}
+.task.open { color: var(--ink); }
+.task.open::after { width: 14px; }
+.task.front { background: var(--accent-wash); color: var(--accent-deep); border-color: transparent; }
+.task.front::after { width: 26px; }
+.task.closed { opacity: 0.55; border-style: dashed; }
+.task:hover { transform: translateY(-2px); border-color: var(--accent); }
+.task:active { transform: scale(0.94); }
+.task:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+html.desktop .settings { left: calc(10px + env(safe-area-inset-left, 0px)); bottom: calc(9px + env(safe-area-inset-bottom, 0px)); }
+html.desktop .settings-panel { max-height: calc(100vh - 90px); overflow-y: auto; }
+html.desktop .settings-panel:not([hidden]) { animation: pop-in 0.25s cubic-bezier(0.2, 0.9, 0.3, 1.3) backwards; transform-origin: 0 100%; }
+.settings-panel .row { display: flex; gap: 6px; flex-wrap: wrap; }
+
+/* Motion for the rest of the page's controls and content */
+html.desktop .toggle, html.desktop .settings-button, html.desktop .now-edit, html.desktop .now-form button, html.desktop .reset {
+  transition: transform 0.15s ease, background-color 0.2s ease, border-color 0.2s ease, color 0.2s ease, box-shadow 0.2s ease;
+}
+html.desktop .toggle:hover, html.desktop .settings-button:hover, html.desktop .now-edit:hover, html.desktop .now-form button:hover, html.desktop .reset:hover { transform: translateY(-2px); }
+html.desktop .toggle:active, html.desktop .settings-button:active, html.desktop .now-edit:active, html.desktop .now-form button:active, html.desktop .reset:active { transform: scale(0.94); }
+html.desktop .settings-button svg { transition: transform 0.5s ease; }
+html.desktop .settings-button[aria-expanded="true"] svg { transform: rotate(90deg); }
+html.desktop .pill { transition: background-color 0.3s ease, color 0.3s ease; }
+html.desktop .tile { animation: fade-up 0.45s ease backwards; }
+html.desktop .tiles .tile:nth-child(2) { animation-delay: 60ms; }
+html.desktop .tiles .tile:nth-child(3) { animation-delay: 120ms; }
+html.desktop .tiles .tile:nth-child(4) { animation-delay: 180ms; }
+html.desktop .tiles .tile:nth-child(5) { animation-delay: 240ms; }
+html.desktop .tiles .tile:nth-child(n+6) { animation-delay: 300ms; }
+html.desktop .tile:hover { transform: translateY(-3px) scale(1.02); box-shadow: 0 10px 24px rgba(0, 0, 0, 0.14); }
+html.desktop .tile.active { animation: fade-up 0.45s ease backwards, glow 2.4s ease-in-out 0.6s infinite; }
+html.desktop .feed li { animation: slide-in 0.4s ease backwards; transition: background-color 0.2s ease; border-radius: 10px; }
+html.desktop .feed li:nth-child(2) { animation-delay: 40ms; }
+html.desktop .feed li:nth-child(3) { animation-delay: 80ms; }
+html.desktop .feed li:nth-child(4) { animation-delay: 120ms; }
+html.desktop .feed li:nth-child(5) { animation-delay: 160ms; }
+html.desktop .feed li:nth-child(n+6) { animation-delay: 200ms; }
+html.desktop .feed li:hover { background: var(--surface-2); }
+html.desktop .stat { animation: pop-in 0.45s cubic-bezier(0.2, 0.9, 0.3, 1.3) backwards; transition: transform 0.2s ease, box-shadow 0.2s ease; }
+html.desktop .stat:nth-child(2) { animation-delay: 70ms; }
+html.desktop .stat:nth-child(3) { animation-delay: 140ms; }
+html.desktop .stat:nth-child(4) { animation-delay: 210ms; }
+html.desktop .stat:hover { transform: translateY(-3px); box-shadow: 0 10px 24px rgba(0, 0, 0, 0.14); }
+html.desktop .stat .value.bump { animation: bump 0.5s ease; }
+html.desktop .shots figure { overflow: hidden; border-radius: 16px; }
+html.desktop .shots img { transition: transform 0.4s ease, box-shadow 0.3s ease; }
+html.desktop .shots figure:hover img { transform: scale(1.04); }
+html.desktop .timeline li { animation: slide-in 0.45s ease backwards; }
+html.desktop .timeline li:nth-child(2) { animation-delay: 50ms; }
+html.desktop .timeline li:nth-child(3) { animation-delay: 100ms; }
+html.desktop .timeline li:nth-child(4) { animation-delay: 150ms; }
+html.desktop .timeline li:nth-child(n+5) { animation-delay: 200ms; }
+html.desktop .timeline li:hover::after { transform: scale(1.35); background: var(--accent); }
+html.desktop .timeline li::after { transition: transform 0.2s ease, background-color 0.2s ease; }
+html.desktop .now h1, html.desktop .now p { transition: opacity 0.3s ease; }
+html.desktop .now::after { animation: drift 9s ease-in-out infinite alternate; }
+html.desktop .now-note:not([hidden]), html.desktop .log-note:not([hidden]) { animation: fade-up 0.35s ease backwards; }
+html.desktop .bar, html.desktop .stat, html.desktop .tile, html.desktop .hw { transition-property: transform, box-shadow, background-color, border-color, color; transition-duration: 0.2s, 0.2s, 0.3s, 0.3s, 0.3s; }
+@keyframes win-in { from { opacity: 0; transform: translateY(24px) scale(0.92); } to { opacity: 1; transform: none; } }
+@keyframes fade-up { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: none; } }
+@keyframes slide-in { from { opacity: 0; transform: translateX(-12px); } to { opacity: 1; transform: none; } }
+@keyframes pop-in { from { opacity: 0; transform: scale(0.8); } to { opacity: 1; transform: none; } }
+@keyframes slide-down { from { opacity: 0; transform: translateY(-30px); } to { opacity: 1; transform: none; } }
+@keyframes slide-up { from { transform: translateY(100%); } to { transform: none; } }
+@keyframes bump { 40% { transform: scale(1.15); color: var(--accent-deep); } }
+@keyframes glow { 50% { box-shadow: 0 0 0 7px var(--accent-wash), var(--shadow); } }
+@keyframes drift { from { transform: translate(0, 0); } to { transform: translate(-40px, -30px) scale(1.15); } }
+
+.desk.ready .win { animation-delay: 0s; }
+.desk.ready .win-body > * { animation-delay: 0.1s; }
+
+/* Phones: one window at a time, full size; the taskbar switches between them */
+html.desktop.narrow .win { left: 4px !important; top: 4px !important; width: calc(100% - 8px) !important; height: calc(100% - 8px) !important; }
+html.desktop.narrow .win-bar { cursor: default; }
+html.desktop.narrow .win-btn.max { display: none; }
+html.desktop.narrow .taskbar { padding-left: calc(112px + env(safe-area-inset-left, 0px)); }
+html.desktop.narrow .settings-button { padding-right: 10px; }
+
+.sr-status { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; }
+@media (prefers-reduced-motion: reduce) {
+  html.desktop *, html.desktop *::before, html.desktop *::after { animation: none !important; transition: none !important; }
+}
 </style>
 
 <!-- Logo artwork, drawn once and reused by the header and the bouncing screensaver -->
@@ -834,7 +1044,7 @@ body {
      live database (signed out) still see current progress. Refreshed on every republish. -->
 <script type="application/json" id="snapshot">
 {
-  "status": {"headline": "Phase 14: Speed Update #2", "detail": "I am aiming for a new release on GitHub soon. It should be after Phase 14 is done and wrapped up. Expect it soon!", "testCases": 118, "assertions": 52398, "commits": 95, "lastCommit": "327f344", "instructions": 6625102041, "instructionsNote": "Super Mario Maker to its title screen in 200 seconds", "updatedAt": "2026-10-22T00:42:48-07:00", "logEditedAt": "2026-10-16T23:00:07-07:00"},
+  "status": {"headline": "Phase 14: Speed Update #2", "detail": "I am aiming for a new release on GitHub soon. It should be after Phase 14 is done and wrapped up. Expect it soon!", "testCases": 130, "assertions": 165913, "commits": 135, "lastCommit": "a0aa801", "instructions": 6625102041, "instructionsNote": "Super Mario Maker to its title screen in 200 seconds", "updatedAt": "2026-10-23T19:45:53-07:00", "logEditedAt": "2026-10-16T23:00:07-07:00"},
   "phases": [
     {"n": 0, "group": "Foundation", "title": "Tools", "detail": "Visual Studio, CMake, Vulkan SDK, vcpkg, devkitPro", "status": "done"},
     {"n": 1, "group": "Foundation", "title": "Project skeleton", "detail": "Folders, build system, docs, git", "status": "done"},
@@ -861,6 +1071,7 @@ body {
     {"n": 22, "group": "Hardware extras", "title": "Extras", "detail": "Camera, microphone, amiibo, save states", "status": "later"}
   ],
   "log": [
+    {"id": "e040", "at": "2026-10-23T19:45:53-07:00", "phase": 14, "text": "Phase 14 progress: the renderer now runs on its own thread, and each of the three guest CPU cores runs on its own host thread. Splatoon's Mission 1 run takes 94 seconds for 74 seconds of game time (about 0.8x speed), down from 810 seconds when Phase 14 started. Also new: smoother audio, F11 fullscreen, the frame rate in the window title, and key bindings in controls.ini with mouse-look aiming through the GamePad gyro", "commit": "a0aa801"},
     {"id": "e039", "at": "2026-10-22T00:42:48-07:00", "phase": 14, "text": "Phase 14: Speed Update #2. I am aiming for a new release on GitHub soon. It should be after Phase 14 is done and wrapped up. Expect it soon!"},
     {"id": "e038", "at": "2026-10-21T21:39:42-07:00", "phase": 13, "text": "Phase 13 done: Super Mario Maker clears the first 10 Mario Challenge course and reaches course 2, and Splatoon plays Mission 1. Both games run too slowly to play yet (Splatoon at about 1/9 speed), which is what Phase 14 is for", "commit": "3fea85e"},
     {"id": "e035", "at": "2026-10-21T16:29:46-07:00", "phase": 13, "text": "Even more Phase 13 progress! WiiUE is still being worked on as of 10.21.2026!"},
@@ -1502,8 +1713,401 @@ body {
     setRunning(pref === "on");
     requestAnimationFrame(frame);
   }
+  // ---- desktop mode: every section is a window, tiled to fill the screen ----
+  // Open windows always share the whole desktop: closing, minimizing or reopening one reflows the
+  // rest. Drag a title bar to swap places, maximize to cover the desktop. Layout kept in this browser.
+  // A test on the claude.ai page only: the GitHub Pages mirror keeps the fixed layout.
+  // Built at runtime after PAGE_SOURCE is captured, so none of it reaches a republish.
+  function startDesktop() {
+    if (/(^|\.)github\.io$/i.test(location.hostname)) return;
+    const WINS = [
+      { id: "now", name: "Now working on", short: "Now", el: document.querySelector(".now") },
+      { id: "stats", name: "Stats", short: "Stats", el: document.querySelector(".stats") },
+      { id: "shots", name: "Latest screenshots", short: "Screenshots", el: document.querySelector(".shots") },
+      { id: "roadmap", name: "Roadmap", short: "Roadmap", el: document.querySelector(".roadmap") },
+      { id: "feed", name: "Activity", short: "Activity", el: document.querySelector(".feed") },
+      { id: "history", name: "History of the Wii U", short: "History", el: document.querySelector(".history") },
+    ].filter((c) => c.el);
+    const bar = document.querySelector(".bar");
+    if (!bar || WINS.length === 0) return;
+    const IDS = WINS.map((c) => c.id);
+    const ICON = {
+      min: '<svg viewBox="0 0 16 16" aria-hidden="true"><path fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" d="M3.5 11.5h9"/></svg>',
+      max: '<svg viewBox="0 0 16 16" aria-hidden="true"><rect x="3.5" y="3.5" width="9" height="9" rx="1.5" fill="none" stroke="currentColor" stroke-width="1.6"/></svg>',
+      unmax: '<svg viewBox="0 0 16 16" aria-hidden="true"><path fill="none" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round" d="M5.5 5.5V3.5h7v7h-2M3.5 5.5h7v7h-7z"/></svg>',
+      close: '<svg viewBox="0 0 16 16" aria-hidden="true"><path fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" d="M4 4l8 8M12 4l-8 8"/></svg>',
+    };
+    const MOTION = !window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+
+    // Saved layout: { order: [...ids], z: [back..front], max: [], min: [], closed: [] }
+    const fresh = () => ({ order: IDS.slice(), z: IDS.slice().reverse(), max: [], min: [], closed: [] });
+    let state = fresh();
+    try {
+      const saved = JSON.parse(loadPref("desktop", "null"));
+      if (saved && Array.isArray(saved.order)) {
+        const pick = (a) => (Array.isArray(a) ? a.filter((id) => IDS.includes(id)) : []);
+        const order = pick(saved.order);
+        state.order = order.concat(IDS.filter((id) => !order.includes(id)));
+        const z = pick(saved.z);
+        state.z = IDS.filter((id) => !z.includes(id)).concat(z);
+        state.max = pick(saved.max);
+        state.min = pick(saved.min);
+        state.closed = pick(saved.closed);
+      }
+    } catch (e) {
+      /* bad or missing saved layout: use the default */
+    }
+    const save = () => savePref("desktop", JSON.stringify(state));
+    const has = (list, id) => state[list].includes(id);
+    const drop = (list, id) => { state[list] = state[list].filter((x) => x !== id); };
+    const add = (list, id) => { if (!has(list, id)) state[list].push(id); };
+    const shown = (id) => !has("min", id) && !has("closed", id);
+    const tiledIds = () => state.order.filter(shown);
+
+    const root = document.documentElement;
+    root.classList.add("desktop");
+    const narrowQuery = window.matchMedia("(max-width: 760px)");
+    const setNarrow = () => root.classList.toggle("narrow", narrowQuery.matches);
+    setNarrow();
+
+    const desk = document.createElement("div");
+    desk.className = "desk";
+    desk.id = "desk";
+    document.body.appendChild(desk);
+    const taskbar = document.createElement("nav");
+    taskbar.className = "taskbar";
+    taskbar.setAttribute("aria-label", "Windows");
+    document.body.appendChild(taskbar);
+    const live = document.createElement("p");
+    live.className = "sr-status";
+    live.setAttribute("role", "status");
+    document.body.appendChild(live);
+    const say = (text) => { live.textContent = ""; setTimeout(() => { live.textContent = text; }, 30); };
+
+    // The desktop starts just under the status bar, which wraps to more lines on narrow screens and
+    // grows when the web font arrives (layout box, not getBoundingClientRect: the bar slides in on load)
+    function placeDesk() {
+      desk.style.setProperty("--desk-top", Math.round(bar.offsetTop + bar.offsetHeight + 8) + "px");
+    }
+    placeDesk();
+    if (window.ResizeObserver) new ResizeObserver(placeDesk).observe(bar);
+    if (document.fonts && document.fonts.ready) document.fonts.ready.then(placeDesk);
+
+    function button(cls, icon, label) {
+      const b = document.createElement("button");
+      b.type = "button";
+      b.className = "win-btn " + cls;
+      b.innerHTML = ICON[icon];
+      b.setAttribute("aria-label", label);
+      b.title = label;
+      return b;
+    }
+
+    const byId = {};
+    WINS.forEach((c, n) => {
+      const w = document.createElement("section");
+      w.className = "win";
+      w.style.setProperty("--n", n);
+      w.setAttribute("aria-label", c.name + " window");
+      const head = document.createElement("div");
+      head.className = "win-bar";
+      head.tabIndex = 0;
+      head.setAttribute("aria-label", c.name + ". Drag, or use arrow keys, to swap places with another window. Enter maximizes.");
+      const dot = document.createElement("span");
+      dot.className = "win-dot";
+      const title = document.createElement("span");
+      title.className = "win-title";
+      title.textContent = c.name;
+      const min = button("min", "min", "Minimize " + c.name);
+      const max = button("max", "max", "Maximize " + c.name);
+      const close = button("close", "close", "Close " + c.name);
+      head.append(dot, title, min, max, close);
+      const body = document.createElement("div");
+      body.className = "win-body";
+      body.appendChild(c.el);
+      w.append(head, body);
+      desk.appendChild(w);
+
+      const task = document.createElement("button");
+      task.type = "button";
+      task.className = "task";
+      task.style.setProperty("--n", n);
+      task.textContent = c.short;
+      task.title = c.name;
+      taskbar.appendChild(task);
+
+      byId[c.id] = { card: c, w, head, body, min, max, close, task };
+      min.addEventListener("click", () => minimize(c.id));
+      max.addEventListener("click", () => toggleMax(c.id));
+      close.addEventListener("click", () => closeWin(c.id));
+      head.addEventListener("dblclick", (e) => { if (!e.target.closest("button")) toggleMax(c.id); });
+      w.addEventListener("pointerdown", () => raise(c.id), true);
+      w.addEventListener("focusin", () => { if (state.z[state.z.length - 1] !== c.id) raise(c.id); });
+      task.addEventListener("click", () => {
+        if (!shown(c.id)) restore(c.id);
+        else if (topmost() === c.id) minimize(c.id);
+        else { raise(c.id); byId[c.id].head.focus({ preventScroll: true }); }
+      });
+      head.addEventListener("keydown", (e) => keyMove(c.id, e));
+      startDrag(c.id, head);
+    });
+    // The footer travels with the history window
+    const foot = document.querySelector(".foot");
+    if (foot && byId.history) byId.history.body.appendChild(foot);
+
+    const topmost = () => state.z.filter(shown).pop();
+
+    // Grid slots (fractions of the desktop) for n windows: about as many columns as suit the
+    // desktop's shape, rows filled left to right, and a short last row stretched to the full width
+    function slots(n) {
+      const d = desk.getBoundingClientRect();
+      const aspect = d.height > 0 ? d.width / d.height : 1.6;
+      let cols = Math.max(1, Math.min(n, Math.round(Math.sqrt((n * aspect) / 1.3))));
+      if (root.classList.contains("narrow")) cols = 1;
+      const rows = Math.ceil(n / cols);
+      const out = [];
+      for (let i = 0; i < n; i++) {
+        const row = Math.floor(i / cols);
+        const inRow = row === rows - 1 ? n - row * cols : cols;
+        const col = i - row * cols;
+        out.push({ x: col / inRow, y: row / rows, w: 1 / inRow, h: 1 / rows });
+      }
+      return out;
+    }
+
+    function setRect(id, q) {
+      const s = byId[id].w.style;
+      s.left = "calc(" + (q.x * 100).toFixed(3) + "% + 4px)";
+      s.top = "calc(" + (q.y * 100).toFixed(3) + "% + 4px)";
+      s.width = "calc(" + (q.w * 100).toFixed(3) + "% - 8px)";
+      s.height = "calc(" + (q.h * 100).toFixed(3) + "% - 8px)";
+    }
+
+    // Lay out every open window; `skip` is the one the pointer is carrying
+    function layout(skip) {
+      const ids = tiledIds();
+      const grid = slots(ids.length);
+      ids.forEach((id, i) => {
+        if (id === skip) return;
+        if (has("max", id)) setRect(id, { x: 0, y: 0, w: 1, h: 1 });
+        else setRect(id, grid[i]);
+      });
+      return grid;
+    }
+
+    function apply(skip) {
+      const top = topmost();
+      state.z.forEach((id, i) => { byId[id].w.style.zIndex = String(i + 1); });
+      for (const id of IDS) {
+        const r = byId[id];
+        const isMax = has("max", id);
+        r.w.classList.toggle("max", isMax);
+        r.w.classList.toggle("front", id === top);
+        r.max.innerHTML = isMax ? ICON.unmax : ICON.max;
+        const verb = isMax ? "Restore " : "Maximize ";
+        r.max.setAttribute("aria-label", verb + r.card.name);
+        r.max.title = verb + r.card.name;
+        r.task.classList.toggle("open", shown(id));
+        r.task.classList.toggle("front", id === top);
+        r.task.classList.toggle("closed", has("closed", id));
+        r.task.setAttribute("aria-pressed", String(id === top));
+        r.task.setAttribute("aria-label", r.card.name + (has("closed", id) ? " (closed)" : has("min", id) ? " (minimized)" : ""));
+        if (!r.leaving) r.w.hidden = !shown(id);
+      }
+      layout(skip);
+    }
+
+    // Size and position changes glide unless the pointer is driving them
+    function glide(ids) {
+      if (!MOTION) return;
+      for (const id of ids) {
+        const r = byId[id];
+        if (r.w.classList.contains("moving")) continue;
+        r.w.classList.add("anim");
+        clearTimeout(r.glideTimer);
+        r.glideTimer = setTimeout(() => r.w.classList.remove("anim"), 350);
+      }
+    }
+    const reflow = () => { glide(IDS); apply(); };
+
+    function raise(id) {
+      if (state.z[state.z.length - 1] === id) return;
+      state.z = state.z.filter((x) => x !== id).concat(id);
+      save();
+      apply(dragging);
+    }
+
+    // Play the leave animation, then hide; the others close the gap
+    function leave(id, cls) {
+      const r = byId[id];
+      if (!MOTION) { apply(); return; }
+      r.leaving = true;
+      r.w.classList.add(cls);
+      setTimeout(() => {
+        r.leaving = false;
+        r.w.classList.remove(cls);
+        apply();
+      }, 240);
+    }
+
+    function minimize(id) {
+      add("min", id);
+      save();
+      leave(id, "going-min");
+      reflow();
+      say(byId[id].card.name + " minimized to the taskbar");
+      byId[id].task.focus({ preventScroll: true });
+    }
+
+    function closeWin(id) {
+      add("closed", id);
+      drop("min", id);
+      drop("max", id);
+      save();
+      leave(id, "going-close");
+      reflow();
+      say(byId[id].card.name + " closed. Reopen it from the taskbar.");
+      byId[id].task.focus({ preventScroll: true });
+    }
+
+    function restore(id) {
+      drop("min", id);
+      drop("closed", id);
+      state.z = state.z.filter((x) => x !== id).concat(id);
+      save();
+      glide(IDS.filter((x) => x !== id));
+      apply();
+      byId[id].head.focus({ preventScroll: true });
+      say(byId[id].card.name + " opened");
+    }
+
+    function toggleMax(id) {
+      if (has("max", id)) drop("max", id);
+      else add("max", id);
+      state.z = state.z.filter((x) => x !== id).concat(id);
+      save();
+      glide([id]);
+      apply();
+    }
+
+    // Swap places with the window in slot `to` (among the open windows)
+    function moveTo(id, to) {
+      const ids = tiledIds();
+      const from = ids.indexOf(id);
+      if (from < 0 || to === from || to < 0 || to >= ids.length) return false;
+      const other = ids[to];
+      const a = state.order.indexOf(id);
+      const b = state.order.indexOf(other);
+      state.order[a] = other;
+      state.order[b] = id;
+      return true;
+    }
+
+    // Drag a title bar: the window follows the pointer and the others slide out of the slot under it
+    let dragging = null;
+    function startDrag(id, handle) {
+      let pointer = null;
+      let start = null;
+      handle.addEventListener("pointerdown", (e) => {
+        if (e.button !== 0 || pointer !== null || e.target.closest("button")) return;
+        if (root.classList.contains("narrow") || has("max", id)) return;
+        pointer = e.pointerId;
+        const d = desk.getBoundingClientRect();
+        const r = byId[id].w.getBoundingClientRect();
+        start = { px: e.clientX, py: e.clientY, d, left: r.left - d.left, top: r.top - d.top };
+        try { handle.setPointerCapture(pointer); } catch (err) { /* ignore */ }
+        dragging = id;
+        byId[id].w.classList.remove("anim");
+        byId[id].w.classList.add("moving");
+        e.preventDefault();
+      });
+      handle.addEventListener("pointermove", (e) => {
+        if (e.pointerId !== pointer) return;
+        const s = byId[id].w.style;
+        s.left = start.left + e.clientX - start.px + "px";
+        s.top = start.top + e.clientY - start.py + "px";
+        // The slot whose centre is nearest the pointer
+        const fx = (e.clientX - start.d.left) / start.d.width;
+        const fy = (e.clientY - start.d.top) / start.d.height;
+        const grid = slots(tiledIds().length);
+        let best = 0;
+        let bestDist = Infinity;
+        grid.forEach((q, i) => {
+          const dist = Math.hypot(q.x + q.w / 2 - fx, q.y + q.h / 2 - fy);
+          if (dist < bestDist) { bestDist = dist; best = i; }
+        });
+        if (moveTo(id, best)) {
+          glide(IDS);
+          layout(id);
+        }
+      });
+      const end = (e) => {
+        if (e.pointerId !== pointer) return;
+        pointer = null;
+        dragging = null;
+        byId[id].w.classList.remove("moving");
+        save();
+        reflow();
+      };
+      handle.addEventListener("pointerup", end);
+      handle.addEventListener("pointercancel", end);
+    }
+
+    // Keyboard: arrows swap with the neighbouring window, Enter maximizes
+    function keyMove(id, e) {
+      if (e.target !== byId[id].head) return;
+      if (e.key === "Enter") { e.preventDefault(); toggleMax(id); return; }
+      const step = { ArrowLeft: -1, ArrowUp: -1, ArrowRight: 1, ArrowDown: 1 }[e.key];
+      if (!step || has("max", id)) return;
+      e.preventDefault();
+      const ids = tiledIds();
+      if (moveTo(id, ids.indexOf(id) + step)) {
+        save();
+        reflow();
+        const now = tiledIds();
+        say(byId[id].card.name + " moved to place " + (now.indexOf(id) + 1) + " of " + now.length);
+      }
+    }
+
+    // Phones and resizes: retile for the new shape (instantly)
+    window.addEventListener("resize", () => apply(dragging));
+    if (narrowQuery.addEventListener) narrowQuery.addEventListener("change", () => { setNarrow(); reflow(); });
+
+    // Stat numbers bump when they change
+    for (const v of document.querySelectorAll(".stat .value")) {
+      new MutationObserver(() => {
+        v.classList.remove("bump");
+        void v.offsetWidth;
+        v.classList.add("bump");
+      }).observe(v, { childList: true, characterData: true, subtree: true });
+    }
+
+    // Settings: bring every window back in the original order
+    const panel = $("settings-panel");
+    const set = document.createElement("fieldset");
+    const legend = document.createElement("legend");
+    legend.textContent = "Windows";
+    const reset = document.createElement("button");
+    reset.type = "button";
+    reset.className = "reset";
+    reset.textContent = "Reset layout";
+    reset.addEventListener("click", () => {
+      state = fresh();
+      save();
+      reflow();
+      say("Window layout reset");
+    });
+    set.append(legend, reset);
+    panel.appendChild(set);
+
+    apply();
+    // After the opening animation, reopened windows animate in without the staggered delay
+    setTimeout(() => desk.classList.add("ready"), 1200);
+  }
+
   startScreensaver();
   startSettings();
+  startDesktop();
 
   start();
 })();
