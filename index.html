@@ -1044,7 +1044,7 @@ html.desktop.narrow .settings-button { padding-right: 10px; }
      live database (signed out) still see current progress. Refreshed on every republish. -->
 <script type="application/json" id="snapshot">
 {
-  "status": {"headline": "Phase 14: Speed Update #2", "detail": "I am aiming for a new release on GitHub soon. It should be after Phase 14 is done and wrapped up. Expect it soon!", "testCases": 130, "assertions": 165913, "commits": 135, "lastCommit": "a0aa801", "instructions": 6625102041, "instructionsNote": "Super Mario Maker to its title screen in 200 seconds", "updatedAt": "2026-10-23T19:45:53-07:00", "logEditedAt": "2026-10-16T23:00:07-07:00"},
+  "status": {"headline": "Phase 14: Speed Update #2", "detail": "I am aiming for a new release on GitHub soon. It should be after Phase 14 is done and wrapped up. Expect it soon!", "testCases": 133, "assertions": 167441, "commits": 140, "lastCommit": "271a0e6", "instructions": 6625102041, "instructionsNote": "Super Mario Maker to its title screen in 200 seconds", "updatedAt": "2026-10-25T18:20:46-07:00", "logEditedAt": "2026-10-16T23:00:07-07:00"},
   "phases": [
     {"n": 0, "group": "Foundation", "title": "Tools", "detail": "Visual Studio, CMake, Vulkan SDK, vcpkg, devkitPro", "status": "done"},
     {"n": 1, "group": "Foundation", "title": "Project skeleton", "detail": "Folders, build system, docs, git", "status": "done"},
@@ -1071,6 +1071,7 @@ html.desktop.narrow .settings-button { padding-right: 10px; }
     {"n": 22, "group": "Hardware extras", "title": "Extras", "detail": "Camera, microphone, amiibo, save states", "status": "later"}
   ],
   "log": [
+    {"id": "e041", "at": "2026-10-25T18:20:46-07:00", "phase": 14, "text": "Phase 14 progress: a faster JIT. Compiled code no longer saves the CPU state before every memory access (a fault works it out afterwards), compiled blocks jump straight to each other, and function returns go straight back to their caller. Splatoon's busiest CPU core now needs 16-28% fewer cycles for the Mission 1 run. Also new: the host profiler samples every guest core.", "commit": "271a0e6"},
     {"id": "e040", "at": "2026-10-23T19:45:53-07:00", "phase": 14, "text": "Phase 14 progress: the renderer now runs on its own thread, and each of the three guest CPU cores runs on its own host thread. Splatoon's Mission 1 run takes 94 seconds for 74 seconds of game time (about 0.8x speed), down from 810 seconds when Phase 14 started. Also new: smoother audio, F11 fullscreen, the frame rate in the window title, and key bindings in controls.ini with mouse-look aiming through the GamePad gyro", "commit": "a0aa801"},
     {"id": "e039", "at": "2026-10-22T00:42:48-07:00", "phase": 14, "text": "Phase 14: Speed Update #2. I am aiming for a new release on GitHub soon. It should be after Phase 14 is done and wrapped up. Expect it soon!"},
     {"id": "e038", "at": "2026-10-21T21:39:42-07:00", "phase": 13, "text": "Phase 13 done: Super Mario Maker clears the first 10 Mario Challenge course and reaches course 2, and Splatoon plays Mission 1. Both games run too slowly to play yet (Splatoon at about 1/9 speed), which is what Phase 14 is for", "commit": "3fea85e"},
