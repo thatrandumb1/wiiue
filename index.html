@@ -206,6 +206,7 @@ body {
   text-wrap: balance;
 }
 .now p { margin: 0; max-width: 60ch; font-size: 15px; opacity: 0.95; }
+.now-date { font-size: 13px; font-weight: 700; opacity: 0.85; margin-top: -4px; }
 .meter {
   margin-top: 6px;
   height: 12px;
@@ -920,6 +921,7 @@ html.desktop.narrow .settings-button { padding-right: 10px; }
         <button type="button" class="now-edit" id="now-edit" hidden>Post update</button>
       </div>
       <h1 id="now-title">Waiting for the first update</h1>
+      <time class="now-date" id="now-date" hidden></time>
       <p id="now-text">Progress appears here as each phase is built and tested.</p>
       <form class="now-form" id="now-form" hidden>
         <label>Headline<input type="text" id="now-in-title" maxlength="140" required></label>
@@ -1185,6 +1187,16 @@ html.desktop.narrow .settings-button { padding-right: 10px; }
     $("now-eyebrow").textContent = active ? "Now working on · Phase " + active.n : "Now working on";
     $("now-title").textContent = status.headline || (active ? active.title : "Between phases");
     $("now-text").textContent = status.detail || (active ? active.detail : "");
+    const posted = status.updatedAt ? new Date(Date.parse(status.updatedAt)) : null;
+    const dateEl = $("now-date");
+    if (posted && !Number.isNaN(posted.getTime())) {
+      dateEl.textContent = "Posted " + posted.toLocaleDateString(undefined, { year: "numeric", month: "long", day: "numeric" });
+      dateEl.dateTime = status.updatedAt;
+      dateEl.hidden = !$("now-form").hidden;
+    } else {
+      dateEl.textContent = "";
+      dateEl.hidden = true;
+    }
     $("stat-tests").textContent = status.testCases != null ? String(status.testCases) : "–";
     $("stat-tests-sub").textContent = status.assertions != null ? status.assertions + " checks, all passing" : "unit tests";
     $("stat-commits").textContent = status.commits != null ? String(status.commits) : "–";
@@ -1356,6 +1368,7 @@ html.desktop.narrow .settings-button { padding-right: 10px; }
       form.hidden = !on;
       button.hidden = on;
       for (const e of shown) e.hidden = on;
+      $("now-date").hidden = on || !$("now-date").textContent;
       msg.textContent = "";
       if (on) {
         title.value = (status && status.headline) || "";
