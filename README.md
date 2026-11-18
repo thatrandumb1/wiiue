@@ -40,6 +40,7 @@ run commercial games yet.
 
 ## Recent activity
 
+- `Nov 17, 9:30 PM` · **P14** · Phase 14 Update. Sorry for the absence! I am still working on this project, just took a little break before getting back to work on the project, I will announce a release date when all of the phases of WiiUE are done! See you all soon!
 - `Oct 25, 6:20 PM` · **P14** · Phase 14 progress: a faster JIT. Compiled code no longer saves the CPU state before every memory access (a fault works it out afterwards), compiled blocks jump straight to each other, and function returns go straight back to their caller. Splatoon's busiest CPU core now needs 16-28% fewer cycles for the Mission 1 run. Also new: the host profiler samples every guest core. · `271a0e6`
 - `Oct 23, 7:45 PM` · **P14** · Phase 14 progress: the renderer now runs on its own thread, and each of the three guest CPU cores runs on its own host thread. Splatoon's Mission 1 run takes 94 seconds for 74 seconds of game time (about 0.8x speed), down from 810 seconds when Phase 14 started. Also new: smoother audio, F11 fullscreen, the frame rate in the window title, and key bindings in controls.ini with mouse-look aiming through the GamePad gyro · `a0aa801`
 - `Oct 22, 12:42 AM` · **P14** · Phase 14: Speed Update #2. I am aiming for a new release on GitHub soon. It should be after Phase 14 is done and wrapped up. Expect it soon!
@@ -47,7 +48,6 @@ run commercial games yet.
 - `Oct 21, 4:29 PM` · **P13** · Even more Phase 13 progress! WiiUE is still being worked on as of 10.21.2026!
 - `Oct 21, 3:29 PM` · **P13** · Splatoon reaches Mission 1: Octo Valley, the kettle Super Jump, walking and shooting. Painted ink, squid form and enemy ink all work · `dbd114d`
 - `Oct 21, 2:35 PM` · **P14** · Phase 14 started: a block JIT recompiler and a faster renderer take Super Mario Maker's title screen from about 0.17x to 0.83x real time · `732ba51`
-- `Oct 19, 12:53 AM` · **P13** · Phase 13 Progress: Splatoon graphics! Splatoon graphics have been successfully compiled! This is a huge step up from Mario Maker as Splatoon graphics are way heavier than Mario Maker graphics. Anyway, I should be done with Phase 13 soon!
 
 ## History of the Wii U
 
@@ -78,5 +78,5 @@ The console this project brings back.
 
 ---
 
-<sub>Last updated Oct 25, 2026, 6:20 PM PDT. Full live view: <a href="https://thatrandumb1.github.io/wiiue/">https://thatrandumb1.github.io/wiiue/</a><br>
+<sub>Last updated Nov 17, 2026, 9:30 PM PST. Full live view: <a href="https://thatrandumb1.github.io/wiiue/">https://thatrandumb1.github.io/wiiue/</a><br>
 Fan project page. Not affiliated with or endorsed by Nintendo.</sub>
