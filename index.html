@@ -683,7 +683,7 @@ body {
 }
 .settings-panel .reset:hover { border-color: var(--accent); color: var(--accent-deep); }
 
-/* ---- desktop mode (claude.ai page only; switched on by the script, never on the GitHub mirror) ----
+/* ---- desktop mode (optional: Settings > Layout > Desktop; Simple is the default) ----
    The page becomes a full-screen desktop: each section is a window you can drag by its title bar,
    minimize to the taskbar, maximize or close; open windows are tiled to fill the screen. Layout is kept in this browser.
    Everything animates; prefers-reduced-motion turns the motion off. */
@@ -1073,6 +1073,11 @@ html.desktop.narrow .settings-button { padding-right: 10px; }
       <label><input type="radio" name="theme" value="light"> Light</label>
       <label><input type="radio" name="theme" value="dark"> Dark</label>
       <label><input type="radio" name="theme" value="gold"> Gold</label>
+    </fieldset>
+    <fieldset>
+      <legend>Layout</legend>
+      <label><input type="radio" name="layout" value="simple" checked> Simple</label>
+      <label><input type="radio" name="layout" value="desktop"> Desktop</label>
     </fieldset>
   </div>
 </div>
@@ -1798,10 +1803,10 @@ html.desktop.narrow .settings-button { padding-right: 10px; }
   // ---- desktop mode: every section is a window, tiled to fill the screen ----
   // Open windows always share the whole desktop: closing, minimizing or reopening one reflows the
   // rest. Drag a title bar to swap places, maximize to cover the desktop. Layout kept in this browser.
-  // A test on the claude.ai page only: the GitHub Pages mirror keeps the fixed layout.
+  // Optional: picked under Settings > Layout (Simple is the default). Returns a function that
+  // puts every section back into the simple page.
   // Built at runtime after PAGE_SOURCE is captured, so none of it reaches a republish.
   function startDesktop() {
-    if (/(^|\.)github\.io$/i.test(location.hostname)) return;
     const WINS = [
       { id: "now", name: "Now working on", short: "Now", el: document.querySelector(".now") },
       { id: "stats", name: "Stats", short: "Stats", el: document.querySelector(".stats") },
@@ -1811,8 +1816,13 @@ html.desktop.narrow .settings-button { padding-right: 10px; }
       { id: "history", name: "History of the Wii U", short: "History", el: document.querySelector(".history") },
     ].filter((c) => c.el);
     const bar = document.querySelector(".bar");
-    if (!bar || WINS.length === 0) return;
+    if (!bar || WINS.length === 0) return null;
     const IDS = WINS.map((c) => c.id);
+    // Where each section lives in the simple page, to put it back when leaving desktop mode
+    const footEl = document.querySelector(".foot");
+    const homes = WINS.map((c) => c.el).concat(footEl ? [footEl] : []).map((el) => ({ el, parent: el.parentNode, next: el.nextSibling }));
+    const listeners = new AbortController();
+    const observers = [];
     const ICON = {
       min: '<svg viewBox="0 0 16 16" aria-hidden="true"><path fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" d="M3.5 11.5h9"/></svg>',
       max: '<svg viewBox="0 0 16 16" aria-hidden="true"><rect x="3.5" y="3.5" width="9" height="9" rx="1.5" fill="none" stroke="currentColor" stroke-width="1.6"/></svg>',
@@ -1872,7 +1882,11 @@ html.desktop.narrow .settings-button { padding-right: 10px; }
       desk.style.setProperty("--desk-top", Math.round(bar.offsetTop + bar.offsetHeight + 8) + "px");
     }
     placeDesk();
-    if (window.ResizeObserver) new ResizeObserver(placeDesk).observe(bar);
+    if (window.ResizeObserver) {
+      const ro = new ResizeObserver(placeDesk);
+      ro.observe(bar);
+      observers.push(ro);
+    }
     if (document.fonts && document.fonts.ready) document.fonts.ready.then(placeDesk);
 
     function button(cls, icon, label) {
@@ -2152,16 +2166,18 @@ html.desktop.narrow .settings-button { padding-right: 10px; }
     }
 
     // Phones and resizes: retile for the new shape (instantly)
-    window.addEventListener("resize", () => apply(dragging));
-    if (narrowQuery.addEventListener) narrowQuery.addEventListener("change", () => { setNarrow(); reflow(); });
+    window.addEventListener("resize", () => apply(dragging), { signal: listeners.signal });
+    if (narrowQuery.addEventListener) narrowQuery.addEventListener("change", () => { setNarrow(); reflow(); }, { signal: listeners.signal });
 
     // Stat numbers bump when they change
     for (const v of document.querySelectorAll(".stat .value")) {
-      new MutationObserver(() => {
+      const mo = new MutationObserver(() => {
         v.classList.remove("bump");
         void v.offsetWidth;
         v.classList.add("bump");
-      }).observe(v, { childList: true, characterData: true, subtree: true });
+      });
+      mo.observe(v, { childList: true, characterData: true, subtree: true });
+      observers.push(mo);
     }
 
     // Settings: bring every window back in the original order
@@ -2185,11 +2201,44 @@ html.desktop.narrow .settings-button { padding-right: 10px; }
     apply();
     // After the opening animation, reopened windows animate in without the staggered delay
     setTimeout(() => desk.classList.add("ready"), 1200);
+
+    return function stopDesktop() {
+      listeners.abort();
+      for (const o of observers) o.disconnect();
+      for (const h of homes) h.parent.insertBefore(h.el, h.next && h.next.parentNode === h.parent ? h.next : null);
+      desk.remove();
+      taskbar.remove();
+      live.remove();
+      set.remove();
+      root.classList.remove("desktop", "narrow");
+    };
+  }
+
+  // ---- layout: Simple (default) or Desktop, kept in this browser ----
+  function startLayout() {
+    const radios = document.querySelectorAll('input[name="layout"]');
+    let stop = null;
+    function use(layout) {
+      if (layout === "desktop" && !stop) stop = startDesktop();
+      else if (layout !== "desktop" && stop) {
+        stop();
+        stop = null;
+      }
+      for (const r of radios) r.checked = r.value === (stop ? "desktop" : "simple");
+    }
+    for (const r of radios) {
+      r.addEventListener("change", () => {
+        if (!r.checked) return;
+        savePref("layout", r.value);
+        use(r.value);
+      });
+    }
+    use(loadPref("layout", "simple"));
   }
 
   startScreensaver();
   startSettings();
-  startDesktop();
+  startLayout();
 
   start();
 })();
