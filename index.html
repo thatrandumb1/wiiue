@@ -677,6 +677,24 @@ body {
 /* Radio buttons and ticks look the same in every theme: Wii U blue, light style */
 .settings-panel input, .now-form input[type="checkbox"] { accent-color: #00a6e0; color-scheme: light; }
 .settings-panel input { margin: 0; }
+/* Drawn by hand so the browser's light/dark styles never change them */
+.settings-panel input[type="radio"] {
+  appearance: none;
+  -webkit-appearance: none;
+  flex: none;
+  width: 16px;
+  height: 16px;
+  border-radius: 50%;
+  border: 2px solid #b7c0c8;
+  background: #fff;
+  cursor: pointer;
+  transition: border-color 0.15s ease, background 0.15s ease;
+}
+.settings-panel input[type="radio"]:hover { border-color: #00a6e0; }
+.settings-panel input[type="radio"]:checked {
+  border-color: #00a6e0;
+  background: radial-gradient(circle, #00a6e0 0 3.5px, var(--surface) 4px);
+}
 .settings-panel fieldset + fieldset { margin-top: 12px; }
 .settings-panel .reset {
   font: inherit; font-size: 13px; font-weight: 700; margin-top: 4px; justify-self: start;
