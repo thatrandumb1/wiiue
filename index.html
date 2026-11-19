@@ -9,8 +9,8 @@
 <body>
 <!--page-start-->
 <script>
-/* Theme picked in the settings (light or dark; none = follow the system), applied before first paint */
-try { var t = localStorage.getItem("wiiue-theme"); if (t === "light" || t === "dark") document.documentElement.dataset.theme = t; } catch (e) {}
+/* Theme picked in the settings (light, dark or gold; none = follow the system), applied before first paint */
+try { var t = localStorage.getItem("wiiue-theme"); if (t === "light" || t === "dark" || t === "gold") document.documentElement.dataset.theme = t; } catch (e) {}
 </script>
 <title>WiiUE</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -49,7 +49,7 @@ try { var t = localStorage.getItem("wiiue-theme"); if (t === "light" || t === "d
 /* Dark theme: with the system set to dark (unless the settings picked Light), or picked in the
    settings. data-theme on <html> holds the choice; none = follow the system. */
 @media (prefers-color-scheme: dark) {
-  :root:not([data-theme="light"]) {
+  :root:not([data-theme="light"]):not([data-theme="gold"]) {
     --bg: #12171c;
     --stripe: #161c22;
     --surface: #1d242b;
@@ -88,6 +88,31 @@ try { var t = localStorage.getItem("wiiue-theme"); if (t === "light" || t === "d
 }
 :root[data-theme="light"] { color-scheme: light; }
 :root[data-theme="dark"] { color-scheme: dark; }
+/* Gold theme: the light theme with every Wii U blue turned to shiny gold */
+:root[data-theme="gold"] {
+  color-scheme: light;
+  --accent: #d4a017;
+  --accent-deep: #8f6a0c;
+  --accent-wash: #fbf0cf;
+  --logo-blue: url(#gold-shine);
+  --now-bg: linear-gradient(160deg, #e8bd3c 0%, #c4921a 40%, #a87a10 70%, #8a640b 100%);
+}
+:root[data-theme="gold"] .now { text-shadow: 0 1px 2px rgba(90, 60, 0, 0.35); }
+:root[data-theme="gold"] .now::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  pointer-events: none;
+  background: linear-gradient(115deg, transparent 30%, rgba(255, 248, 210, 0.55) 45%, transparent 60%);
+  background-size: 250% 100%;
+  animation: gold-sheen 5s ease-in-out infinite;
+}
+@keyframes gold-sheen { 0% { background-position: 120% 0; } 60%, 100% { background-position: -30% 0; } }
+:root[data-theme="gold"] .now-form .save { color: #8f6a0c; }
+:root[data-theme="gold"] .now-form input, :root[data-theme="gold"] .now-form textarea { text-shadow: none; }
+:root[data-theme="gold"] .tile.active .chip, :root[data-theme="gold"] .win-dot { background: linear-gradient(135deg, #f6d66b, #c4921a 55%, #e8bd3c); }
+@media (prefers-reduced-motion: reduce) { :root[data-theme="gold"] .now::before { animation: none; } }
 
 * { box-sizing: border-box; }
 /* Every piece of text wraps instead of overflowing: long words and URLs break if they must,
@@ -175,7 +200,7 @@ body {
   border-radius: var(--radius-tile);
   padding: 22px 24px;
   color: #fff;
-  background: linear-gradient(160deg, #19bdf2 0%, #0093cf 70%, #0080b8 100%);
+  background: var(--now-bg, linear-gradient(160deg, #19bdf2 0%, #0093cf 70%, #0080b8 100%));
   box-shadow: var(--shadow);
   display: grid;
   gap: 10px;
@@ -866,6 +891,15 @@ html.desktop.narrow .settings-button { padding-right: 10px; }
 <svg width="0" height="0" style="position:absolute" aria-hidden="true" focusable="false">
   <symbol id="logo-art" viewBox="20 150 1960 460">
     <defs>
+      <!-- Shiny gold for the U and E in the Gold theme -->
+      <linearGradient id="gold-shine" gradientUnits="userSpaceOnUse" x1="1062" y1="177" x2="1916" y2="590">
+        <stop offset="0" stop-color="#fff1b0"></stop>
+        <stop offset="0.22" stop-color="#f2c94c"></stop>
+        <stop offset="0.45" stop-color="#b8860b"></stop>
+        <stop offset="0.62" stop-color="#f7dc7a"></stop>
+        <stop offset="0.8" stop-color="#c9971c"></stop>
+        <stop offset="1" stop-color="#8f6a0c"></stop>
+      </linearGradient>
       <clipPath id="w-clip"><rect x="0" y="188" width="700" height="420"/></clipPath>
       <mask id="u-cut">
         <rect x="1040" y="160" width="520" height="380" fill="#fff"/>
@@ -1038,6 +1072,7 @@ html.desktop.narrow .settings-button { padding-right: 10px; }
       <label><input type="radio" name="theme" value="system" checked> System</label>
       <label><input type="radio" name="theme" value="light"> Light</label>
       <label><input type="radio" name="theme" value="dark"> Dark</label>
+      <label><input type="radio" name="theme" value="gold"> Gold</label>
     </fieldset>
   </div>
 </div>
@@ -1546,8 +1581,39 @@ html.desktop.narrow .settings-button { padding-right: 10px; }
     const panel = $("settings-panel");
     const radios = panel.querySelectorAll('input[name="theme"]');
     const root = document.documentElement;
-    const current = root.dataset.theme === "light" || root.dataset.theme === "dark" ? root.dataset.theme : "system";
+    const current = ["light", "dark", "gold"].includes(root.dataset.theme) ? root.dataset.theme : "system";
     for (const r of radios) r.checked = r.value === current;
+
+    // Tab icon: the U box, shiny gold in the Gold theme
+    const GOLD_ICON = "data:image/svg+xml," + encodeURIComponent(
+      '<svg xmlns="http://www.w3.org/2000/svg" viewBox="1052 105 494 494"><defs>' +
+      '<linearGradient id="g" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#fff1b0"/><stop offset="0.3" stop-color="#f2c94c"/>' +
+      '<stop offset="0.55" stop-color="#b8860b"/><stop offset="0.75" stop-color="#f7dc7a"/><stop offset="1" stop-color="#8f6a0c"/></linearGradient>' +
+      '<mask id="u"><rect x="1040" y="100" width="520" height="500" fill="#fff"/>' +
+      '<path d="M1180,150 V330 A116,116 0 0 0 1412,330 V150 Z" fill="#000"/>' +
+      '<path d="M1229,150 V333 A66.5,66.5 0 0 0 1362,333 V150 Z" fill="#fff"/></mask></defs>' +
+      '<rect x="1062" y="177" width="474" height="349" rx="72" fill="url(#g)" mask="url(#u)"/></svg>');
+    let iconLink = document.querySelector('link[rel~="icon"]');
+    const baseIcon = iconLink ? iconLink.getAttribute("href") : null;
+    function setIcon() {
+      const gold = root.dataset.theme === "gold";
+      if (!iconLink) {
+        if (!gold) return;
+        iconLink = document.createElement("link");
+        iconLink.rel = "icon";
+        document.head.appendChild(iconLink);
+      }
+      if (gold) {
+        iconLink.type = "image/svg+xml";
+        iconLink.href = GOLD_ICON;
+      } else if (baseIcon) {
+        iconLink.href = baseIcon;
+      } else {
+        iconLink.remove();
+        iconLink = null;
+      }
+    }
+    setIcon();
     panel.hidden = true;
     button.setAttribute("aria-expanded", "false");
 
@@ -1569,6 +1635,7 @@ html.desktop.narrow .settings-button { padding-right: 10px; }
       r.addEventListener("change", () => {
         if (r.value === "system") delete root.dataset.theme;
         else root.dataset.theme = r.value;
+        setIcon();
         try {
           if (r.value === "system") localStorage.removeItem("wiiue-theme");
           else localStorage.setItem("wiiue-theme", r.value);
